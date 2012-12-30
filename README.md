@@ -15,7 +15,7 @@ xmonad
   
 apt install commands:  
 &nbsp;&nbsp;&nbsp;&nbsp;sudo apt-get install xorg  
-&nbsp;&nbsp;&nbsp;&nbsp;sudo apt-get install suckless-tools  
+&nbsp;&nbsp;&nbsp;&nbsp;sudo apt-get install xmonad suckless-tools  
 &nbsp;&nbsp;&nbsp;&nbsp;sudo apt-get install rxvt-unicode-256color  
 &nbsp;&nbsp;&nbsp;&nbsp;sudo apt-get install ttf-ubuntu-font-family  
   
