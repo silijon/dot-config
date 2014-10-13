@@ -66,24 +66,9 @@ map <C-p> :bprevious<CR>
 """NERDTree stuff"""
 let g:NERDTreeWinSize = 50
 
-
-"""clang complete stuff"""
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-"let g:clang_snippets = 1
-"let g:clang_snippets_engine = 'clang_complete'
-
-
-"""ctags stuff"""
-let Tlist_Ctags_cmd = "/usr/bin/ctags"
-let Tlist_WinWidth = 50
-
-
 """convenience mappings"""
 nnoremap <F2> :set nonumber!<CR>
 nmap <silent> <F3> :NERDTreeToggle .<CR>
 nmap <silent> <F4> :TlistToggle<cr>
 nmap <silent> <F5> :e ~/.bashrc<CR>
 nmap <silent> <F6> :e ~/.vimrc<CR>
-
-
