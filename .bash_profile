@@ -1,7 +1,9 @@
+source git-prompt.sh
+
 # env niceness
 set -o vi
 export CLICOLOR=1
-export PS1="\[\033[0;35m\]\h\[\033[0;33m\] \w\[\033[00m\]: "
+export PS1="\$(__git_ps1)\[\033[0;35m\]\h\[\033[0;33m\] \w\[\033[00m\]: "
 
 # home vars
 export PYTHON_HOME=/usr/local
