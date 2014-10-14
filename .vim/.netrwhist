@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/john/src/c/KadC'
-let g:netrw_dirhist_2='/home/john/src/c/sharecopper'
-let g:netrw_dirhist_3='/home/john/src/c/dnsproxy'
-let g:netrw_dirhist_4='/home/john/src/c/hello_udp'
-let g:netrw_dirhist_5='/home/john/src/c/libkad/src'
-let g:netrw_dirhist_6='/home/john/src/py/hello-angular'
-let g:netrw_dirhist_7='/home/john/src/js/hello-angular'
