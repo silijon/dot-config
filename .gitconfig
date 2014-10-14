@@ -1,0 +1,7 @@
+[user]
+	email = john.w.dennis@gmail.com
+	name = John Dennis
+[color]
+	ui = auto
+[push]
+	default = simple
