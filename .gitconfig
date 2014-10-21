@@ -1,0 +1,17 @@
+[user]
+	name = silijon
+	email = john.w.dennis@gmail.com
+[core]
+	symlinks = false
+	autocrlf = true
+	preloadindex = true
+	fscache = true
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = true
+[push]
+	default = simple
+[gc]
+	auto = 256
