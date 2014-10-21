@@ -5,3 +5,6 @@ ln -s ~/dot-config/.vim ~/.vim
 ln -s ~/dot-config/.vimrc ~/.vimrc
 ln -s ~/dot-config/.tmux.conf ~/.tmux.conf
 ln -s ~/dot-config/.gitconfig ~/.gitconfig
+
+git submodule update --init .vim/bundle/nerdtree
+git submodule update --init .vim/bundle/nerdcommenter
