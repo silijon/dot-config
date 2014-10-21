@@ -3,7 +3,6 @@
 	email = john.w.dennis@gmail.com
 [core]
 	symlinks = false
-	autocrlf = true
 	preloadindex = true
 	fscache = true
 [color]
