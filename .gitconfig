@@ -5,6 +5,7 @@
 	symlinks = false
 	preloadindex = true
 	fscache = true
+	editor = vim
 [color]
 	diff = auto
 	status = auto
