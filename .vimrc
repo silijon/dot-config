@@ -83,7 +83,11 @@ let Tlist_WinWidth = 50
 nnoremap <F2> :set nonumber!<CR>
 nmap <silent> <F3> :NERDTreeToggle .<CR>
 nmap <silent> <F4> :TlistToggle<cr>
-nmap <silent> <F5> :e ~/.bashrc<CR>
+nmap <silent> <F5> :e ~/.bash_profile<CR>
 nmap <silent> <F6> :e ~/.vimrc<CR>
 
-
+""gui"""
+if has("gui_running")
+    set guifont=Ubuntu\ Mono:h16
+    set vb "gotta turn the visual bell back on to shut up the audible bell in macvim
+endif
