@@ -15,3 +15,18 @@
 	default = simple
 [gc]
 	auto = 256
+[diff]
+    tool = bc3
+[difftool]
+    prompt = false
+[difftool "bc3"]
+    cmd =  \"c:/program files (x86)/beyond compare 3/bcomp.exe\" "$(cygpath -w $LOCAL)" "$REMOTE"
+[merge]
+    tool = bc3
+[mergetool]
+    prompt = false
+[mergetool "bc3"]
+    #trustExitCode = true
+    cmd = \"c:/program files (x86)/beyond compare 3/bcomp.exe\" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+
+
