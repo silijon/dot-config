@@ -1,4 +1,4 @@
-source git-prompt.sh
+source ~/git-prompt.sh
 
 # env niceness
 set -o vi
@@ -26,5 +26,9 @@ alias egrep='egrep --color=auto'
 alias l='ls -hal'
 alias ll='l |less'
 alias tmux='TERM=xterm-256color tmux'
-alias serve='python -m SimpleHTTPServer'
 alias myip='curl http://icanhazip.com'
+
+# funcs
+serve () {
+    python -m SimpleHTTPServer $1
+}
