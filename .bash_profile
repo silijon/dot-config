@@ -25,6 +25,7 @@ export SK2IP=184.73.254.141
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias ls='ls --color=tty'
 alias l='ls -hal'
 alias ll='l |less'
 alias tmux='TERM=xterm-256color tmux'
