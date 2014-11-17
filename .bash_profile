@@ -4,6 +4,8 @@ source ~/git-prompt.sh
 set -o vi
 export CLICOLOR=1
 export PS1="\$(__git_ps1)\[\033[0;35m\]\h\[\033[0;33m\] \w\[\033[00m\]: "
+bind "set completion-ignore-case on"
+bind "set show-all-if-ambiguous on"
 
 # home vars
 export PYTHON_HOME=/usr/local
