@@ -64,7 +64,8 @@ map <C-n> :bnext<CR>
 map <C-p> :bprevious<CR>
 
 """NERDTree stuff"""
-let g:NERDTreeWinSize = 50
+au VimEnter * NERDTree
+let g:NERDTreeWinSize = 35
 
 
 """clang complete stuff"""
@@ -88,6 +89,7 @@ nmap <silent> <F6> :e ~/.vimrc<CR>
 
 ""gui"""
 if has("gui_running")
-    set guifont=Ubuntu\ Mono:h16
+    set guioptions-=L
+    set guifont=Ubuntu\ Mono:h18
     set vb "gotta turn the visual bell back on to shut up the audible bell in macvim
 endif
