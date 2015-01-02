@@ -64,7 +64,7 @@ map <C-n> :bnext<CR>
 map <C-p> :bprevious<CR>
 
 """NERDTree stuff"""
-au VimEnter * NERDTree
+"au VimEnter * NERDTree
 let g:NERDTreeWinSize = 35
 
 
