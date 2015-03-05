@@ -42,6 +42,7 @@ alias grep='grep --color'
 alias ls='ls --color=tty'
 alias l='ls -hal'
 alias ll='l |less'
+alias serve='python -m SimpleHTTPServer'
 
 # win specific
 alias open='cygstart'
