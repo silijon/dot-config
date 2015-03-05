@@ -46,7 +46,7 @@ alias serve='python -m SimpleHTTPServer'
 
 # win specific
 alias open='cygstart'
-alias gvim='"/cygdrive/c/Program Files (x86)/Vim/vim73/gvim.exe"'
+alias gvim='"/cygdrive/c/Program Files (x86)/Vim/vim74/gvim.exe"'
 alias xwin='XWin -nodecoration -rootless'
 
 grepNoCRLF()
