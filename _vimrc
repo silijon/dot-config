@@ -26,6 +26,7 @@ set vb      "shut the bell up
 set ch=2    "make command line two lines high
 set mousehide   "hide the mouse when typing text
 set number  "start with line nos
+set textwidth=0 wrapmargin=0
 "set ruler
 "set noesckeys   "don't look for escape sequences in insert mode (stops crazy delays on certain characters)
 "set textwidth=160
