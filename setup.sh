@@ -9,3 +9,4 @@ ln -s ~/dot-config/git-prompt.sh ~/git-prompt.sh
 
 git submodule update --init .vim/bundle/nerdtree
 git submodule update --init .vim/bundle/nerdcommenter
+git submodule update --init .vim/bundle/vim-coffee-script
