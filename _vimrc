@@ -70,6 +70,8 @@ map <C-k> :bnext<CR>
 map <C-l> :bprevious<CR>
 map <C-t> <Esc>:tabnew<CR>
 map <C-Tab> <Esc>gt<CR>
+map + :res +5<CR>
+map - :res -5<CR>
 
 
 "indentation
@@ -112,6 +114,7 @@ nmap <silent> <F3> :NERDTreeToggle .<CR>
 
 "pydiction code completion - not as good as built-in omnicompletion
 "let g:pydiction_location='/Users/john/.vimfiles/ftplugin/pydiction/complete-dict'
+source dot-config\_vimrc.local
 
 "-------------- macvim specific -------------"
 if has("gui_running")
