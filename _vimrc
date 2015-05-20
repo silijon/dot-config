@@ -114,7 +114,7 @@ nmap <silent> <F3> :NERDTreeToggle .<CR>
 
 "pydiction code completion - not as good as built-in omnicompletion
 "let g:pydiction_location='/Users/john/.vimfiles/ftplugin/pydiction/complete-dict'
-source dot-config\_vimrc.local
+source _vimrc.local
 
 "-------------- macvim specific -------------"
 if has("gui_running")
