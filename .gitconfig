@@ -1,12 +1,11 @@
 [user]
 	name = JD
-	email = john.dennis@skykick.com
+	email = john.w.dennis@gmail.com
 [core]
 	symlinks = false
 	preloadindex = true
 	fscache = true
 	editor = vim
-	autocrlf = true
 [color]
 	diff = auto
 	status = auto
