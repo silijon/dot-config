@@ -26,7 +26,8 @@ set vb      "shut the bell up
 set ch=2    "make command line two lines high
 set mousehide   "hide the mouse when typing text
 set number  "start with line nos
-set textwidth=0 wrapmargin=0
+set textwidth=0 
+set wrapmargin=0
 "set ruler
 "set noesckeys   "don't look for escape sequences in insert mode (stops crazy delays on certain characters)
 "set textwidth=160
@@ -114,7 +115,7 @@ nmap <silent> <F3> :NERDTreeToggle .<CR>
 
 "pydiction code completion - not as good as built-in omnicompletion
 "let g:pydiction_location='/Users/john/.vimfiles/ftplugin/pydiction/complete-dict'
-source _vimrc.local
+source C:\\Users\John\_vimrc.local
 
 "-------------- macvim specific -------------"
 if has("gui_running")
