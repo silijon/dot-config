@@ -12,3 +12,7 @@
 	path = .vim/bundle/vim-ps1
 	url = git@github.com:PProvost/vim-ps1.git
     ignore = untracked
+[submodule ".vim/bundle/vim-json"]
+	path = .vim/bundle/vim-json
+	url = git@github.com:elzr/vim-json.git
+    ignore = untracked
