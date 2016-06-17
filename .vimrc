@@ -76,8 +76,8 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 
 """ctags stuff"""
-let Tlist_Ctags_cmd = "/usr/bin/ctags"
-let Tlist_WinWidth = 50
+"let Tlist_Ctags_cmd = "/usr/bin/ctags"
+"let Tlist_WinWidth = 50
 
 
 """convenience mappings"""
