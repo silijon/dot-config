@@ -4,10 +4,11 @@ source $VIMRUNTIME/mswin.vim
 behave mswin
 
 """plugins -- using junegunn/vim-plug"""
-call plug#begin()
+silent!call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'elzr/vim-json'
+Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 "---------------- key mappings ----------------
