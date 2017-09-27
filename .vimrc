@@ -11,9 +11,9 @@ set t_Co=256  "hopefully working in 256 color term
 
 """plugins -- using junegunn/vim-plug"""
 call plug#begin()
-Plug 'git@github.com:scrooloose/nerdtree.git'
-Plug 'git@github.com:scrooloose/nerdcommenter'
-Plug 'git@github.com:elzr/vim-json.git'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'elzr/vim-json'
 call plug#end()
 
 
