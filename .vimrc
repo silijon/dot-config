@@ -1,7 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ .vimrc --- all-purpose, console friendly
-"""            reqs: Pathogen, NERDTree, gentooish
+"""            reqs: vim-plug, gentooish
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -9,9 +9,15 @@
 set t_Co=256  "hopefully working in 256 color term
 
 
-"""externals (plugins, colors)"""
-call pathogen#infect()
-call pathogen#helptags()
+"""plugins -- using junegunn/vim-plug"""
+call plug#begin()
+Plug 'git@github.com:scrooloose/nerdtree.git'
+Plug 'git@github.com:scrooloose/nerdcommenter'
+Plug 'git@github.com:elzr/vim-json.git'
+call plug#end()
+
+
+"""colors"""
 colorscheme gentooish
 
 
@@ -66,6 +72,7 @@ map <C-p> :bprevious<CR>
 """NERDTree stuff"""
 "au VimEnter * NERDTree
 let g:NERDTreeWinSize = 35
+let g:NERDTreeShowHidden = 1
 
 
 """clang complete stuff"""
