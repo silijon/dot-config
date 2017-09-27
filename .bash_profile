@@ -32,6 +32,7 @@ alias l='ls -hal'
 alias ll='l |less'
 alias tmux='TERM=xterm-256color tmux'
 alias myip='curl http://icanhazip.com'
+alias gvim='/mnt/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe'
 
 # funcs
 serve () {
