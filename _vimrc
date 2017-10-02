@@ -27,6 +27,7 @@ call plug#end()
 
 syntax on
 
+set encoding=utf-8
 set hidden  "shut the command line up
 set vb      "shut the bell up
 set ch=2    "make command line two lines high
