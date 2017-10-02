@@ -5,98 +5,86 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""terminal settings"""
-set t_Co=256  "hopefully working in 256 color term
+"""setup"""
+set nocompatible
+colorscheme gentooish
+if has("win32")
+    source $VIMRUNTIME/vimrc_example.vim  "not sure if i need these but wth
+    source $VIMRUNTIME/mswin.vim
+    behave mswin  "this seems to be essential
+    au GUIEnter * simalt ~x "run fullscreen on startup
+    set backupdir=C:\tmp\vim
+endif
 
-
-"""plugins -- using junegunn/vim-plug"""
-call plug#begin()
+"""load plugins -- using junegunn/vim-plug"""
+silent!call plug#begin()  "force silent since gvim complains about missing git in some execution contexts
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'elzr/vim-json'
+Plug 'plasticboy/vim-markdown'
+Plug 'vim-airline/vim-airline'
 call plug#end()
 
-
-"""colors"""
-colorscheme gentooish
-
+"""plugin-specific settigns"""
+let g:NERDTreeWinSize = 35
+let g:NERDTreeShowHidden = 1
 
 """general settings"""
 let mapleader = ","
-set hidden    "shut the command line up
+set encoding=utf-8
 set novb      "shut the visual bell up
+set hidden    "shut the command line up
 set cpoptions+=$  "outline the word being modified
 set ch=2    "make command line two lines high
 set mousehide   "hide the mouse when typing text
 set number  "start with line nos
 set ignorecase  "ignore case sensitivity on searches
 
-"set laststatus=2
-"set statusline+=%F
-"set wrap    "default to line wrapping
-"set linebreak  "break in-between words rather than spliting them in the middle
-"set ruler
-"set noesckeys   "don't look for escape sequences in insert mode (stops crazy
-"delays on certain characters)
-"set textwidth=160
-"set wrapmargin=2 "inserts EOLs between lines when word-wrapping
-
-
 """indentation"""
 set smartindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
-imap <S-Tab> <Esc><<i
-
+set expandtab  "use spaces instead of tabs
+set tabstop=4  "default to 4 spaces per tab
+set shiftwidth=4  "also 4 spaces on an indent
+imap <S-Tab> <Esc><<i  
 
 """filetype settings"""
 syntax on
 filetype on
 filetype indent on
 filetype plugin on
-au! FileType python setl nosmartindent
 au BufNewFile,BufRead *.ejs set filetype=html
 au BufNewFile,BufRead *.tmpl set filetype=html
-au BufNewFile,BufRead *.gsp set filetype=htmlm4  "regular html formatting looks like shit with groovy tags for some reason
-"au BufNewFile,BufRead *.html set filetype=htmlm4
-autocmd FileType make setlocal noexpandtab  "make files need actual tab characters
+au FileType python setl nosmartindent
+au FileType make setl noexpandtab  "make files need actual tab characters
+au FileType markdown setl tabstop=2 shiftwidth=2  "markdown seems to work nicer with 2 spaces
 
+"""pretty printing on indent call (gg=G)"""
+if has("win32")
+    au FileType xml setlocal equalprg=c:\\Windows\\Sysnative\\bash.exe\ -c\ 'xmllint\ --format\ --recover\ -'
+    au FileType json setlocal equalprg=c:\\Windows\\Sysnative\\bash.exe\ -c\ 'python2.7\ -mjson.tool'
+else
+    au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -
+    au FileType json setlocal equalprg=python2.7\ -mjson.tool
+endif
 
-"remap window/buffer cycling to something that doesn't suck
-map <Tab> <C-w><C-w>
+"""remap window/buffer cycling to something that doesn't suck"""
+map <Tab> <C-w><C-w>  
 map <C-j> <C-^>
 map <C-n> :bnext<CR>
 map <C-p> :bprevious<CR>
+map <C-t> <Esc>:tabnew<CR>
+map + :vertical res +5<CR>
+map - :vertical res -5<CR>
 
-"""NERDTree stuff"""
-"au VimEnter * NERDTree
-let g:NERDTreeWinSize = 35
-let g:NERDTreeShowHidden = 1
-
-
-"""clang complete stuff"""
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-"let g:clang_snippets = 1
-"let g:clang_snippets_engine = 'clang_complete'
-
-
-"""ctags stuff"""
-"let Tlist_Ctags_cmd = "/usr/bin/ctags"
-"let Tlist_WinWidth = 50
-
-
-"""convenience mappings"""
-nnoremap <F2> :set nonumber!<CR>
-nmap <silent> <F3> :NERDTreeToggle .<CR>
-nmap <silent> <F4> :TlistToggle<cr>
-nmap <silent> <F5> :e ~/.bash_profile<CR>
-nmap <silent> <F6> :e ~/.vimrc<CR>
-
-""gui"""
+"""gui/console specific"""
 if has("gui_running")
+    set guioptions=egmt
     set guioptions-=L
-    set guifont=Ubuntu\ Mono:h18
-    set vb "gotta turn the visual bell back on to shut up the audible bell in macvim
+    set guifont=Ubuntu\ Mono:h14
+    set guioptions-=m "do something with intercepting alt key
+    map <M-t> <Esc>:tabnew<CR>
+    nmap <silent> <M-;> :NERDTreeToggle .<CR>
+else
+    set t_Co=256  "hopefully working in 256 color term
+    nmap <silent> <Esc>; :NERDTreeToggle .<CR>
 endif
