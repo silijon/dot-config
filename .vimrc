@@ -49,7 +49,7 @@ set smartindent
 set expandtab  "use spaces instead of tabs
 set tabstop=4  "default to 4 spaces per tab
 set shiftwidth=4  "also 4 spaces on an indent
-imap <S-Tab> <Esc><<i  
+imap <S-Tab> <Esc><<i
 
 """filetype settings"""
 syntax on
@@ -72,7 +72,7 @@ else
 endif
 
 """remap window/buffer cycling to something that doesn't suck"""
-map <Tab> <C-w><C-w>  
+map <Tab> <C-w><C-w>
 map <C-j> <C-^>
 map <C-n> :bnext<CR>
 map <C-p> :bprevious<CR>
