@@ -7,7 +7,7 @@
 
 """setup"""
 set nocompatible
-colorscheme gentooish
+colorscheme jellybeans
 if has("win32")
     source $VIMRUNTIME/vimrc_example.vim  "not sure if i need these but wth
     source $VIMRUNTIME/mswin.vim
@@ -31,7 +31,8 @@ call plug#end()  "PlugStatus to check on plugins
 """plugin-specific settigns"""
 let g:NERDTreeWinSize=35
 let g:NERDTreeShowHidden=1
-let g:airline_theme='behelit'
+let g:airline_theme='jellybeans'
+let g:airline_powerline_fonts=1
 
 """general settings"""
 let mapleader = ","
@@ -42,6 +43,7 @@ set cpoptions+=$  "outline the word being modified
 set ch=2    "make command line two lines high
 set mousehide   "hide the mouse when typing text
 set number  "start with line nos
+set foldlevel=99  "open all folds on startup
 set ignorecase  "ignore case sensitivity on searches
 set hlsearch "highlight search results
 
@@ -50,7 +52,6 @@ set smartindent
 set expandtab  "use spaces instead of tabs
 set tabstop=4  "default to 4 spaces per tab
 set shiftwidth=4  "also 4 spaces on an indent
-imap <S-Tab> <Esc><<i
 
 """filetype settings"""
 syntax on
@@ -78,18 +79,18 @@ map <C-j> <C-^>
 map <C-n> :bnext<CR>
 map <C-p> :bprevious<CR>
 map <C-t> <Esc>:tabnew<CR>
-map + :vertical res +5<CR>
-map - :vertical res -5<CR>
+nmap + :vertical res +5<CR>
+nmap - :vertical res -5<CR>
 
 """gui/console specific"""
 if has("gui_running")
+    set guifont=Ubuntu_Mono_derivative_Powerlin:h14,Ubuntu_Mono:h14,Consolas:h13
     set guioptions=egmt
     set guioptions-=L
-    set guifont=Ubuntu\ Mono:h14
     set guioptions-=m "do something with intercepting alt key
     map <M-t> <Esc>:tabnew<CR>
-    nmap <silent> <M-;> :NERDTreeToggle .<CR>
+    map <silent> <M-;> :NERDTreeToggle .<CR>
 else
     set t_Co=256  "hopefully working in 256 color term
-    nmap <silent> <Esc>; :NERDTreeToggle .<CR>
+    map <silent> <Esc>; :NERDTreeToggle .<CR>
 endif
