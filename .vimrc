@@ -23,11 +23,13 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'elzr/vim-json'
 Plug 'plasticboy/vim-markdown'
 Plug 'vim-airline/vim-airline'
-call plug#end()
+Plug 'vim-airline/vim-airline-themes'
+call plug#end()  "PlugStatus to check on plugins
 
 """plugin-specific settigns"""
-let g:NERDTreeWinSize = 35
-let g:NERDTreeShowHidden = 1
+let g:NERDTreeWinSize=35
+let g:NERDTreeShowHidden=1
+let g:airline_theme='behelit'
 
 """general settings"""
 let mapleader = ","
