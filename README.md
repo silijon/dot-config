@@ -1,15 +1,21 @@
 dot-config
 ==========
-  
-  
-These configs use but don't require the following:  
-  
-vim  
-&nbsp;&nbsp;&nbsp;&nbsp;Pathogen  
-&nbsp;&nbsp;&nbsp;&nbsp;NERDTree  
-ubuntu monospace font  
+ 
+These configs apply to the following:
+ 
+* vim / gvim
+    * [vim-plug](https://github.com/junegunn/vim-plug)
+    * [NERDTree](https://github.com/scrooloose/nerdtree.git)
+    * [NERDCommenter](https://github.com/scrooloose/nerdcommenter.git)
+    * [vim-json](https://github.com/elzr/vim-json)
+    * [vim-markdown](https://github.com/plasticboy/vim-markdown)
+    * [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
+    * [vim-bufferline](https://github.com/bling/vim-bufferline)
+    * [vim-airline](https://github.com/vim-airline/vim-airline)
+    * [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
 
-vim plugin links  
-&nbsp;&nbsp;&nbsp;&nbsp;https://github.com/tpope/vim-pathogen  
-&nbsp;&nbsp;&nbsp;&nbsp;https://github.com/scrooloose/nerdtree.git  
-&nbsp;&nbsp;&nbsp;&nbsp;https://github.com/scrooloose/nerdcommenter.git  
+* [ubuntu monospace font (powerline derivative)](https://github.com/powerline/fonts)
+
+* tmux
+
+* git
