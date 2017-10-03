@@ -43,6 +43,7 @@ set ch=2    "make command line two lines high
 set mousehide   "hide the mouse when typing text
 set number  "start with line nos
 set ignorecase  "ignore case sensitivity on searches
+set hlsearch "highlight search results
 
 """indentation"""
 set smartindent
