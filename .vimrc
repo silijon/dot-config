@@ -40,7 +40,7 @@ set encoding=utf-8
 set novb      "shut the visual bell up
 set hidden    "shut the command line up
 set cpoptions+=$  "outline the word being modified
-set ch=2    "make command line two lines high
+set ch=1    "make command line one line high
 set mousehide   "hide the mouse when typing text
 set number  "start with line nos
 set foldlevel=99  "open all folds on startup
