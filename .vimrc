@@ -29,7 +29,7 @@ Plug 'vim-airline/vim-airline-themes'
 call plug#end()  "PlugStatus to check on plugins
 
 """plugin-specific settigns"""
-let g:NERDTreeWinSize=35
+let g:NERDTreeWinSize=40
 let g:NERDTreeShowHidden=1
 let g:airline_theme='jellybeans'
 let g:airline_powerline_fonts=1
@@ -62,7 +62,6 @@ au BufNewFile,BufRead *.ejs set filetype=html
 au BufNewFile,BufRead *.tmpl set filetype=html
 au FileType python setl nosmartindent
 au FileType make setl noexpandtab  "make files need actual tab characters
-au FileType markdown setl tabstop=2 shiftwidth=2  "markdown seems to work nicer with 2 spaces
 
 """pretty printing on indent call (gg=G)"""
 if has("win32")
