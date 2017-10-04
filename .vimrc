@@ -29,7 +29,7 @@ Plug 'vim-airline/vim-airline-themes'
 call plug#end()  "PlugStatus to check on plugins
 
 """plugin-specific settigns"""
-let g:NERDTreeWinSize=40
+let g:NERDTreeWinSize=35
 let g:NERDTreeShowHidden=1
 let g:airline_theme='jellybeans'
 let g:airline_powerline_fonts=1
