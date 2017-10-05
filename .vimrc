@@ -27,6 +27,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-bufferline'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/OutlookVim'
 call plug#end()  "PlugStatus to check on plugins
 
 """plugin-specific settigns"""
@@ -34,10 +35,14 @@ let g:NERDTreeWinSize=35
 let g:NERDTreeShowHidden=1
 let g:airline_theme='jellybeans'
 let g:airline_powerline_fonts=1
+let g:outlook_scan_email_body_Unicode=0
+let g:outlook_textwidth=0
 
 """general settings"""
+if has("multi_byte")
+    set encoding=utf-8
+endif
 let mapleader = ","
-set encoding=utf-8
 set novb      "shut the visual bell up
 set hidden    "shut the command line up
 set cpoptions+=$  "outline the word being modified
