@@ -30,7 +30,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/OutlookVim'
 call plug#end()  "PlugStatus to check on plugins
 
-"""plugin-specific settigns"""
+"""plugin-specific settings"""
 let g:NERDTreeWinSize=35
 let g:NERDTreeShowHidden=1
 let g:airline_theme='jellybeans'
@@ -49,6 +49,7 @@ set cpoptions+=$  "outline the word being modified
 set ch=1    "make command line one line high
 set mousehide   "hide the mouse when typing text
 set number  "start with line nos
+set textwidth=0  "driving you crazy?  ':verbose set tw?' to find the culprit
 set foldlevel=99  "open all folds on startup
 set ignorecase  "ignore case sensitivity on searches
 set hlsearch "highlight search results
@@ -68,14 +69,16 @@ au BufNewFile,BufRead *.ejs set filetype=html
 au BufNewFile,BufRead *.tmpl set filetype=html
 au FileType python setl nosmartindent
 au FileType make setl noexpandtab  "make files need actual tab characters
+au FileType markdown setl spell spelllang=en_us
+au FileType mail setl spell spelllang=en_us
 
 """pretty printing on indent call (gg=G)"""
 if has("win32")
-    au FileType xml setlocal equalprg=c:\\Windows\\Sysnative\\bash.exe\ -c\ 'xmllint\ --format\ --recover\ -'
-    au FileType json setlocal equalprg=c:\\Windows\\Sysnative\\bash.exe\ -c\ 'python2.7\ -mjson.tool'
+    au FileType xml setl equalprg=c:\\Windows\\Sysnative\\bash.exe\ -c\ 'xmllint\ --format\ --recover\ -'
+    au FileType json setl equalprg=c:\\Windows\\Sysnative\\bash.exe\ -c\ 'python2.7\ -mjson.tool'
 else
-    au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -
-    au FileType json setlocal equalprg=python2.7\ -mjson.tool
+    au FileType xml setl equalprg=xmllint\ --format\ --recover\ -
+    au FileType json setl equalprg=python2.7\ -mjson.tool
 endif
 
 """remap window/buffer cycling to something that doesn't suck"""
