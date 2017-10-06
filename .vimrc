@@ -81,7 +81,8 @@ else
     au FileType json setl equalprg=python2.7\ -mjson.tool
 endif
 
-"""remap window/buffer cycling to something that doesn't suck"""
+"""custom mappings"""
+map <leader>z 1z=
 map <Tab> <C-w><C-w>
 map <C-j> <C-^>
 map <C-n> :bnext<CR>
