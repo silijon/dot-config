@@ -28,6 +28,7 @@ Plug 'bling/vim-bufferline'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/OutlookVim'
+Plug 'PProvost/vim-ps1'
 call plug#end()  "PlugStatus to check on plugins
 
 """plugin-specific settings"""
