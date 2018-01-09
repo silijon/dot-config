@@ -29,6 +29,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/OutlookVim'
 Plug 'PProvost/vim-ps1'
+Plug 'leafgarland/typescript-vim'
+Plug 'cakebaker/scss-syntax.vim'
 call plug#end()  "PlugStatus to check on plugins
 
 """plugin-specific settings"""
@@ -72,6 +74,7 @@ au FileType python setl nosmartindent
 au FileType make setl noexpandtab  "make files need actual tab characters
 au FileType markdown setl spell spelllang=en_us
 au FileType mail setl spell spelllang=en_us
+au FileType typescript setl tabstop=2 shiftwidth=2
 
 """pretty printing on indent call (gg=G)"""
 if has("win32")
