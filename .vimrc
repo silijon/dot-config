@@ -27,6 +27,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-bufferline'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/OutlookVim'
 call plug#end()  "PlugStatus to check on plugins
 

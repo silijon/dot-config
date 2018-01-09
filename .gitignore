@@ -1,4 +1,5 @@
 *.pyc
 *.swp
+*.swo
 *.un~
 .vim/plugged/
