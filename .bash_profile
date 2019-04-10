@@ -7,6 +7,9 @@ export PS1="\$(__git_ps1)\[\033[0;35m\]\h\[\033[0;33m\] \w\[\033[00m\]: "
 bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
 
+# path mods
+export PATH=~/.local/bin:$PATH
+
 # home vars
 export PYTHON_HOME=/usr/local
 export EDITOR=/usr/bin/vim
@@ -20,6 +23,7 @@ export CL=jdennis@chiulab.ucsfmedicalcenter.org
 export SK1=ubuntu@107.22.245.129
 export SK2=ubuntu@184.73.254.141
 export SK2IP=184.73.254.141
+export DOCKER_HOST=tcp://localhost:2375
 
 # command shortcuts
 alias grep='grep --color=auto'

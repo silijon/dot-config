@@ -39,6 +39,7 @@ let g:NERDTreeWinSize=35
 let g:NERDTreeShowHidden=1
 let g:airline_theme='jellybeans'
 let g:airline_powerline_fonts=1
+let g:vim_json_syntax_conceal = 0
 let g:outlook_scan_email_body_Unicode=0
 let g:outlook_textwidth=0
 

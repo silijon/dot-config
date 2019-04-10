@@ -15,3 +15,14 @@
 	default = simple
 [gc]
 	auto = 256
+[merge]
+    tool = vs
+[mergetool "vs"]
+    cmd = /home/john/win-home/dot-config/win_merge.sh merge $LOCAL $REMOTE $BASE $MERGED
+    trustExitCode = false
+[mergetool]
+    keepBackup = false
+[diff]
+    tool = vs
+[difftool "vs"]
+    cmd = /home/john/win-home/dot-config/win_merge.sh diff $LOCAL $PWD/$REMOTE
