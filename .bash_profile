@@ -8,7 +8,7 @@ bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
 
 # path mods
-export PATH=~/.local/bin:$PATH
+export PATH=~/.local/bin:~/.dotnet:$PATH
 
 # home vars
 export PYTHON_HOME=/usr/local
