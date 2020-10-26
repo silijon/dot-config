@@ -31,6 +31,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'PProvost/vim-ps1'
 Plug 'leafgarland/typescript-vim'
 Plug 'cakebaker/scss-syntax.vim'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()  "PlugStatus to check on plugins
 
 """plugin-specific settings"""
