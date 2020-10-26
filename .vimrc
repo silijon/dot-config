@@ -99,7 +99,7 @@ nmap - :vertical res -5<CR>
 
 """gui/console specific"""
 if has("gui_running")
-    set guifont=Ubuntu_Mono_derivative_Powerlin:h14,Ubuntu_Mono:h14,Consolas:h13
+    set guifont=UbuntuMono_NF:h14,Ubuntu_Mono_derivative_Powerlin:h14,Ubuntu_Mono:h14,Consolas:h13
     set guioptions=egmt
     set guioptions-=L
     set guioptions-=m "do something with intercepting alt key
