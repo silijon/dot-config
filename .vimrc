@@ -76,13 +76,20 @@ au FileType markdown setl spell spelllang=en_us
 au FileType mail setl spell spelllang=en_us
 au FileType typescript setl tabstop=2 shiftwidth=2
 
-"""pretty printing on indent call (gg=G)"""
 if has("win32")
+    """pretty printing on indent call (gg=G)"""
     au FileType xml setl equalprg=c:\\Windows\\Sysnative\\bash.exe\ -c\ 'xmllint\ --format\ --recover\ -'
     au FileType json setl equalprg=c:\\Windows\\Sysnative\\bash.exe\ -c\ 'python2.7\ -mjson.tool'
+    """put backups in tmp
+    set backupdir-=.
+    set backupdir^=$TEMP
 else
+    """pretty printing on indent call (gg=G)"""
     au FileType xml setl equalprg=xmllint\ --format\ --recover\ -
     au FileType json setl equalprg=python2.7\ -mjson.tool
+    """put backups in tmp
+    set backupdir-=.
+    set backupdir^=~/tmp,/tmp
 endif
 
 """custom mappings"""
