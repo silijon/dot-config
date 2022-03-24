@@ -14,7 +14,7 @@ These configs apply to the following:
     * [vim-airline](https://github.com/vim-airline/vim-airline)
     * [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
 
-* [ubuntu monospace font (powerline derivative)](https://github.com/powerline/fonts)
+* [nerd fonts](https://github.com/ryanoasis/nerd-fonts)
 
 * tmux
 
