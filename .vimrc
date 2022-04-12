@@ -47,6 +47,7 @@ if has("multi_byte")
     set encoding=utf-8
 endif
 let mapleader = ","
+let maplocalleader = ","
 set novb      "shut the visual bell up
 set hidden    "shut the command line up
 set cpoptions+=$  "outline the word being modified
