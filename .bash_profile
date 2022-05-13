@@ -1,9 +1,10 @@
-#source ~/git-prompt.sh
+# git niceness
+export GIT_PS1_SHOWDIRTYSTATE=1
 
 # env niceness
 set -o vi
 export CLICOLOR=1
-export PS1="\$(__git_ps1)\[\033[0;35m\]\h\[\033[0;33m\] \w\[\033[00m\]: "
+export PS1="\[\033[01;32m\]\h\[\033[0;34m\] \w\[\033[35m\]\$(__git_ps1)\[\033[00m\]: "
 bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
 
