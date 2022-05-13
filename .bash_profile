@@ -1,4 +1,4 @@
-source ~/git-prompt.sh
+#source ~/git-prompt.sh
 
 # env niceness
 set -o vi
@@ -11,7 +11,6 @@ bind "set show-all-if-ambiguous on"
 export PATH=~/.local/bin:~/.dotnet:$PATH
 
 # home vars
-export PYTHON_HOME=/usr/local
 export EDITOR=/usr/bin/vim
 
 # command shortcuts
