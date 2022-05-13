@@ -21,7 +21,7 @@ alias egrep='egrep --color=auto'
 if [[ `uname` != 'Darwin' ]]; then
     alias ls='ls --color=tty'
 fi
-alias l='ls -hal'
+alias l='ls -hal --color'
 alias ll='l |less'
 alias tmux='TERM=xterm-256color tmux'
 alias myip='curl http://icanhazip.com'
