@@ -76,19 +76,23 @@ au FileType python setl nosmartindent
 au FileType make setl noexpandtab  "make files need actual tab characters
 au FileType markdown setl spell spelllang=en_us
 au FileType mail setl spell spelllang=en_us
+"au FileType text setl spell spelllang=en_us
 au FileType typescript setl tabstop=2 shiftwidth=2
 
 if has("win32")
     """pretty printing on indent call (gg=G)"""
-    au FileType xml setl equalprg=c:\\Windows\\Sysnative\\bash.exe\ -c\ 'xmllint\ --format\ --recover\ -'
-    au FileType json setl equalprg=c:\\Windows\\Sysnative\\bash.exe\ -c\ 'python2.7\ -mjson.tool'
+    "au FileType xml setl equalprg=pwsh\ -nop\ -c\ echo\ [System.Xml.Linq.XDocument]::Parse("$input")
+    au FileType xml setl equalprg=pwsh\ -nop\ -c\ echo\ [System.Xml.Linq.XDocument]::Parse(\"\"\"$input\"\"\").ToString()
+    "au FileType xml setl equalprg=pwsh\ -nop\ -c\ echo\ \"\"\"$input\"\"\"
+    au FileType json setl equalprg=python\ -mjson.tool
+    "au FileType json setl equalprg=c:\\Windows\\Sysnative\\bash.exe\ -c\ 'python\ -mjson.tool'
     """put backups in tmp
     set backupdir-=.
     set backupdir^=$TEMP
 else
     """pretty printing on indent call (gg=G)"""
     au FileType xml setl equalprg=xmllint\ --format\ --recover\ -
-    au FileType json setl equalprg=python2.7\ -mjson.tool
+    au FileType json setl equalprg=python\ -mjson.tool
     """put backups in tmp
     set backupdir-=.
     set backupdir^=~/tmp,/tmp
