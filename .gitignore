@@ -3,3 +3,4 @@
 *.swo
 *.un~
 .vim/plugged/
+.vim/.netrwhist
