@@ -58,6 +58,7 @@ set textwidth=0  "driving you crazy?  ':verbose set tw?' to find the culprit
 set foldlevel=99  "open all folds on startup
 set ignorecase  "ignore case sensitivity on searches
 set hlsearch "highlight search results
+set printoptions=header:0 "don't print gobbledygook with a hardcopy
 
 """indentation"""
 set smartindent
