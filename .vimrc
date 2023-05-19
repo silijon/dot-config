@@ -79,6 +79,7 @@ au FileType markdown setl spell spelllang=en_us
 au FileType mail setl spell spelllang=en_us
 "au FileType text setl spell spelllang=en_us
 au FileType typescript setl tabstop=2 shiftwidth=2
+au FileType yaml setl tabstop=2 shiftwidth=2
 
 if has("win32")
     """pretty printing on indent call (gg=G)"""
