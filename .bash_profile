@@ -10,7 +10,7 @@ bind "set show-all-if-ambiguous on"
 bind "TAB:menu-complete"
 
 # path mods
-export PATH=~/.local/bin:~/.dotnet:$PATH
+export PATH=~/.local/bin:~/.dotnet:~/scripts:$PATH
 
 # home vars
 export EDITOR=/usr/bin/vim
@@ -24,7 +24,7 @@ if [[ `uname` != 'Darwin' ]]; then
 fi
 alias l='ls -hal --color'
 alias ll='l |less'
-alias less='less -r'
+alias less='less -R'
 alias tmux='TERM=xterm-256color tmux'
 alias myip='curl http://icanhazip.com'
 # alias gvim='/mnt/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe'
