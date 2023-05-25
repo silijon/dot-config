@@ -7,6 +7,7 @@ export CLICOLOR=1
 export PS1="\[\033[01;32m\]\h\[\033[01;34m\] \w\[\033[35m\]\$(__git_ps1)\[\033[00m\]: "
 bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
+bind "TAB:menu-complete"
 
 # path mods
 export PATH=~/.local/bin:~/.dotnet:$PATH
