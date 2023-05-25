@@ -9,7 +9,7 @@ bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
 
 # path mods
-export PATH=~/.local/bin:~/.dotnet:$PATH
+export PATH=~/.local/bin:~/.dotnet:~/scripts:$PATH
 
 # home vars
 export EDITOR=/usr/bin/vim
