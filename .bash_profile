@@ -26,9 +26,8 @@ alias ll='l |less'
 alias less='less -r'
 alias tmux='TERM=xterm-256color tmux'
 alias myip='curl http://icanhazip.com'
-alias gvim='/mnt/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe'
+# alias gvim='/mnt/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe'
 
-# nvm config -- may cause problems without nvm, not sure
-export NVM_DIR="$HOME/.config/nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
