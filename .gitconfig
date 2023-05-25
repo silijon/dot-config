@@ -27,3 +27,5 @@
     tool = vs
 [difftool "vs"]
     cmd = /home/john/win-home/dot-config/win_merge.sh diff $LOCAL $PWD/$REMOTE
+[pull]
+	rebase = false
