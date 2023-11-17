@@ -112,8 +112,8 @@ nmap - :vertical res -5<CR>
 
 """gui/console specific"""
 if has("gui_running")
-    "set guifont=BitstreamVeraSansMono_NF:h12:cANSI:qDRAFT,UbuntuMono_NF:h14,Ubuntu_Mono_derivative_Powerlin:h14,Ubuntu_Mono:h14,Consolas:h13
-    set guifont=BitstromWera\ Nerd\ Font\ Mono\ 18
+    set guifont=BitstreamVeraSansMono_NF:h12:cANSI:qDRAFT,UbuntuMono_NF:h14,Ubuntu_Mono_derivative_Powerlin:h14,Ubuntu_Mono:h14,Consolas:h13
+    "set guifont=BitstromWera\ Nerd\ Font\ Mono\ 18
     set guioptions=egmt
     set guioptions-=L
     set guioptions-=m "do something with intercepting alt key
