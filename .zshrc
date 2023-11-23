@@ -118,3 +118,5 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias myip='curl http://icanhazip.com'
+alias l='ls -hal --color'
+alias ll='ls -hal --color |less'
