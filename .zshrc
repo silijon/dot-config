@@ -90,6 +90,10 @@ plugins=(
     python
 )
 
+function virtualenv_info { 
+    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
+}
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -120,3 +124,13 @@ fi
 alias myip='curl http://icanhazip.com'
 alias l='ls -hal --color'
 alias ll='ls -hal --color |less'
+
+export PATH="$HOME/.local/bin:$PATH"
+
+
+# bun completions
+[ -s "/home/john/.bun/_bun" ] && source "/home/john/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
