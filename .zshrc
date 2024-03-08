@@ -90,6 +90,10 @@ plugins=(
     python
 )
 
+# Use TAB for auto succest completions -- sick bro
+bindkey '^ ' autosuggest-accept
+
+# Func to inject venv into custom prompt
 function virtualenv_info { 
     [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
@@ -134,3 +138,10 @@ export PATH="$HOME/.local/bin:$PATH"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# go
+export PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
+
+# neovim
+export PATH="/opt/nvim-linux64/bin:$PATH"
+alias vim='nvim'
