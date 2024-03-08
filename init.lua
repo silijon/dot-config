@@ -583,7 +583,7 @@ require('lazy').setup {
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = { disable = { 'missing-fields', 'undefined-field' } },
             },
           },
         },
@@ -864,12 +864,48 @@ require('lazy').setup {
       config = function()
           local dap, dapui = require("dap"), require("dapui")
 
-          require('dapui').setup()
-          require('dap-go').setup()
+          -- dapui configuration
+          require('dapui').setup({
+              layouts = {
+                {
+                    elements = {
+                        {
+                            id = "scopes",
+                            size = 0.4,
+                        },
+                        {
+                            id = "watches",
+                            size = 0.35,
+                        },
+                        {
+                            id = "stacks",
+                            size = 0.25,
+                        },
+                    },
+                    position = "right",
+                    size = 60,
+                },
+                {
+                    elements = {
+                        {
+                            id = "repl",
+                            size = 0.5,
+                        },
+                        {
+                            id = "console",
+                            size = 0.5,
+                        },
+                    },
+                    position = "bottom",
+                    size = 15,
+                },
+            },
+          })
 
+          -- bind ui and keymaps
           dap.listeners.before.attach.dapui_config = dapui.attach
-          dap.listeners.before.launch.dapui_config = dapui.open 
-          dap.listeners.before.event_terminated.dapui_config = dapui.close 
+          dap.listeners.before.launch.dapui_config = function() dapui.open({ reset = true })  end
+          dap.listeners.before.event_terminated.dapui_config = dapui.close
           dap.listeners.before.event_exited.dapui_config = dapui.close
 
           vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, {})
@@ -884,6 +920,9 @@ require('lazy').setup {
           vim.fn.sign_define("DapStopped", { linehl = "DapStoppedLinehl" })
           vim.api.nvim_set_hl(0, "DapBreakpointColor", { fg = "#FF0000" })
           vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpointColor", linehl = "", numhl = "" })
+
+          -- specific language configurations
+          require('dap-go').setup()
       end
   },
 
