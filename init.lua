@@ -90,6 +90,10 @@ P.S. You can delete this when you're done too. It's your config now! :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Disable netrw for nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -551,6 +555,7 @@ require('lazy').setup {
         tsserver = {},
         emmet_ls = {},
         cssls = {},
+        csharp_ls = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -825,6 +830,18 @@ require('lazy').setup {
   },
 
   -- My plugins go here
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      require('nvim-tree').setup({
+        view = {
+          adaptive_size = true,
+        },
+      })
+      vim.keymap.set('n', '<M-n>', '<cmd>NvimTreeToggle<CR>', { desc = 'toggle file tree' })
+    end
+  },
+
   'freitass/todo.txt-vim',
 
   'github/copilot.vim',
@@ -883,7 +900,7 @@ require('lazy').setup {
                         },
                     },
                     position = "right",
-                    size = 60,
+                    size = 70,
                 },
                 {
                     elements = {
@@ -921,10 +938,22 @@ require('lazy').setup {
           vim.api.nvim_set_hl(0, "DapBreakpointColor", { fg = "#FF0000" })
           vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpointColor", linehl = "", numhl = "" })
 
+          -- allow for .vscode/launch.json configurations
+          require('dap.ext.vscode').load_launchjs(nil, { coreclr = { 'cs' } })
+
           -- specific language configurations
           require('dap-go').setup()
+
+          dap.adapters.coreclr = {
+            type = 'executable',
+            command = '/home/john/.local/bin/netcoredbg',
+            args = {'--interpreter=vscode'}
+          }
+
       end
   },
+
+  'OrangeT/vim-csharp',
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
