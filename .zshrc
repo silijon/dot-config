@@ -1,10 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Enable prediction
-# autoload predict-on
-# predict-on
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -12,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="kali"
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -75,8 +71,6 @@ ZSH_THEME="kali"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    zsh-autosuggestions
-    zsh-syntax-highlighting
     vi-mode
     sudo
     debian
@@ -90,14 +84,17 @@ plugins=(
     python
 )
 
-# Use TAB for auto succest completions -- sick bro
-bindkey '^ ' autosuggest-accept
+# Download Znap, if it's not there yet.
+[[ -r ~/.config/zsh/znap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/.config/zsh/znap
+source ~/.config/zsh/znap/znap.zsh  # Start Znap
 
-# Func to inject venv into custom prompt
-function virtualenv_info { 
-    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
-}
+# Znap plugins
+znap source marlonrichert/zsh-autocomplete
+znap source zsh-users/zsh-autosuggestions
 
+# Source OMZ
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -108,11 +105,12 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='gvim'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -130,14 +128,6 @@ alias l='ls -hal --color'
 alias ll='ls -hal --color |less'
 
 export PATH="$HOME/.local/bin:$PATH"
-
-
-# bun completions
-[ -s "/home/john/.bun/_bun" ] && source "/home/john/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 # go
 export PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
