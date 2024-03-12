@@ -105,6 +105,8 @@ vim.opt.shiftwidth = 4
 
 vim.opt.termguicolors = true
 
+vim.filetype.add({ extension = { templ = 'templ' } })
+
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, for help with jumping.
@@ -363,6 +365,10 @@ require('lazy').setup {
               "--files",
               "-g",
               "!**/.git/*",
+              "-g",
+              "!**/node_modules/*",
+              "-g",
+              "!**/.venv/*",
             },
           },
         },
@@ -556,6 +562,8 @@ require('lazy').setup {
         emmet_ls = {},
         cssls = {},
         csharp_ls = {},
+        htmx = {},
+        templ = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -704,7 +712,7 @@ require('lazy').setup {
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
           ['<C-y>'] = cmp.mapping.confirm { select = true },
-          ['<CR>'] = cmp.mapping.confirm {select = false},
+          ['<Tab>'] = cmp.mapping.confirm {select = false},
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -833,18 +841,32 @@ require('lazy').setup {
   {
     'nvim-tree/nvim-tree.lua',
     config = function()
-      require('nvim-tree').setup({
+      require('nvim-tree').setup {
+        actions = {
+          open_file = {
+            quit_on_open = true,
+          },
+        },
         view = {
           adaptive_size = true,
-        },
-      })
-      vim.keymap.set('n', '<M-n>', '<cmd>NvimTreeToggle<CR>', { desc = 'toggle file tree' })
-    end
+        }
+      }
+      vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'toggle file tree' })
+    end,
   },
 
   'freitass/todo.txt-vim',
 
-  'github/copilot.vim',
+  {
+    'github/copilot.vim',
+    config = function()
+        vim.keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
+          expr = true,
+          replace_keycodes = false
+        })
+        vim.g.copilot_no_tab_map = true
+    end
+  },
 
   {
     'christoomey/vim-tmux-navigator',
@@ -863,20 +885,11 @@ require('lazy').setup {
   },
 
   {
-    "nvim-telescope/telescope-file-browser.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-    config = function()
-      local telescope = require('telescope')
-      telescope.load_extension('file_browser')
-      vim.keymap.set('n', '<leader>f', telescope.extensions.file_browser.file_browser, { desc = '[F]ile [F]inder' })
-    end,
-  },
-
-  {
       "mfussenegger/nvim-dap",
       dependencies = {
         'rcarriga/nvim-dap-ui',
         'leoluz/nvim-dap-go',
+        'OrangeT/vim-csharp',
       },
       config = function()
           local dap, dapui = require("dap"), require("dapui")
@@ -953,7 +966,6 @@ require('lazy').setup {
       end
   },
 
-  'OrangeT/vim-csharp',
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and

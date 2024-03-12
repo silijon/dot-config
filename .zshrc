@@ -132,6 +132,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # go
 export PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 
+# rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
 # neovim
 export PATH="/opt/nvim-linux64/bin:$PATH"
 alias vim='nvim'
