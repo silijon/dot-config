@@ -491,7 +491,7 @@ require('lazy').setup {
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          -- map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
@@ -711,8 +711,8 @@ require('lazy').setup {
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<C-y>'] = cmp.mapping.confirm { select = true },
-          ['<Tab>'] = cmp.mapping.confirm {select = false},
+          -- ['<C-y>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.confirm {select = true},
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -860,7 +860,7 @@ require('lazy').setup {
   {
     'github/copilot.vim',
     config = function()
-        vim.keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
+        vim.keymap.set('i', '<C-t>', 'copilot#Accept("\\<CR>")', {
           expr = true,
           replace_keycodes = false
         })

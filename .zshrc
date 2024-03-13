@@ -84,6 +84,9 @@ plugins=(
     python
 )
 
+# Source OMZ
+source $ZSH/oh-my-zsh.sh
+
 # Download Znap, if it's not there yet.
 [[ -r ~/.config/zsh/znap/znap.zsh ]] ||
     git clone --depth 1 -- \
@@ -93,9 +96,6 @@ source ~/.config/zsh/znap/znap.zsh  # Start Znap
 # Znap plugins
 znap source marlonrichert/zsh-autocomplete
 znap source zsh-users/zsh-autosuggestions
-
-# Source OMZ
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
