@@ -96,6 +96,7 @@ source ~/.config/zsh/znap/znap.zsh  # Start Znap
 # Znap plugins
 znap source marlonrichert/zsh-autocomplete
 znap source zsh-users/zsh-autosuggestions
+bindkey '^I' autosuggest-accept
 
 # User configuration
 
