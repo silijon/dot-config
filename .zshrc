@@ -127,6 +127,7 @@ export EDITOR='nvim'
 alias myip='curl http://icanhazip.com'
 alias l='ls -hal --color'
 alias ll='ls -hal --color |less'
+alias fd='fdfind'
 
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -139,3 +140,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # neovim
 export PATH="/opt/nvim-linux64/bin:$PATH"
 alias vim='nvim'
+
+# vcpkg
+export VCPKG_ROOT="$HOME/src/gh/vcpkg"
+export PATH="$VCPKG_ROOT:$PATH"
