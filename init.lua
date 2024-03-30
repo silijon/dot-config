@@ -556,6 +556,7 @@ require('lazy').setup {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         clangd = {},
+        cmake = {},
         gopls = {},
         html = {},
         pyright = {},
@@ -827,7 +828,7 @@ require('lazy').setup {
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = { enable = true },
-        indent = { enable = true },
+        indent = { enable = false },  -- this just breaks indentation
       }
 
       -- There are additional nvim-treesitter modules that you can use to interact
