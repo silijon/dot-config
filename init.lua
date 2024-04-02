@@ -99,10 +99,10 @@ vim.g.loaded_netrwPlugin = 1
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
-vim.opt.expandtab = true
+-- Set tab defaults - vim-sleuth will adjust these as needed 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
---vim.opt.smarttab = true
+vim.opt.expandtab = true
 
 vim.opt.termguicolors = true
 
