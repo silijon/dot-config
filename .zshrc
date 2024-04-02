@@ -128,6 +128,7 @@ alias myip='curl http://icanhazip.com'
 alias l='ls -hal --color'
 alias ll='ls -hal --color |less'
 alias fd='fdfind'
+alias gd='git diff --name-only --relative --diff-filter=d |xargs bat --diff'
 
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -144,3 +145,5 @@ alias vim='nvim'
 # vcpkg
 export VCPKG_ROOT="$HOME/src/gh/vcpkg"
 export PATH="$VCPKG_ROOT:$PATH"
+
+eval $(thefuck --alias)
