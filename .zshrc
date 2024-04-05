@@ -82,6 +82,7 @@ plugins=(
     nvm
     virtualenv
     python
+    autojump
 )
 
 # Source OMZ
