@@ -103,6 +103,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.g.pyindent_open_paren = vim.bo.shiftwidth --unfuck python indentation
 
 vim.opt.termguicolors = true
 
@@ -559,7 +560,16 @@ require('lazy').setup {
         cmake = {},
         gopls = {},
         html = {},
-        pyright = {},
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = 'off', -- mimics vscode defaults, unfortunate requirement since py libs are a mess
+                useLibraryCodeForTypes = true,
+              },
+            },
+          },
+        },
         tsserver = {},
         emmet_ls = {},
         cssls = {},
@@ -830,7 +840,7 @@ require('lazy').setup {
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = { enable = true },
-        indent = { enable = false },  -- this just breaks indentation
+        indent = { enable = false },  -- this breaks indentation sometimes and fixes it other times :(
       }
 
       -- There are additional nvim-treesitter modules that you can use to interact
