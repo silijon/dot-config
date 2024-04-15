@@ -897,6 +897,9 @@ require('lazy').setup {
   {
     'RRethy/vim-hexokinase',
     build = 'make',
+    config = function()
+      vim.g.Hexokinase_ftEnabled = {'css', 'html', 'javascript', 'typescript'}
+    end,
   },
 
   {
