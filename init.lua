@@ -560,7 +560,6 @@ require('lazy').setup {
       local servers = {
         clangd = {},
         cmake = {},
-        gopls = {},
         html = {
           filetypes = { "html", "templ", "jinja" },
         },
@@ -576,8 +575,10 @@ require('lazy').setup {
         },
         tsserver = {},
         emmet_ls = {},
+        jsonls = {},
         cssls = {},
         csharp_ls = {},
+        gopls = {},
         htmx = {},
         templ = {},
         terraformls = {},
