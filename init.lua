@@ -108,6 +108,8 @@ vim.g.pyindent_open_paren = vim.bo.shiftwidth --unfuck python indentation
 vim.opt.termguicolors = true
 
 vim.filetype.add({ extension = { templ = 'templ' } })
+vim.filetype.add({ extension = { jinja = 'jinja', jinja2 = 'jinja', j2 = 'jinja' } })
+vim.treesitter.language.register("html", "jinja")
 
 -- Make line numbers default
 vim.opt.number = true
@@ -559,7 +561,9 @@ require('lazy').setup {
         clangd = {},
         cmake = {},
         gopls = {},
-        html = {},
+        html = {
+          filetypes = { "html", "templ", "jinja" },
+        },
         pyright = {
           settings = {
             python = {
@@ -577,6 +581,7 @@ require('lazy').setup {
         htmx = {},
         templ = {},
         terraformls = {},
+        jinja_lsp = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -951,8 +956,10 @@ require('lazy').setup {
       "mfussenegger/nvim-dap",
       dependencies = {
         'rcarriga/nvim-dap-ui',
+        'nvim-neotest/nvim-nio',
         'leoluz/nvim-dap-go',
         'OrangeT/vim-csharp',
+        'mfussenegger/nvim-dap-python',
       },
       config = function()
           local dap, dapui = require("dap"), require("dapui")
@@ -1018,13 +1025,18 @@ require('lazy').setup {
           require('dap.ext.vscode').load_launchjs(nil, { coreclr = { 'cs' } })
 
           -- specific language configurations
+          -- go
           require('dap-go').setup()
 
+          -- csharp
           dap.adapters.coreclr = {
             type = 'executable',
             command = '/home/john/.local/bin/netcoredbg',
             args = {'--interpreter=vscode'}
           }
+
+          -- python
+          require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
 
       end
   },
