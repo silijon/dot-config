@@ -578,7 +578,9 @@ require('lazy').setup {
           },
         },
         tsserver = {},
-        emmet_ls = {},
+        emmet_ls = {
+          filetypes = { 'html', 'css', 'javascript', 'typescript', 'templ', 'jinja' },
+        },
         jsonls = {},
         cssls = {},
         csharp_ls = {},
