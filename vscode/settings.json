@@ -1,0 +1,70 @@
+{
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.fontSize": 16,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "powershell.promptToUpdatePowerShell": false,
+    "workbench.iconTheme": "vscode-icons",
+    "prettier.endOfLine": "auto",
+    "explorer.confirmDelete": false,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
+    // "debug.javascript.autoAttachFilter": "smart",
+    "terminal.integrated.fontFamily": "Hack Nerd Font Mono",
+    "redhat.telemetry.enabled": true,
+    "editor.inlineSuggest.enabled": true,
+    "bracketPairColorizer.depreciation-notice": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "yaml.maxItemsComputed": 20000,
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "debug.onTaskErrors": "showErrors",
+    "diffEditor.codeLens": false,
+    "git.openRepositoryInParentFolders": "never",
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "workbench.colorCustomizations": {
+        "[Tokyo Night]": {
+            "editor.background": "#16161e"
+        }
+    },
+    "editor.fontFamily": "Hack Nerd Font Mono, Consolas, 'Courier New', monospace",
+    "python.analysis.useLibraryCodeForTypes": true,
+    "python.analysis.typeCheckingMode": "off",
+    "files.exclude": {
+        // "**/node_modules/**": true,
+        "**/.git/objects/**": true,
+        "**/tmp/**": true,
+    },
+    "files.watcherExclude": {
+        "**/node_modules/**": true,
+        "**/dist/**": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/tmp/**": true,
+    },
+    "search.exclude": {
+        // "**/node_modules/**": true,
+        // "**/dist/**": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/tmp/**": true,
+    },
+    "extensions.autoCheckUpdates": false,
+    "extensions.autoUpdate": false,
+    "search.followSymlinks": false,
+    "settingsSync.keybindingsPerPlatform": false,
+    "github.copilot.editor.enableAutoCompletions": true,
+
+    // "csharp.maxProjectFileCountForDiagnosticAnalysis": 250,
+    // "dotnet.backgroundAnalysis.compilerDiagnosticsScope": "openFiles",
+    // "dotnet.backgroundAnalysis.analyzerDiagnosticsScope": "openFiles",
+    
+    "editor.codeLens": false
+}

@@ -1,0 +1,137 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.navigateLeft"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.navigateRight"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "workbench.action.navigateUp"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.navigateDown"
+    },
+    {
+        "key": "tab",
+        "command": "-editor.action.inlineSuggest.commit"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "editor.action.inlineSuggest.commit"
+    },
+    {
+        "key": "space p",
+        "command": "workbench.action.showCommands",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "space space",
+        "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !activeEditorGroupEmpty"
+    },
+    {
+        "key": "space s f",
+        "command": "workbench.action.quickOpen",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "space s g",
+        "command": "workbench.action.findInFiles",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "space e",
+        "command": "workbench.view.explorer",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "space e",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "filesExplorerFocus && !activeEditorGroupEmpty"
+    },
+    {
+        "key": "space c",
+        "command": "workbench.panel.chat.view.copilot.focus",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "ctrl+a t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminal.active"
+    },
+    {
+        "key": "space h a",
+        "command": "vscode-harpoon.addEditor",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "space h h",
+        "command": "vscode-harpoon.editEditors",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "space j",
+        "command": "vscode-harpoon.gotoEditor1",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "space k",
+        "command": "vscode-harpoon.gotoEditor2",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "space l",
+        "command": "vscode-harpoon.gotoEditor3",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "space ;",
+        "command": "vscode-harpoon.gotoEditor4",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "space d e",
+        "command": "workbench.view.debug",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "space d b",
+        "command": "editor.debug.action.toggleBreakpoint",
+        "when": "editorTextFocus && neovim.mode != 'insert'"
+    },
+    {
+        "key": "space d c",
+        "command": "workbench.action.debug.start",
+        "when": "editorTextFocus && neovim.mode != 'insert' && !inDebugMode"
+    },
+    {
+        "key": "space d c",
+        "command": "workbench.action.debug.continue",
+        "when": "neovim.mode != 'insert' && inDebugMode"
+    },
+    {
+        "key": "space d n",
+        "command": "workbench.action.debug.stepOver",
+        "when": "neovim.mode != 'insert' && inDebugMode"
+    },
+    {
+        "key": "space d i",
+        "command": "workbench.action.debug.stepInto",
+        "when": "neovim.mode != 'insert' && inDebugMode"
+    },
+    {
+        "key": "space d o",
+        "command": "workbench.action.debug.stepOut",
+        "when": "neovim.mode != 'insert' && inDebugMode"
+    },
+    {
+        "key": "space d x",
+        "command": "workbench.action.debug.stop",
+        "when": "neovim.mode != 'insert' && inDebugMode"
+    }
+]
