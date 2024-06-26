@@ -38,6 +38,6 @@ RPROMPT="${return_code}"
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{green}-[%f"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%F{green}]%f"
 
-PROMPT+='%{$fg[green]%}$(virtualenv_info)%{$reset_color%}%'
+#PROMPT+='%{$fg[green]%}$(virtualenv_info)%{$reset_color%}%'
 
 }
