@@ -133,6 +133,10 @@ alias gd='git diff --name-only --relative --diff-filter=d |xargs bat --diff'
 
 export PATH="$HOME/.local/bin:$PATH"
 
+# dotnet
+export DOTNET_ROOT="$HOME/.dotnet"
+export PATH="$DOTNET_ROOT:$PATH"
+
 # go
 export PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 
@@ -144,11 +148,11 @@ export PATH="/opt/nvim-linux64/bin:$PATH"
 alias vim='nvim'
 
 # vcpkg
-export VCPKG_ROOT="$HOME/src/gh/vcpkg"
+export VCPKG_ROOT="$HOME/.local/share/vcpkg/"
 export PATH="$VCPKG_ROOT:$PATH"
 
 # thefuck
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
 
 # anaconda
 export PATH="/home/john/anaconda3/bin:$PATH"
@@ -208,3 +212,7 @@ elif type compctl &>/dev/null; then
   compctl -K _pm2_completion + -f + pm2
 fi
 ###-end-pm2-completion-###
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
