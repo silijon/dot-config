@@ -95,8 +95,8 @@ source $ZSH/oh-my-zsh.sh
 source ~/.config/zsh/znap/znap.zsh  # Start Znap
 
 # Znap plugins
-znap source marlonrichert/zsh-autocomplete
 znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-syntax-highlighting
 bindkey '^t' autosuggest-accept
 
 # User configuration
