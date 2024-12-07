@@ -142,7 +142,7 @@ return {
             },
           },
         },
-        tsserver = {},
+        ts_ls = {},
         emmet_ls = {
           filetypes = { 'html', 'css', 'templ', 'jinja' },
         },
@@ -153,7 +153,9 @@ return {
         bashls = {},
         dockerls = {},
         gopls = {},
-        htmx = {},
+        htmx = {
+          filetypes = { 'html', 'templ', 'jinja' },
+        },
         templ = {},
         terraformls = {},
         jinja_lsp = {},
