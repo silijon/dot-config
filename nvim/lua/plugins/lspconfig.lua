@@ -165,14 +165,14 @@ return {
         cmake = {},
 
         -- web --
-        -- html = { filetypes = { "html", "templ", "jinja" }, },
-        -- jsonls = {},
-        -- emmet_ls = { filetypes = { 'html', 'css', 'templ', 'jinja' }, },
-        -- cssls = {},
-        -- ts_ls = {},
+        html = { filetypes = { "html", "templ", "jinja" }, },
+        jsonls = {},
+        emmet_ls = { filetypes = { 'html', 'css', 'templ', 'jinja' }, },
+        cssls = {},
+        ts_ls = {},
 
         -- devops --
-        -- dockerls = {},
+        dockerls = {},
         -- terraformls = {},
 
         -- web extras --
@@ -182,7 +182,7 @@ return {
         -- angularls = {},
 
         -- lang extras -- 
-        -- bashls = {},
+        bashls = {},
         -- csharp_ls = {},
         -- powershell_es = {},
         -- gopls = {},
