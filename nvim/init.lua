@@ -330,6 +330,6 @@ require('lazy').setup {
   { import = 'plugins/lspconfig' },
   { import = 'plugins/autocmp' },
   { import = 'plugins/harpoon' },
-  { import = 'plugins/copilot' },
+  -- { import = 'plugins/copilot' },
   -- { import = 'plugins/debugger' },
 }
