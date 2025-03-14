@@ -24,20 +24,20 @@ else
   PR_HOST='%F{blue}%M%f' # no SSH
 fi
 
-
 local return_code="%(?..%F{red}%? ↵%f)"
-
 local user_host="%B${PR_USER}%F{blue}@${PR_HOST}%b"
 local current_dir="%B%F{blue}%~%f%b"
 local git_branch='$(git_prompt_info)'
-
-PROMPT="%F{green}╭─(%f${user_host}%F{green})-[%f${current_dir}%F{green}]%f${git_branch}
-%F{green}╰─$PR_PROMPT%f "
-RPROMPT="${return_code}"
+local python_venv='$(virtualenv_prompt_info)'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{green}-[%f"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%F{green}]%f"
 
-#PROMPT+='%{$fg[green]%}$(virtualenv_info)%{$reset_color%}%'
+ZSH_THEME_VIRTUALENV_PREFIX="%F{green}-[%f"
+ZSH_THEME_VIRTUALENV_SUFFIX="%F{green}]%f"
+
+PROMPT="%F{green}╭─(%f${user_host}%F{green})-[%f${current_dir}%F{green}]%f${python_venv}${git_branch}
+%F{green}╰─$PR_PROMPT%f "
+RPROMPT="${return_code}"
 
 }
