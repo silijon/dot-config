@@ -3,11 +3,11 @@ opacity = 0.9
 
 [window.dimensions]
 columns = 130
-lines = 34
+lines = 32
 
 [window.position]
-x = 24
-y = 24
+x = 32
+y = 18
 
 [window.padding]
 x = 5
