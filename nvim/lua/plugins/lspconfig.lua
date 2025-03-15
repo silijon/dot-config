@@ -60,7 +60,7 @@ return {
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
           -- Find references for the word under your cursor.
-          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          map('gr', function() require('telescope.builtin').lsp_references({ show_line = false }) end, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
@@ -123,41 +123,7 @@ return {
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       local servers = {
-        clangd = {
-          capabilities = {
-            offsetEncoding = { 'utf-16' }, -- make it play nice with copilot
-          }
-        },
-        cmake = {},
-        html = {
-          filetypes = { "html", "templ", "jinja" },
-        },
-        pyright = {
-          settings = {
-            python = {
-              analysis = {
-                typeCheckingMode = 'off', -- mimics vscode defaults, unfortunate requirement since py libs are a mess
-                useLibraryCodeForTypes = true,
-              },
-            },
-          },
-        },
-        tsserver = {},
-        emmet_ls = {
-          filetypes = { 'html', 'css', 'templ', 'jinja' },
-        },
-        jsonls = {},
-        cssls = {},
-        csharp_ls = {},
-        powershell_es = {},
-        bashls = {},
-        dockerls = {},
-        gopls = {},
-        htmx = {},
-        templ = {},
-        terraformls = {},
-        jinja_lsp = {},
-        angularls = {},
+        -- essentials (no node/npm required) --
         lua_ls = {
           settings = {
             Lua = {
@@ -179,6 +145,47 @@ return {
             },
           },
         },
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = 'off', -- mimics vscode defaults, unfortunate requirement since py libs are a mess
+                useLibraryCodeForTypes = true,
+              },
+            },
+          },
+        },
+
+        -- c/c++ --
+        clangd = {
+          capabilities = {
+            offsetEncoding = { 'utf-16' }, -- make it play nice with copilot
+          }
+        },
+        cmake = {},
+
+        -- web --
+        html = { filetypes = { "html", "templ", "jinja" }, },
+        jsonls = {},
+        emmet_ls = { filetypes = { 'html', 'css', 'templ', 'jinja' }, },
+        cssls = {},
+        ts_ls = {},
+
+        -- devops --
+        dockerls = {},
+        -- terraformls = {},
+
+        -- web extras --
+        -- htmx = { filetypes = { 'html', 'templ', 'jinja' }, },
+        -- templ = {},
+        -- jinja_lsp = {},
+        -- angularls = {},
+
+        -- lang extras -- 
+        bashls = {},
+        -- csharp_ls = {},
+        -- powershell_es = {},
+        -- gopls = {},
       }
 
       -- Ensure the servers and tools above are installed
