@@ -144,7 +144,7 @@ export PATH="/usr/local/go/bin:$HOME/go/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
 # neovim
-export PATH="/opt/nvim-linux64/bin:$PATH"
+export PATH="/opt/nvim-linux-x86_64/bin:$PATH"
 alias vim='nvim'
 
 # vcpkg

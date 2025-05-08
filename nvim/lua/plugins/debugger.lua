@@ -1,90 +1,73 @@
 return {
   {
-      "mfussenegger/nvim-dap",
-      dependencies = {
-        'rcarriga/nvim-dap-ui',
-        'nvim-neotest/nvim-nio',
-        'leoluz/nvim-dap-go',
-        'OrangeT/vim-csharp',
-        'mfussenegger/nvim-dap-python',
-      },
-      config = function()
-          local dap, dapui = require("dap"), require("dapui")
+    "mfussenegger/nvim-dap",
+    event = "VeryLazy",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "nvim-neotest/nvim-nio",
+      "jay-babu/mason-nvim-dap.nvim",
+      "theHamsta/nvim-dap-virtual-text",
+    },
+    config = function()
+      local mason_dap = require("mason-nvim-dap")
+      local dap = require("dap")
+      local ui = require("dapui")
+      local dap_virtual_text = require("nvim-dap-virtual-text")
 
-          -- dapui configuration
-          require('dapui').setup({
-              layouts = {
-                {
-                    elements = {
-                        {
-                            id = "scopes",
-                            size = 0.4,
-                        },
-                        {
-                            id = "watches",
-                            size = 0.35,
-                        },
-                        {
-                            id = "stacks",
-                            size = 0.25,
-                        },
-                    },
-                    position = "right",
-                    size = 70,
-                },
-                {
-                    elements = {
-                        {
-                            id = "repl",
-                            size = 0.5,
-                        },
-                        {
-                            id = "console",
-                            size = 0.5,
-                        },
-                    },
-                    position = "bottom",
-                    size = 15,
-                },
-            },
-          })
+      dap_virtual_text.setup()
 
-          -- bind ui and keymaps
-          dap.listeners.before.attach.dapui_config = dapui.attach
-          dap.listeners.before.launch.dapui_config = function() dapui.open({ reset = true })  end
-          dap.listeners.before.event_terminated.dapui_config = dapui.close
-          dap.listeners.before.event_exited.dapui_config = dapui.close
+      mason_dap.setup({
+        ensure_installed = { "python" },
+        automatic_installation = true,
+        handlers = {
+          function(config)
+            require("mason-nvim-dap").default_setup(config)
+          end,
+        },
+      })
 
-          vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, {})
-          vim.keymap.set('n', '<leader>dc', dap.continue, {})
-          vim.keymap.set('n', '<leader>dn', dap.step_over, {})
-          vim.keymap.set('n', '<leader>di', dap.step_into, {})
-          vim.keymap.set('n', '<leader>do', dap.step_out, {})
-          vim.keymap.set('n', '<leader>dl', dap.run_last, {})
-          vim.keymap.set('n', '<leader>dx', dap.terminate, {})
+      dap.configurations = {
+        python = {
+          {
+            type = "python",
+            request = "launch",
+            name = "Launch File",
 
-          vim.api.nvim_set_hl(0, "DapStoppedLinehl", { bg = "#555530" })
-          vim.fn.sign_define("DapStopped", { linehl = "DapStoppedLinehl" })
-          vim.api.nvim_set_hl(0, "DapBreakpointColor", { fg = "#FF0000" })
-          vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpointColor", linehl = "", numhl = "" })
+            program = "${file}",
+            pythonPath = function()
+              local cwd = vim.fn.getcwd()
+              if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
+                return cwd .. "/venv/bin/python"
+              elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+                return cwd .. "/.venv/bin/python"
+              else
+                return "/usr/bin/python"
+              end
+            end,
+          },
+        },
+      }
 
-          -- allow for .vscode/launch.json configurations
-          -- require('dap.ext.vscode').load_launchjs(nil, { coreclr = { 'cs' } })
+      ui.setup()
 
-          -- specific language configurations
-          -- go
-          require('dap-go').setup()
+      dap.listeners.before.attach.dapui_config = ui.attach
+      dap.listeners.before.launch.dapui_config = function() ui.open({ reset = true })  end
+      dap.listeners.before.event_terminated.dapui_config = ui.close
+      dap.listeners.before.event_exited.dapui_config = ui.close
 
-          -- csharp
-          dap.adapters.coreclr = {
-            type = 'executable',
-            command = '/home/john/.local/bin/netcoredbg',
-            args = {'--interpreter=vscode'}
-          }
+      vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+      vim.keymap.set('n', '<leader>dc', dap.continue, { desc = "Continue" })
+      vim.keymap.set('n', '<leader>dn', dap.step_over, { desc = "Step Over" })
+      vim.keymap.set('n', '<leader>di', dap.step_into, { desc = "Step Into" })
+      vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step Out" })
+      vim.keymap.set('n', '<leader>dl', dap.run_last, { desc = "Run Last Configuration" })
+      vim.keymap.set('n', '<leader>dx', dap.terminate, { desc = "Terminate" })
 
-          -- python
-          require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+      vim.api.nvim_set_hl(0, "DapStoppedLinehl", { bg = "#555530" })
+      vim.fn.sign_define("DapStopped", { linehl = "DapStoppedLinehl" })
+      vim.api.nvim_set_hl(0, "DapBreakpointColor", { fg = "#FF0000" })
+      vim.fn.sign_define("DapBreakpoint", { text = "🐞", texthl = "DapBreakpointColor", linehl = "", numhl = "" })
 
-      end
+    end
   },
 }

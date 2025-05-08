@@ -231,7 +231,7 @@ require('lazy').setup {
     -- Document existing key chains
     spec = {
       { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
-      { '<leader>d', group = '[D]ocument' },
+      { '<leader>d', group = '[D]ebug' },
       { '<leader>r', group = '[R]ename' },
       { '<leader>s', group = '[S]earch' },
       { '<leader>w', group = '[W]orkspace' },
@@ -330,6 +330,6 @@ require('lazy').setup {
   { import = 'plugins/lspconfig' },
   { import = 'plugins/autocmp' },
   { import = 'plugins/harpoon' },
+  { import = 'plugins/debugger' },
   -- { import = 'plugins/copilot' },
-  -- { import = 'plugins/debugger' },
 }
