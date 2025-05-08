@@ -19,7 +19,7 @@ fi
 
 # Check if we are on SSH or not
 if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then
-  PR_HOST='%F{red}%M%f' # SSH
+  PR_HOST='%F{blue}%M%f' # SSH
 else
   PR_HOST='%F{blue}%M%f' # no SSH
 fi
