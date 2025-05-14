@@ -26,9 +26,17 @@ return {
         },
       })
 
+      dap.adapters.remote = function(callback, config)
+        callback({
+          type = 'server',
+          host = config.connect.host,
+          port = config.connect.port,
+        })
+      end
+
       ui.setup()
 
-      dap.listeners.before.attach.dapui_config = ui.attach
+      dap.listeners.before.attach.dapui_config = function() ui.open({ reset = true })  end
       dap.listeners.before.launch.dapui_config = function() ui.open({ reset = true })  end
       dap.listeners.before.event_terminated.dapui_config = ui.close
       dap.listeners.before.event_exited.dapui_config = ui.close
