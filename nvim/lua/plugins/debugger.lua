@@ -1,27 +1,36 @@
 return {
   {
-    "mfussenegger/nvim-dap",
-    event = "VeryLazy",
+    'mfussenegger/nvim-dap',
+    event = 'VeryLazy',
     dependencies = {
-      "rcarriga/nvim-dap-ui",
-      "nvim-neotest/nvim-nio",
-      "jay-babu/mason-nvim-dap.nvim",
-      "theHamsta/nvim-dap-virtual-text",
+      'rcarriga/nvim-dap-ui',
+      'nvim-neotest/nvim-nio',
+      'jay-babu/mason-nvim-dap.nvim',
+      'theHamsta/nvim-dap-virtual-text',
     },
     config = function()
-      local mason_dap = require("mason-nvim-dap")
-      local dap = require("dap")
-      local ui = require("dapui")
-      local dap_virtual_text = require("nvim-dap-virtual-text")
+      local mason_dap = require('mason-nvim-dap')
+      local dap = require('dap')
+      local ui = require('dapui')
+      local dap_virtual_text = require('nvim-dap-virtual-text')
 
-      dap_virtual_text.setup()
+      dap_virtual_text.setup({})
 
       mason_dap.setup({
-        ensure_installed = { "python" },
+        ensure_installed = { 'python' },
         automatic_installation = true,
         handlers = {
           function(config)
-            require("mason-nvim-dap").default_setup(config)
+            require('mason-nvim-dap').default_setup(config)
+          end,
+          python = function(config)
+            local venv = os.getenv('VIRTUAL_ENV') or '/usr/bin/python'
+            config.adapters = {
+              type = 'executable',
+              command = venv .. '/bin/python',
+              args = { '-m', 'debugpy.adapter' },
+            }
+            require('mason-nvim-dap').default_setup(config)
           end,
         },
       })

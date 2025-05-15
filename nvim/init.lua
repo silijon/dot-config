@@ -21,6 +21,9 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Indicate nerd font prescence
+vim.g.have_nerd_font = true
+
 -- Disable netrw for nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -141,13 +144,14 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup {
+require('lazy').setup({
   { -- Colorscheme
     'folke/tokyonight.nvim',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- Set transparency
+      ---@diagnostic disable-next-line: missing-fields
       require('tokyonight').setup {
         transparent = false,
         styles = {
@@ -260,7 +264,7 @@ require('lazy').setup {
 
       -- Simple and easy statusline.
       local statusline = require 'mini.statusline'
-      statusline.setup()
+      statusline.setup { use_icons = vim.g.have_nerd_font }
 
       -- Set the cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
@@ -276,7 +280,7 @@ require('lazy').setup {
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'bash', 'c', 'html', 'lua', 'markdown', 'vim', 'vimdoc' },
+        ensure_installed = { 'bash', 'c', 'python', 'html', 'lua', 'markdown', 'vim', 'vimdoc' },
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = { enable = true },
@@ -328,5 +332,28 @@ require('lazy').setup {
   { import = 'plugins/autocmp' },
   { import = 'plugins/harpoon' },
   { import = 'plugins/debugger' },
+  { import = 'plugins/lint' },
   -- { import = 'plugins/copilot' },
-}
+},
+---@diagnostic disable-next-line: missing-fields
+{
+  ui = {
+    -- If you are using a Nerd Font: set icons to an empty table which will use the
+    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
+    icons = vim.g.have_nerd_font and {} or {
+      cmd = '⌘',
+      config = '🛠',
+      event = '📅',
+      ft = '📂',
+      init = '⚙',
+      keys = '🗝',
+      plugin = '🔌',
+      runtime = '💻',
+      require = '🌙',
+      source = '📄',
+      start = '🚀',
+      task = '📌',
+      lazy = '💤 ',
+    },
+  },
+})

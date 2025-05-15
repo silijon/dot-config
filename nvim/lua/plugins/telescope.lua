@@ -21,7 +21,7 @@ return {
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Pretty icons -- requires Nerd Font
-      { 'nvim-tree/nvim-web-devicons' },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- [[ Configure Telescope ]]
