@@ -41,13 +41,15 @@ return {
       dap.listeners.before.event_terminated.dapui_config = ui.close
       dap.listeners.before.event_exited.dapui_config = ui.close
 
-      vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-      vim.keymap.set('n', '<leader>dc', dap.continue, { desc = "Continue" })
+      vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = "Toggle [B]reakpoint" })
+      vim.keymap.set('n', '<leader>dc', dap.continue, { desc = "[C]ontinue" })
       vim.keymap.set('n', '<leader>dn', dap.step_over, { desc = "Step Over" })
-      vim.keymap.set('n', '<leader>di', dap.step_into, { desc = "Step Into" })
-      vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step Out" })
-      vim.keymap.set('n', '<leader>dl', dap.run_last, { desc = "Run Last Configuration" })
+      vim.keymap.set('n', '<leader>di', dap.step_into, { desc = "Step [I]nto" })
+      vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step [O]ut" })
+      vim.keymap.set('n', '<leader>dl', dap.run_last, { desc = "Run [L]ast Configuration" })
       vim.keymap.set('n', '<leader>dx', dap.terminate, { desc = "Terminate" })
+      vim.keymap.set('n', '<leader>dp', function() ui.open({ reset = true }) end, { desc = "O[p]en the debugger" })
+      vim.keymap.set('n', '<leader>dq', ui.close, { desc = "[Q]uit the debugger" })
 
       vim.api.nvim_set_hl(0, "DapStoppedLinehl", { bg = "#555530" })
       vim.fn.sign_define("DapStopped", { linehl = "DapStoppedLinehl" })
