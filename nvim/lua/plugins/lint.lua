@@ -20,8 +20,7 @@ return {
 
       -- Set python linters to work in virtualenv
       lint.linters.pylint.cmd = 'python'
-      lint.linters.pylint.args = {'-m', 'pylint', '-f', 'json', vim.api.nvim_buf_get_name(0)}
-
+      lint.linters.pylint.args = {'-m', 'pylint', '-f', 'json', '--from-stdin', function() return vim.api.nvim_buf_get_name(0) end, }
     end
   }
 }
