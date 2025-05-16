@@ -93,16 +93,16 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
-vim.keymap.set("n", "<leader>n", "<cmd>bnext<CR>", { desc = "Go to next buffer" })
-vim.keymap.set("n", "<leader>p", "<cmd>bprev<CR>", { desc = "Go to previous buffer" })
-vim.keymap.set("n", "<leader>b", "<C-^>", { desc = "Go to previous buffer" })
+vim.keymap.set("n", "<leader>n", "<cmd>bnext<CR>", { desc = "Goto Next Buffer" })
+vim.keymap.set("n", "<leader>p", "<cmd>bprev<CR>", { desc = "Goto Previous Buffer" })
+vim.keymap.set("n", "<leader>b", "<C-^>", { desc = "Goto Previous Buffer" })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open Diagnostic [Q]uickfix List" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -110,16 +110,16 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 --
 -- NOTE: This won"t work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit Terminal Mode" })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move Focus to the Left Window" })
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move Focus to the Right Window" })
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move Focus to the Lower Window" })
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move Focus to the Upper Window" })
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -301,7 +301,7 @@ require("lazy").setup({
             adaptive_size = true,
           }
         }
-        vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file [E]xplorer" })
+        vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle File [E]xplorer" })
       end,
     },
 
@@ -315,10 +315,10 @@ require("lazy").setup({
       "christoomey/vim-tmux-navigator",
       lazy = false,
       config = function()
-        vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { desc = "tmux window left" })
-        vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { desc = "tmux window right" })
-        vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { desc = "tmux window down" })
-        vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "tmux window up" })
+        vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { desc = "Tmux Window Left" })
+        vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { desc = "Tmux Window Right" })
+        vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { desc = "Tmux Window Down" })
+        vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "Tmux Window Up" })
       end,
     },
 

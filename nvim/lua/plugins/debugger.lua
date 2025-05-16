@@ -55,10 +55,11 @@ return {
       vim.keymap.set('n', '<leader>dn', dap.step_over, { desc = "Step Over" })
       vim.keymap.set('n', '<leader>di', dap.step_into, { desc = "Step [I]nto" })
       vim.keymap.set('n', '<leader>do', dap.step_out, { desc = "Step [O]ut" })
+      vim.keymap.set('n', '<leader>dg', dap.goto_, { desc = "[G]oto Current Debug Position" })
       vim.keymap.set('n', '<leader>dl', dap.run_last, { desc = "Run [L]ast Configuration" })
       vim.keymap.set('n', '<leader>dx', dap.terminate, { desc = "Terminate" })
-      vim.keymap.set('n', '<leader>dp', function() ui.open({ reset = true }) end, { desc = "O[p]en the debugger" })
-      vim.keymap.set('n', '<leader>dq', ui.close, { desc = "[Q]uit the debugger" })
+      vim.keymap.set('n', '<leader>dp', function() ui.open({ reset = true }) end, { desc = "O[p]en the Debugger" })
+      vim.keymap.set('n', '<leader>dq', ui.close, { desc = "[Q]uit the Debugger" })
 
       vim.api.nvim_set_hl(0, "DapStoppedLinehl", { bg = "#555530" })
       vim.fn.sign_define("DapStopped", { linehl = "DapStoppedLinehl" })

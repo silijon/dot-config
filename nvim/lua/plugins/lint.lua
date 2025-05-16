@@ -14,7 +14,6 @@ return {
         python = { "pylint" },
       }
 
-
       -- Run after save, insert leave, etc.
       vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave" }, {
         callback = function()
@@ -30,8 +29,8 @@ return {
       -- Disable annoying overly pedantic rules
       lint.linters.markdownlint.args = { "--stdin", "--disable", "MD013", "--", }
 
-      vim.keymap.set("n", "<leader>fl", lint.try_lint, { desc = "[L]int the buffer" })
-      vim.keymap.set("n", "<leader>fs", function() lint.try_lint("cspell") end, { desc = "[S]pellcheck the buffer" })
+      vim.keymap.set("n", "<leader>fl", lint.try_lint, { desc = "[L]int Current Buffer" })
+      vim.keymap.set("n", "<leader>fs", function() lint.try_lint("cspell") end, { desc = "[S]pellcheck Current Buffer" })
 
     end
   }

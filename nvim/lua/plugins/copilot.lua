@@ -20,7 +20,7 @@ return {
     config = function()
       require('CopilotChat').setup({})
       local chat = require("CopilotChat")
-      vim.keymap.set("n", "<leader>cc", function() chat.toggle() end, { desc = 'toggle [C]opilot [C]hat window' })
+      vim.keymap.set("n", "<leader>cc", function() chat.toggle() end, { desc = 'Toggle [C]opilot [C]hat Window' })
     end,
   },
 }
