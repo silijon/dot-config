@@ -253,6 +253,7 @@ return {
         emmet_ls = { filetypes = { "html", "css", "templ", "jinja" } },
         cssls = {},
         ts_ls = {},
+        eslint = {},
 
         -- devops --
         dockerls = {},
@@ -290,6 +291,7 @@ return {
         "jq", -- Json formatting
         "markdownlint", -- Markdown linting
         "mdformat", -- Markdown formatting
+        "prettier", -- JS/TS formatting
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
