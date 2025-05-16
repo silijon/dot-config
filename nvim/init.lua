@@ -17,12 +17,13 @@
 =====================================================================
 --]]
 
+-- Environmental Settings
+vim.g.have_nerd_font = true
+vim.g.full_ide_setup = true
+
 -- Set <space> as the leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
--- Indicate nerd font prescence
-vim.g.have_nerd_font = true
 
 -- Disable netrw for nvim-tree
 vim.g.loaded_netrw = 1
@@ -285,26 +286,6 @@ require("lazy").setup({
       end,
     },
 
-    { -- Side panel tree
-      "nvim-tree/nvim-tree.lua",
-      config = function()
-        require("nvim-tree").setup {
-          update_focused_file = {
-            enable = true,
-          },
-          actions = {
-            open_file = {
-              quit_on_open = true,
-            },
-          },
-          view = {
-            adaptive_size = true,
-          }
-        }
-        vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle File [E]xplorer" })
-      end,
-    },
-
     -- Handles todo.txt files
     "freitass/todo.txt-vim",
 
@@ -322,15 +303,18 @@ require("lazy").setup({
       end,
     },
 
-    -- Import the full setup with all IDE features
+    -- Minimal Setup
     { import = "plugins/telescope" },
     { import = "plugins/harpoon" },
-    { import = "plugins/lspconfig" },
-    { import = "plugins/autocmp" },
-    { import = "plugins/format" },
-    { import = "plugins/lint" },
-    { import = "plugins/debugger" },
-    -- { import = "plugins/copilot" },
+
+    -- Full Setup
+    { import = "plugins/lspconfig", cond = vim.g.full_ide_setup },
+    { import = "plugins/autocmp", cond = vim.g.full_ide_setup },
+    { import = "plugins/format", cond = vim.g.full_ide_setup },
+    { import = "plugins/lint", cond = vim.g.full_ide_setup },
+    { import = "plugins/debugger", cond = vim.g.full_ide_setup },
+    -- { import = "plugins/copilot", cond = vim.g.full_ide_setup },
+
   },
   ---@diagnostic disable-next-line: missing-fields
   {
