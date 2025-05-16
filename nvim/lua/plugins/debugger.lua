@@ -24,7 +24,7 @@ return {
             require('mason-nvim-dap').default_setup(config)
           end,
           python = function(config)
-            local venv = os.getenv('VIRTUAL_ENV') or '/usr/bin/python'
+            local venv = os.getenv('VIRTUAL_ENV') or '/usr'
             config.adapters = {
               type = 'executable',
               command = venv .. '/bin/python',

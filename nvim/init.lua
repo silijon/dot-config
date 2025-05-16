@@ -184,7 +184,7 @@ require("lazy").setup({
 
     {                   -- Useful plugin to show you pending keybinds.
       "folke/which-key.nvim",
-      event = "VimEnter", -- Sets the loading event to "VimEnter"
+      event = "VeryLazy", -- Sets the loading event to "VeryLazy"
       opts = {
         -- delay between pressing a key and opening which-key (milliseconds)
         -- this setting is independent of vim.opt.timeoutlen
@@ -225,16 +225,15 @@ require("lazy").setup({
             F12 = "<F12>",
           },
         },
-      },
-      -- Document existing key chains
-      spec = {
-        { "<leader>c", group = "[C]ode",     mode = { "n", "x" } },
-        { "<leader>d", group = "[D]ebug" },
-        { "<leader>r", group = "[R]ename" },
-        { "<leader>s", group = "[S]earch" },
-        { "<leader>w", group = "[W]orkspace" },
-        { "<leader>t", group = "[T]oggle" },
-        { "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
+        -- Document existing key chains
+        spec = {
+          { "<leader>c", group = "[C]ode",     mode = { "n", "x" } },
+          { "<leader>f", group = "[F]ormat" },
+          { "<leader>d", group = "[D]ebug" },
+          { "<leader>s", group = "[S]earch" },
+          { "<leader>h", group = "[H]arpoon" },
+          { "gr", group = "LSP Commands",         mode = { "n", "x" } },
+        },
       },
     },
 
@@ -302,7 +301,7 @@ require("lazy").setup({
             adaptive_size = true,
           }
         }
-        vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "toggle file tree" })
+        vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file [E]xplorer" })
       end,
     },
 
