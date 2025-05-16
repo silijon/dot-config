@@ -25,7 +25,7 @@ return {
       },
 
       -- File browser
-      "vim-telescope/telescope-file-browser.nvim",
+      "nvim-telescope/telescope-file-browser.nvim",
 
       -- Pretty icons -- requires Nerd Font
       { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
