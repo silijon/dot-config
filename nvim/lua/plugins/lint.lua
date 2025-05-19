@@ -10,7 +10,7 @@ return {
       -- Setup linters
       lint.linters_by_ft = {
         text = { "cspell" },
-        markdown = { "markdownlint" },
+        markdown = { "markdownlint", "cspell" },
         python = { "pylint" },
       }
 
