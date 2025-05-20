@@ -35,11 +35,8 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.g.pyindent_open_paren = vim.bo.shiftwidth --unfuck python indentation
 
+-- Colors
 vim.opt.termguicolors = true
-
-vim.filetype.add({ extension = { templ = "templ" } })
-vim.filetype.add({ extension = { jinja = "jinja", jinja2 = "jinja", j2 = "jinja" } })
-vim.treesitter.language.register("html", "jinja")
 
 -- Make line numbers default
 vim.opt.number = true
@@ -93,7 +90,6 @@ vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
-
 vim.keymap.set("n", "<leader>n", "<cmd>bnext<CR>", { desc = "Goto Next Buffer" })
 vim.keymap.set("n", "<leader>p", "<cmd>bprev<CR>", { desc = "Goto Previous Buffer" })
 vim.keymap.set("n", "<leader>b", "<C-^>", { desc = "Goto Previous Buffer" })
@@ -239,8 +235,22 @@ require("lazy").setup({
       },
     },
 
-    -- Highlight todo, notes, etc in comments
-    { "folke/todo-comments.nvim", event = "VimEnter", dependencies = { "nvim-lua/plenary.nvim" }, opts = { signs = false } },
+    { -- Highlight todo, notes, etc in comments
+      "folke/todo-comments.nvim",
+      event = "VimEnter",
+      dependencies = { "nvim-lua/plenary.nvim" },
+      opts = { signs = false },
+      config = function()
+        vim.keymap.set('n', '<leader>t', function()
+          local file = vim.fn.expand('~/Dropbox/Documents/todo.txt')
+          if vim.fn.filereadable(file) == 1 then
+            vim.cmd.edit(file)
+          else
+            vim.notify('❌ Not Found: ' .. file, vim.log.levels.ERROR)
+          end
+        end, { silent = true, noremap = true })
+      end
+    },
 
     { -- Collection of various small independent plugins/modules
       "echasnovski/mini.nvim",
@@ -284,6 +294,10 @@ require("lazy").setup({
           highlight = { enable = true },
           indent = { enable = false }, -- this breaks indentation sometimes and fixes it other times :(
         }
+        -- Add extra file associations
+        vim.filetype.add({ extension = { templ = "templ" } })
+        vim.filetype.add({ extension = { jinja = "jinja", jinja2 = "jinja", j2 = "jinja" } })
+        vim.treesitter.language.register("html", "jinja")
       end,
     },
 
