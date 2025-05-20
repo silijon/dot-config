@@ -91,26 +91,6 @@ return {
         },
       }
 
-      dap.configurations.typescriptreact = {
-        {
-          name = "Launch: Next.js Server",
-          type = "pwa-node",
-          request = "launch",
-          program = "${workspaceFolder}/node_modules/.bin/next",
-          args = { "dev" },
-          cwd = "${workspaceFolder}",
-          webRoot = "${workspaceFolder}",
-          sourceMaps = true,
-          -- sourceMapPathOverrides = {
-          --   ["webpack-internal:///\\(rsc\\)/(?:../)*"] = "${workspaceFolder}/*",
-          -- },
-          skipFiles = {
-            "<node_internals>/**",
-            "**/node_modules/**",
-          },
-        },
-      }
-
       -- Attach to running node proc for all node file types
       for _, language in ipairs({ "typescript", "typescriptreact", "javascript", "javascriptreact" }) do
 
