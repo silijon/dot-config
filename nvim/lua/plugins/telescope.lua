@@ -35,6 +35,17 @@ return {
       -- See `:help telescope` and `:help telescope.setup()`
       local telescope = require("telescope")
 
+      -- Make file picking more readable
+      vim.api.nvim_create_autocmd("FileType", {
+          pattern = "TelescopeResults",
+          callback = function(ctx)
+              vim.api.nvim_buf_call(ctx.buf, function()
+                  vim.fn.matchadd("TelescopeParent", "\t\t.*$")
+                  vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
+              end)
+          end,
+      })
+
       telescope.setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you"re looking for is in `:help telescope.setup()`
@@ -73,6 +84,12 @@ return {
           layout_strategy = "horizontal",
           layout_config = { prompt_position = "top" },
           sorting_strategy = "ascending",
+          path_display = function(_, path)
+            local tail = vim.fs.basename(path)
+            local parent = vim.fs.dirname(path)
+            if parent == "." then return tail end
+            return string.format("%s\t\t%s", tail, parent)
+          end,
         }
       }
 
@@ -123,6 +140,8 @@ return {
         require("telescope").extensions.file_browser.file_browser()
       end)
 
+      -- Add line numbers to the previewer
+      vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
     end,
   },
 }
