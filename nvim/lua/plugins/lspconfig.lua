@@ -52,6 +52,28 @@ return {
       -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
       -- and elegantly composed help section, `:help lsp-vs-treesitter`
 
+      -- Create a custom LSP References function to show the filename with the lineno
+      -- rather than the filename with the line of code. Would rather see the full file
+      -- name and rely on the Grep Preview pane for the code.
+      require("telescope.builtin").my_lsp_references = function(opts)
+        opts = opts or {}
+
+        -- Override the entry maker
+        opts.entry_maker = function(entry)
+          local filename = vim.api.nvim_buf_get_name(entry.bufnr or 0)
+          return {
+            value = entry,
+            display = filename,
+            ordinal = filename,
+            filename = filename,
+            lnum = entry.lnum,
+            col = entry.col,
+          }
+        end
+
+        require("telescope.builtin").lsp_references(opts)
+      end
+
       --  This function gets run when an LSP attaches to a particular buffer.
       --    That is to say, every time a new file is opened that is associated with
       --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
@@ -79,7 +101,7 @@ return {
           -- map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction")
 
           -- Find references for the word under your cursor.
-          map("grr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+          map("grr", function() require("telescope.builtin").lsp_references({ show_line = false }) end, "[G]oto [R]eferences")
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
