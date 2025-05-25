@@ -24,19 +24,26 @@ else
   PR_HOST='%F{blue}%M%f' # no SSH
 fi
 
-local return_code="%(?..%F{red}%? ↵%f)"
-local user_host="%B${PR_USER}%F{blue}@${PR_HOST}%b"
-local current_dir="%B%F{blue}%~%f%b"
-local git_branch='$(git_prompt_info)'
-local python_venv='$(virtualenv_prompt_info)'
-
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{green}-[%f"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%F{green}]%f"
 
 ZSH_THEME_VIRTUALENV_PREFIX="%F{green}-[%f"
 ZSH_THEME_VIRTUALENV_SUFFIX="%F{green}]%f"
 
-PROMPT="%F{green}╭─(%f${user_host}%F{green})-[%f${current_dir}%F{green}]%f${python_venv}${git_branch}
+function conda_prompt_info {
+  if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
+    echo "${ZSH_THEME_VIRTUALENV_PREFIX}${CONDA_DEFAULT_ENV}${ZSH_THEME_VIRTUALENV_SUFFIX}"
+  fi
+}
+
+local return_code="%(?..%F{red}%? ↵%f)"
+local user_host="%B${PR_USER}%F{blue}@${PR_HOST}%b"
+local current_dir="%B%F{blue}%~%f%b"
+local git_branch='$(git_prompt_info)'
+local python_venv='$(virtualenv_prompt_info)'
+local conda_env='$(conda_prompt_info)'
+
+PROMPT="%F{green}╭─(%f${user_host}%F{green})-[%f${current_dir}%F{green}]%f${python_venv}${conda_env}${git_branch}
 %F{green}╰─$PR_PROMPT%f "
 RPROMPT="${return_code}"
 
