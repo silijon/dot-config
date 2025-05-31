@@ -76,10 +76,10 @@ fi
 
 # 8–10. Symlinks
 log "Creating symlinks..."
-ln -sfT "$USER_HOME/dot-config/.zshrc" "$USER_HOME/.zshrc"
-ln -sfT "$USER_HOME/dot-config/.tmux.conf" "$USER_HOME/.tmux.conf"
-ln -sfT "$USER_HOME/dot-config/.gitconfig" "$USER_HOME/.gitconfig"
-ln -sfT "$USER_HOME/dot-config/kali.zsh-theme" "$USER_HOME/.oh-my-zsh/themes/kali.zsh-theme"
+sudo -u "$USERNAME" ln -sfT "$USER_HOME/dot-config/.zshrc" "$USER_HOME/.zshrc"
+sudo -u "$USERNAME" ln -sfT "$USER_HOME/dot-config/.tmux.conf" "$USER_HOME/.tmux.conf"
+sudo -u "$USERNAME" ln -sfT "$USER_HOME/dot-config/.gitconfig" "$USER_HOME/.gitconfig"
+sudo -u "$USERNAME" ln -sfT "$USER_HOME/dot-config/kali.zsh-theme" "$USER_HOME/.oh-my-zsh/themes/kali.zsh-theme"
 
 # 11. Install tmux plugins
 log "Installing tmux plugins..."
@@ -120,8 +120,8 @@ fi
 
 # 17. Symlink Neovim config
 log "Linking Neovim config..."
-mkdir -p "$USER_HOME/.config"
-ln -sfT "$USER_HOME/dot-config/nvim" "$USER_HOME/.config/nvim"
+sudo -u "$USERNAME" mkdir -p "$USER_HOME/.config"
+sudo -u "$USERNAME" ln -sfT "$USER_HOME/dot-config/nvim" "$USER_HOME/.config/nvim"
 
 # 18. Final message
 log "Setup complete. Switching to home directory and sourcing shell..."
