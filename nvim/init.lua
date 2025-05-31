@@ -19,7 +19,7 @@
 
 -- Environmental Settings
 vim.g.have_nerd_font = true
-vim.g.full_ide_setup = true
+vim.g.full_ide_setup = vim.env.NVIM_FULL_IDE_SETUP == "1"
 
 -- Set <space> as the leader key
 vim.g.mapleader = " "
