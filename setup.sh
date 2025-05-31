@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-USERNAME="$(logname)"  # Get the non-root user
+USERNAME="${SUDO_USER:-$(logname 2>/dev/null || whoami)}"  # Get the invoking user, fallback to whoami
 USER_HOME="/home/$USERNAME"
 DOTCONFIG_REPO="https://github.com/silijon/dot-config.git"
 NEOVIM_REPO="https://github.com/neovim/neovim"
