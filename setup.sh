@@ -76,10 +76,10 @@ fi
 
 # 8–10. Symlinks
 log "Creating symlinks..."
-ln -sf "$USER_HOME/dot-config/.zshrc" "$USER_HOME/.zshrc"
-ln -sf "$USER_HOME/dot-config/.tmux.conf" "$USER_HOME/.tmux.conf"
-ln -sf "$USER_HOME/dot-config/.gitconfig" "$USER_HOME/.gitconfig"
-ln -sf "$USER_HOME/dot-config/kali.zsh-theme" "$USER_HOME/.oh-my-zsh/themes/kali.zsh-theme"
+ln -sfT "$USER_HOME/dot-config/.zshrc" "$USER_HOME/.zshrc"
+ln -sfT "$USER_HOME/dot-config/.tmux.conf" "$USER_HOME/.tmux.conf"
+ln -sfT "$USER_HOME/dot-config/.gitconfig" "$USER_HOME/.gitconfig"
+ln -sfT "$USER_HOME/dot-config/kali.zsh-theme" "$USER_HOME/.oh-my-zsh/themes/kali.zsh-theme"
 
 # 11. Install tmux plugins
 log "Installing tmux plugins..."
@@ -103,19 +103,25 @@ if ! command -v nvim >/dev/null; then
   cd "$NEOVIM_SRC_DIR"
   make CMAKE_BUILD_TYPE=RelWithDebInfo
   make install
-
-  update-alternatives --install /usr/bin/vim vim /usr/local/bin/nvim 60
-  update-alternatives --install /usr/bin/vi vi /usr/local/bin/nvim 60
-  update-alternatives --install /usr/bin/view view /usr/local/bin/nvim 60
-  update-alternatives --install /usr/bin/vimdiff vimdiff /usr/local/bin/nvim 60
 else
   log "Neovim already built and installed. Skipping."
+fi
+
+# Always configure update-alternatives for Neovim if it's available
+if command -v nvim >/dev/null; then
+  log "Setting up update-alternatives for Neovim..."
+  NVIM_PATH="$(command -v nvim)"
+  update-alternatives --install /usr/bin/vim vim "$NVIM_PATH" 60
+  update-alternatives --set vim "$NVIM_PATH"
+  update-alternatives --install /usr/bin/edit edit "$NVIM_PATH" 60
+  update-alternatives --install /usr/bin/view view "$NVIM_PATH" 60
+  update-alternatives --install /usr/bin/vimdiff vimdiff "$NVIM_PATH" 60
 fi
 
 # 17. Symlink Neovim config
 log "Linking Neovim config..."
 mkdir -p "$USER_HOME/.config"
-ln -sf "$USER_HOME/dot-config/nvim" "$USER_HOME/.config/nvim"
+ln -sfT "$USER_HOME/dot-config/nvim" "$USER_HOME/.config/nvim"
 
 # 18. Final message
 log "Setup complete. Switching to home directory and sourcing shell..."
