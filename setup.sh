@@ -78,6 +78,7 @@ fi
 log "Creating symlinks..."
 ln -sf "$USER_HOME/dot-config/.zshrc" "$USER_HOME/.zshrc"
 ln -sf "$USER_HOME/dot-config/.tmux.conf" "$USER_HOME/.tmux.conf"
+ln -sf "$USER_HOME/dot-config/.gitconfig" "$USER_HOME/.gitconfig"
 ln -sf "$USER_HOME/dot-config/kali.zsh-theme" "$USER_HOME/.oh-my-zsh/themes/kali.zsh-theme"
 
 # 11. Install tmux plugins
