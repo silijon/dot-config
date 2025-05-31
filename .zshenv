@@ -1,0 +1,1 @@
+export NVIM_FULL_IDE_SETUP=1
