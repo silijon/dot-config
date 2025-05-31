@@ -82,9 +82,13 @@ ln -sf "$USER_HOME/dot-config/kali.zsh-theme" "$USER_HOME/.oh-my-zsh/themes/kali
 
 # 11. Install tmux plugins
 log "Installing tmux plugins..."
-sudo -u "$USERNAME" tmux new-session -d -s temp_session && \
-  sudo -u "$USERNAME" tmux send-keys -t temp_session 'run-shell ~/.tmux/plugins/tpm/scripts/install_plugins.sh' C-m && \
-  sleep 2 && tmux kill-session -t temp_session
+if sudo -u "$USERNAME" tmux has-session 2>/dev/null || sudo -u "$USERNAME" tmux start-server 2>/dev/null; then
+  sudo -u "$USERNAME" tmux new-session -d -s temp_session && \
+    sudo -u "$USERNAME" tmux send-keys -t temp_session 'run-shell ~/.tmux/plugins/tpm/scripts/install_plugins.sh' C-m && \
+    sleep 2 && sudo -u "$USERNAME" tmux kill-session -t temp_session
+else
+  log "Unable to initialize tmux server. Skipping tmux plugin install."
+fi
 
 # 12–16. Install Neovim from source
 if ! command -v nvim >/dev/null; then
