@@ -255,6 +255,7 @@ require("lazy").setup({
     { -- Collection of various small independent plugins/modules
       "echasnovski/mini.nvim",
       config = function()
+
         -- Better Around/Inside textobjects
         --
         -- Examples:
@@ -268,7 +269,19 @@ require("lazy").setup({
         -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
         -- - sd"   - [S]urround [D]elete ["]quotes
         -- - sr)"  - [S]urround [R]eplace [)] ["]
-        require("mini.surround").setup()
+        require("mini.surround").setup({
+          -- Shortcuts for bold and strikethrough
+          custom_surroundings = {
+            ["+"] = {
+              input = { '%*%*().-()%*%*' },
+              output = { left = '**', right = '**' },
+            },
+            ["-"] = {
+              input = { '%~%~().-()%~%~' },
+              output = { left = '~~', right = '~~' },
+            },
+          },
+        })
 
         -- Simple and easy statusline.
         local statusline = require "mini.statusline"
@@ -288,7 +301,7 @@ require("lazy").setup({
       config = function()
         ---@diagnostic disable-next-line: missing-fields
         require("nvim-treesitter.configs").setup {
-          ensure_installed = { "bash", "c", "python", "html", "lua", "markdown", "vim", "vimdoc" },
+          ensure_installed = { "bash", "c", "python", "html", "lua", "markdown", "markdown_inline", "vim", "vimdoc" },
           -- Autoinstall languages that are not installed
           auto_install = true,
           highlight = { enable = true },
@@ -298,6 +311,17 @@ require("lazy").setup({
         vim.filetype.add({ extension = { templ = "templ" } })
         vim.filetype.add({ extension = { jinja = "jinja", jinja2 = "jinja", j2 = "jinja" } })
         vim.treesitter.language.register("html", "jinja")
+
+        -- Add cooler rendering for markdown decorations
+        vim.api.nvim_set_hl(0, "@markup.strikethrough", { strikethrough = true, fg = "#888888" })
+        vim.api.nvim_set_hl(0, "@markup.strong", { bold = true, })
+        vim.api.nvim_set_hl(0, "@markup.emphasis", { italic = true, })
+
+        -- (Optional) Code blocks
+        vim.api.nvim_set_hl(0, "@markup.raw.inline", {
+          fg = "#ffa500", -- orange-ish for inline code
+          bg = "#2b2b2b", -- subtle dark background
+        })
       end,
     },
 
