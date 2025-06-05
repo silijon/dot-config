@@ -235,16 +235,6 @@ require("lazy").setup({
       event = "VimEnter",
       dependencies = { "nvim-lua/plenary.nvim" },
       opts = { signs = false },
-      config = function()
-        vim.keymap.set('n', '<leader>t', function()
-          local file = vim.fn.expand('~/Dropbox/Documents/todo.txt')
-          if vim.fn.filereadable(file) == 1 then
-            vim.cmd.edit(file)
-          else
-            vim.notify('❌ Not Found: ' .. file, vim.log.levels.ERROR)
-          end
-        end, { silent = true, noremap = true })
-      end
     },
 
     { -- Collection of various small independent plugins/modules
@@ -320,9 +310,6 @@ require("lazy").setup({
       end,
     },
 
-    -- Handles todo.txt files
-    "freitass/todo.txt-vim",
-
     -- Show colors when color codes are detected
     "norcalli/nvim-colorizer.lua",
 
@@ -345,6 +332,7 @@ require("lazy").setup({
     { import = "plugins/harpoon" },
 
     -- Full Setup
+    { import = "plugins/todo", cond = vim.g.full_ide_setup },
     { import = "plugins/lspconfig", cond = vim.g.full_ide_setup },
     { import = "plugins/autocmp", cond = vim.g.full_ide_setup },
     { import = "plugins/format", cond = vim.g.full_ide_setup },
