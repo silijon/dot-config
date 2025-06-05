@@ -3,6 +3,7 @@ return {
       "freitass/todo.txt-vim",
       config = function()
 
+        -- [[ Make todo.txt appear in a float ]]
         -- Copy Normal’s background into NormalFloat (once + on theme-swap)
         local function align_float_bg()
           local normal_bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg
@@ -71,6 +72,8 @@ return {
           vim.bo[todo.buf].bufhidden = "wipe"   -- buffer options live in vim.bo
         end
 
+
+        -- Setup key-binding as a toggle
         local function close_float()
           if is_open() then
             vim.api.nvim_win_close(todo.win, true)
@@ -92,6 +95,41 @@ return {
         -- Key-binding: <leader>t
         vim.keymap.set("n", "<leader>t", todo.toggle,
           { desc = "Toggle floating todo.txt", silent = true, noremap = true })
+
+
+        -- Shut off folding
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = { "todo" },   -- adjust to your actual &filetype
+          callback = function()
+            vim.opt_local.foldenable = false
+            vim.opt_local.foldmethod = "manual"
+          end,
+        })
+
+
+        -- Define (or re-define) TodoDone to look like Comment + strike-through
+        local function set_todo_done_hl()
+          -- `link=false` gives you the *resolved* colours of Comment
+          local comment = vim.api.nvim_get_hl(0, { name = "Comment", link = false })
+          vim.api.nvim_set_hl(0, "TodoDone", {
+            fg            = comment.fg or comment.foreground,    -- keep same colour
+            ctermfg       = comment.ctermfg,                     -- terminal palette
+            strikethrough = true,                                -- the extra bit
+          })
+        end
+
+        -- run it right now (for the current session)
+        set_todo_done_hl()
+
+        -- Run it again whenever the filetype plugs in or the theme changes
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern  = { "todo", "todotxt" },     -- adjust to your actual &filetype
+          callback = set_todo_done_hl,
+        })
+
+        vim.api.nvim_create_autocmd("ColorScheme", {
+          callback = set_todo_done_hl,
+        })
 
       end
   },
