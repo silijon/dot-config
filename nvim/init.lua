@@ -140,27 +140,20 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    {                -- Colorscheme
-      "folke/tokyonight.nvim",
-      lazy = false,  -- make sure we load this during startup if it is your main colorscheme
-      priority = 1000, -- make sure to load this before all the other start plugins
+    {
+      "EdenEast/nightfox.nvim",
+      lazy = false,
+      priority = 1000,
       config = function()
-        -- Set transparency
-        ---@diagnostic disable-next-line: missing-fields
-        require("tokyonight").setup {
-          transparent = false,
-          styles = {
-            sidebars = "transparent",
-            floats = "transparent",
-          },
-        }
-
-        -- Load the colorscheme here
-        vim.cmd.colorscheme "tokyonight-night"
-
-        -- You can configure highlights by doing something like
-        vim.cmd.hi "Comment gui=none"
-      end,
+        require("nightfox").setup({
+          options = {
+            styles = {
+              types = "italic",
+            }
+          }
+        })
+        vim.cmd.colorscheme "carbonfox"
+      end
     },
 
     "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically

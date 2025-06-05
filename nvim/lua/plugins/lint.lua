@@ -62,7 +62,6 @@ return {
       -- Run after save, insert leave, etc.
       vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave" }, {
         callback = function()
-          print(visible)
           if visible then
             lint.try_lint()
           end
