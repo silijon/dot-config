@@ -256,6 +256,7 @@ return {
               analysis = {
                 --typeCheckingMode = 'off', -- mimics vscode defaults, unfortunate requirement since py libs are a mess
                 useLibraryCodeForTypes = true,
+                autoSearchPaths = true,
               },
             },
           },

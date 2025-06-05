@@ -58,6 +58,14 @@ return {
         },
       }
 
+      table.insert(dap.configurations.python, {
+        type = "python",
+        request = "attach",
+        name = "Attach: Running Process",
+        processId = dap_utils.pick_process,
+        cwd = "${workspaceFolder}"
+      })
+
       -- Useful links for js/ts
       -- https://github.com/gonstoll/dotfiles/blob/master/.config/nvim/lua/plugins/dap.lua
       -- https://github.com/Andrei0872/dotfiles/blob/master/nvim/after/plugin/dap.lua

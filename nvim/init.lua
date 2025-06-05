@@ -342,6 +342,9 @@ require("lazy").setup({
       end,
     },
 
+    -- Makes debugging nvim configs easier by running lua in a full screen
+    "rafcamlet/nvim-luapad",
+
     -- Minimal Setup
     { import = "plugins/telescope" },
     { import = "plugins/harpoon" },
