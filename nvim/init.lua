@@ -147,7 +147,9 @@ require("lazy").setup({
       config = function()
         require("nightfox").setup({
           options = {
+            transparent = false,
             styles = {
+              comments = "italic",
               types = "italic",
             }
           }
