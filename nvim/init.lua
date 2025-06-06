@@ -163,6 +163,7 @@ require("lazy").setup({
       ---@module 'oil'
       ---@type oil.SetupOpts
       opts = {
+        skip_confirm_for_simple_edits = true,
         columns = { "icon", "permissions", "size", "mtime", },
         view_options = { show_hidden = true, }
       },
