@@ -2,8 +2,8 @@
 opacity = 0.9
 
 [window.dimensions]
-columns = 130
-lines = 32
+columns = 180
+lines = 54
 
 [window.position]
 x = 32
@@ -18,7 +18,12 @@ normal = { family = "Hack Nerd Font Mono", style = "Regular" }
 bold = { family = "Hack Nerd Font Mono", style = "Bold" }
 italic = { family = "Hack Nerd Font Mono", style = "Italic" }
 bold_italic = { family = "Hack Nerd Font Mono", style = "Bold Italic" }
-size = 12
+size = 13
 
 [mouse]
 hide_when_typing = true
+
+[[keyboard.bindings]]
+key  = "F"                     # the physical F key
+mods = "Alt|Shift"             # press Alt + Shift together
+action = "ToggleFullscreen"
