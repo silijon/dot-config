@@ -140,7 +140,7 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    {
+    { -- Colorscheme
       "EdenEast/nightfox.nvim",
       lazy = false,
       priority = 1000,
@@ -158,9 +158,21 @@ require("lazy").setup({
       end
     },
 
+    { -- Edit filesystem as buffer
+      'stevearc/oil.nvim',
+      ---@module 'oil'
+      ---@type oil.SetupOpts
+      opts = {
+        columns = { "icon", "permissions", "size", "mtime", },
+        view_options = { show_hidden = true, }
+      },
+      dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+      lazy = false,
+    },
+
     "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
-    { "numToStr/Comment.nvim",    opts = {} },
+    { "numToStr/Comment.nvim",    opts = {} }, -- Quick commenting/uncommenting
 
     { -- Adds git related signs to the gutter, as well as utilities for managing changes
       "lewis6991/gitsigns.nvim",
@@ -175,7 +187,7 @@ require("lazy").setup({
       },
     },
 
-    {                   -- Useful plugin to show you pending keybinds.
+    { -- Useful plugin to show you pending keybinds.
       "folke/which-key.nvim",
       event = "VeryLazy", -- Sets the loading event to "VeryLazy"
       opts = {
