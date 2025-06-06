@@ -99,6 +99,9 @@ znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
 bindkey '^t' autosuggest-accept
 
+# Make autosuggestions appear dim gray instead of black
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#777777'
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
