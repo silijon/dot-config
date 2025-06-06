@@ -1,5 +1,5 @@
 [general]
-import = ["~/.config/alacritty/themes/themes/carbonfox.toml"]
+import = ["~/.config/alacritty/alacritty-theme/themes/carbonfox.toml"]
 
 [window]
 opacity = 0.9
