@@ -97,7 +97,7 @@ return {
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- ora suggestion from your LSP for this to activate.
-          map("ga", vim.lsp.buf.code_action, "[G]oto Code [A]ction")
+          map("ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
           -- Find references for the word under your cursor.
           map("gr", function() require("telescope.builtin").lsp_references({ show_line = false }) end, "[G]oto [R]eferences")
@@ -204,6 +204,12 @@ return {
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, "Toggle Inlay [H]ints")
           end
+
+          -- Disable hover in favor of Pyright
+          if client and client.name == "ruff" then
+              client.server_capabilities.hoverProvider = false
+          end
+
         end,
       })
 
@@ -263,7 +269,6 @@ return {
           settings = {
             python = {
               analysis = {
-                --typeCheckingMode = 'off', -- mimics vscode defaults, unfortunate requirement since py libs are a mess
                 useLibraryCodeForTypes = true,
                 autoSearchPaths = true,
               },
@@ -319,7 +324,6 @@ return {
         "stylua", -- Used to format lua code
         "black", -- Used to format python code
         "isort", -- Used to format python imports
-        "pylint", -- Python linting
         "jq", -- Json formatting
         "markdownlint", -- Markdown linting
         "mdformat", -- Markdown formatting

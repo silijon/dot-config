@@ -291,14 +291,41 @@ require("lazy").setup({
         })
 
         -- Simple and easy statusline.
-        local statusline = require "mini.statusline"
-        statusline.setup { use_icons = vim.g.have_nerd_font }
+        require("mini.statusline").setup({
+          use_icons = vim.g.have_nerd_font,
+          content = {
+            active = function()
+              local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+              local git           = MiniStatusline.section_git({ trunc_width = 40 })
+              local diff          = MiniStatusline.section_diff({ trunc_width = 75 })
+              local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+              local lsp           = MiniStatusline.section_lsp({ trunc_width = 75 })
+              local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
+              local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+              local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
+              local location      = "%2l:%-2v" -- Fix ugly location indicator
 
-        -- Set the cursor location to LINE:COLUMN
-        ---@diagnostic disable-next-line: duplicate-set-field
-        statusline.section_location = function()
-          return "%2l:%-2v"
-        end
+              local linter = "󰅙"
+              local lint_hl = "MiniStatuslineDevinfo"
+              if vim.b.linting == true then
+                linter = "󰒱"
+                lint_hl = "MiniStatuslineModeInsert"
+              end
+
+              return MiniStatusline.combine_groups({
+                { hl = mode_hl,                  strings = { mode } },
+                { hl = "MiniStatuslineDevinfo",  strings = { git, diff, diagnostics, lsp } },
+                { hl = lint_hl,  strings = { linter } },
+                "%<", -- Mark general truncate point
+                { hl = "MiniStatuslineFilename", strings = { filename } },
+                "%=", -- End left alignment
+                { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+                { hl = mode_hl,                  strings = { search, location } },
+              })
+            end
+          }
+        })
+
       end,
     },
 
