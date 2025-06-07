@@ -47,6 +47,12 @@ return {
               find = "fewer lines",
             },
           },
+          {
+            filter = {
+              event = "msg_show",
+              find = "clipboard: No provider.",
+            },
+          },
         },
         lsp = {
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**

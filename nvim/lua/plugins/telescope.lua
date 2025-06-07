@@ -75,12 +75,30 @@ return {
           file_browser = {
             hijack_netrw = true,
             hidden = true,
-            path = "%:p:h",
+            -- path = "%:p:h", -- open in current file dir (default is pwd)
             mappings = {
               ["n"] = {
                 ["H"] = telescope.extensions.file_browser.actions.toggle_hidden,
                 ["h"] = telescope.extensions.file_browser.actions.goto_parent_dir,
                 ["l"] = require("telescope.actions").select_default,
+              },
+            },
+          },
+          zoxide = {
+            mappings = {
+              default = {
+                -- Fix bug in Harpoon: https://github.com/rmagatti/auto-session/issues/433
+                before_action = function(selection)
+                  -- might not be necessary, but save current harpoon data when we're about to restore a session
+                  require("harpoon"):sync()
+                end,
+                after_action = function(selection)
+                  -- this is the only way i found to force harpoon to reread data from the disk rather
+                  -- than using what's in memory
+                  local harpoon = require("harpoon")
+                  harpoon.data = require("harpoon.data").Data:new(harpoon.config)
+                  print("Updated to (" .. selection.z_score .. ") " .. selection.path)
+                end
               },
             },
           },
