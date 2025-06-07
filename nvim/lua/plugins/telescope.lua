@@ -75,7 +75,7 @@ return {
           file_browser = {
             hijack_netrw = true,
             hidden = true,
-            path = "%:p:h",
+            -- path = "%:p:h",
             mappings = {
               ["n"] = {
                 ["H"] = telescope.extensions.file_browser.actions.toggle_hidden,

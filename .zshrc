@@ -17,7 +17,6 @@ plugins=(
     virtualenv
     python
     pip
-    autojump
     zoxide
 )
 
