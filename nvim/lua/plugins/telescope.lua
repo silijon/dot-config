@@ -27,6 +27,9 @@ return {
       -- File browser
       "nvim-telescope/telescope-file-browser.nvim",
 
+      -- Zoxide for slick dir changes
+      "jvgrootveld/telescope-zoxide",
+
       -- Pretty icons -- requires Nerd Font
       { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
     },
@@ -99,6 +102,7 @@ return {
       pcall(telescope.load_extension, "fzf")
       pcall(telescope.load_extension, "ui-select")
       pcall(telescope.load_extension, "file_browser")
+      pcall(telescope.load_extension, "zoxide")
 
       -- See `:help telescope.builtin`
       local builtin = require "telescope.builtin"
@@ -113,6 +117,7 @@ return {
       vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
       vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "[S]earch Recent Files ('.' for repeat)" })
       vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "Search Open Buffers" })
+      vim.keymap.set("n", "z", telescope.extensions.zoxide.list, { desc = "Change Directory" })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set("n", "<leader>/", function()

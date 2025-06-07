@@ -18,3 +18,8 @@
 	auto = 256
 [pull]
 	rebase = false
+[maintenance]
+	repo = /home/john/.config/zsh/znap
+	repo = /home/john/.config/zsh/marlonrichert/zsh-autocomplete
+	repo = /home/john/.config/zsh/zsh-users/zsh-autosuggestions
+	repo = /home/john/.config/zsh/zsh-users/zsh-syntax-highlighting

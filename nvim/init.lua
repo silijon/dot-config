@@ -377,6 +377,8 @@ require("lazy").setup({
     -- Minimal Setup
     { import = "plugins/telescope" },
     { import = "plugins/harpoon" },
+    { import = "plugins/noice" },
+    { import = "plugins/term" },
 
     -- Full Setup
     { import = "plugins/todo", cond = vim.g.full_ide_setup },

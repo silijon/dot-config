@@ -93,11 +93,11 @@ return {
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map("rn", vim.lsp.buf.rename, "[R]e[n]ame")
+          map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- ora suggestion from your LSP for this to activate.
-          map("ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+          map("gca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
           -- Find references for the word under your cursor.
           map("gr", function() require("telescope.builtin").lsp_references({ show_line = false }) end, "[G]oto [R]eferences")

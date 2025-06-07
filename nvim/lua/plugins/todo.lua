@@ -24,11 +24,6 @@ return {
         todo.buf  = nil   -- buffer handle
         todo.win  = nil   -- window handle
 
-        ---@return boolean visible  True if the floating todo window is up
-        local function is_open()
-          return todo.win and vim.api.nvim_win_is_valid(todo.win)
-        end
-
         local function open_float()
           -- load / create buffer ------------------------------------------
           if todo.buf and vim.api.nvim_buf_is_valid(todo.buf) then
@@ -72,7 +67,7 @@ return {
           vim.bo[todo.buf].bufhidden = "wipe"   -- buffer options live in vim.bo
         end
 
-        -- Key-binding: <leader>t
+        -- Key-binding: t
         vim.keymap.set("n", "t", open_float,
           { desc = "Open todo.txt", silent = true, noremap = true })
 
