@@ -7,18 +7,13 @@ return {
     config = function()
       local lint = require("lint")
 
-      local function trigger_lint(names, opts)
-        lint.try_lint(names, opts)
-        vim.b.linting = true
-      end
-
       --------------------------------------------------------------------
       -- 1. Configure linters per filetype
       --------------------------------------------------------------------
       lint.linters_by_ft = {
-        text     = { "cspell" },
-        markdown = { "markdownlint", "cspell" },
-        python   = { "ruff", "pylint" },
+        text     = { "cspell", },
+        markdown = { "markdownlint", },
+        python   = { "ruff", "pylint", },
       }
 
       --------------------------------------------------------------------
@@ -37,14 +32,17 @@ return {
       -- 3. Toggle: show linters (run) ⇄ hide them (reset only those active)
       --------------------------------------------------------------------
       local visible = false   -- start with diagnostics not shown
+      local active = nil
 
-      local function toggle_linter_diagnostics(bufnr)
-        bufnr = bufnr or 0      -- 0 ⇒ current buffer
+      local function toggle_linter_diagnostics(names, opts)
 
         visible = not visible
         if visible then
           -- Re-run the linters for the current buffer
-          trigger_lint()
+          active = names
+          vim.b.linting = true
+          vim.cmd("redrawstatus")
+          lint.try_lint(active, opts)
           return
         end
 
@@ -54,9 +52,12 @@ return {
         -- * if its *name* is one of our linters *and* the buffer actually
         --   has diagnostics in that namespace, reset it for this buffer
         ------------------------------------------------------------------
+        active = nil
         vim.b.linting = false
         vim.cmd("redrawstatus")
 
+        -- 0 ⇒ current buffer
+        local bufnr = 0
         local nsinfo = vim.diagnostic.get_namespaces()  -- {ns_id → {name=…}}
         for ns_id, info in pairs(nsinfo) do
           if linter_set[info.name] then
@@ -71,7 +72,7 @@ return {
       vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave" }, {
         callback = function()
           if visible then
-            trigger_lint()
+            lint.try_lint(active)
           end
         end
       })
@@ -91,7 +92,7 @@ return {
       lint.linters.markdownlint.args = { "--stdin", "--disable", "MD013", "MD024", "--", }
 
       vim.keymap.set("n", "<leader>fl", toggle_linter_diagnostics, { desc = "[L]int Current Buffer" })
-      vim.keymap.set("n", "<leader>fs", function() trigger_lint("cspell") end, { desc = "[S]pellcheck Current Buffer" })
+      vim.keymap.set("n", "<leader>fs", function() toggle_linter_diagnostics("cspell") end, { desc = "[S]pellcheck Current Buffer" })
 
     end
   }
