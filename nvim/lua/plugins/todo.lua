@@ -72,30 +72,9 @@ return {
           vim.bo[todo.buf].bufhidden = "wipe"   -- buffer options live in vim.bo
         end
 
-
-        -- Setup key-binding as a toggle
-        local function close_float()
-          if is_open() then
-            vim.api.nvim_win_close(todo.win, true)
-          end
-          if todo.buf and vim.api.nvim_buf_is_loaded(todo.buf) then
-            vim.api.nvim_buf_delete(todo.buf, { force = true })
-          end
-          todo.buf, todo.win = nil, nil
-        end
-
-        function todo.toggle()
-          if is_open() then
-            close_float()
-          else
-            open_float()
-          end
-        end
-
         -- Key-binding: <leader>t
-        vim.keymap.set("n", "<leader>t", todo.toggle,
-          { desc = "Toggle floating todo.txt", silent = true, noremap = true })
-
+        vim.keymap.set("n", "t", open_float,
+          { desc = "Open todo.txt", silent = true, noremap = true })
 
         -- Shut off folding
         vim.api.nvim_create_autocmd("FileType", {
@@ -106,13 +85,12 @@ return {
           end,
         })
 
-
         -- Define (or re-define) TodoDone to look like Comment + strike-through
         local function set_todo_done_hl()
           -- `link=false` gives you the *resolved* colours of Comment
           local comment = vim.api.nvim_get_hl(0, { name = "Comment", link = false })
           vim.api.nvim_set_hl(0, "TodoDone", {
-            fg            = comment.fg or comment.foreground,    -- keep same colour
+            fg            = comment.fg,                          -- keep same colour
             ctermfg       = comment.ctermfg,                     -- terminal palette
             strikethrough = true,                                -- the extra bit
           })

@@ -168,16 +168,14 @@ require("lazy").setup({
           skip_confirm_for_simple_edits = true,
           columns = { "icon", "permissions", "size", "mtime", },
           float = {
-            max_height = 0.8,
-            max_width = 0.8,
+            max_height = 0.7,
+            max_width = 0.7,
             preview_split = "auto",
           },
           view_options = { show_hidden = true, }
         })
 
-        vim.keymap.set("n", "-", function()
-          require("oil").open_float(nil, { preview = { vertical = true, } })
-        end, { desc = "Open Oil in current working directory" })
+        vim.keymap.set("n", "-", require("oil").open_float, { desc = "Open Oil in current working directory" })
       end,
     },
 
