@@ -160,15 +160,25 @@ require("lazy").setup({
 
     { -- Edit filesystem as buffer
       'stevearc/oil.nvim',
-      ---@module 'oil'
-      ---@type oil.SetupOpts
-      opts = {
-        skip_confirm_for_simple_edits = true,
-        columns = { "icon", "permissions", "size", "mtime", },
-        view_options = { show_hidden = true, }
-      },
-      dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+      dependencies = { "nvim-tree/nvim-web-devicons" },
       lazy = false,
+      config = function()
+        require("oil").setup({
+          default_file_explorer = false,
+          skip_confirm_for_simple_edits = true,
+          columns = { "icon", "permissions", "size", "mtime", },
+          float = {
+            max_height = 0.8,
+            max_width = 0.8,
+            preview_split = "auto",
+          },
+          view_options = { show_hidden = true, }
+        })
+
+        vim.keymap.set("n", "-", function()
+          require("oil").open_float(nil, { preview = { vertical = true, } })
+        end, { desc = "Open Oil in current working directory" })
+      end,
     },
 
     "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically

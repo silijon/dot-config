@@ -70,7 +70,7 @@ return {
             require("telescope.themes").get_dropdown(),
           },
           file_browser = {
-            hijack_netrw = false, -- Use Oil for this
+            hijack_netrw = true,
             hidden = true,
             path = "%:p:h",
             mappings = {

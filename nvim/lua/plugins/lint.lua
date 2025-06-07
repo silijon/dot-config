@@ -74,7 +74,9 @@ return {
       lint.linters.pylint.args = { "-m", "pylint", "-f", "json", "--from-stdin", function() return vim.api.nvim_buf_get_name(0) end, }
 
       -- Disable annoying overly pedantic rules
-      lint.linters.markdownlint.args = { "--stdin", "--disable", "MD013", "--", }
+      -- MD013: Line length too long
+      -- MD024: Duplicate headings
+      lint.linters.markdownlint.args = { "--stdin", "--disable", "MD013", "MD024", "--", }
 
       vim.keymap.set("n", "<leader>fl", toggle_linter_diagnostics, { desc = "[L]int Current Buffer" })
       vim.keymap.set("n", "<leader>fs", function() lint.try_lint("cspell") end, { desc = "[S]pellcheck Current Buffer" })
