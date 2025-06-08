@@ -105,9 +105,9 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open Diagn
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
 --
--- NOTE: This won"t work in all terminal emulators/tmux/etc. Try your own mapping
+-- NOTE: This (Esc-Esc) won"t work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit Terminal Mode" })
+vim.keymap.set("t", "<C-q>", "<C-\\><C-n>", { desc = "Exit Terminal Mode" })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -274,14 +274,14 @@ require("lazy").setup({
         -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
         -- - sd"   - [S]urround [D]elete ["]quotes
         -- - sr)"  - [S]urround [R]eplace [)] ["]
+        vim.keymap.set({ "n", "v" }, "s", "<Nop>", { noremap = true }) -- Avoid conflicts
         require("mini.surround").setup({
-          -- Shortcuts for bold and strikethrough
           custom_surroundings = {
-            ["+"] = {
+            ["+"] = { -- bold in markdown
               input = { '%*%*().-()%*%*' },
               output = { left = '**', right = '**' },
             },
-            ["-"] = {
+            ["-"] = { -- strikethrough in markdown
               input = { '%~%~().-()%~%~' },
               output = { left = '~~', right = '~~' },
             },
