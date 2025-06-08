@@ -83,4 +83,12 @@ return {
       signature = { enabled = true },
     },
   },
+  { -- For generating annotations
+    "danymat/neogen",
+    config = function()
+      require("neogen").setup({ snippet_engine = "luasnip", })
+      local opts = { noremap = true, silent = true, desc = "[N]ew [A]nnotation" }
+      vim.api.nvim_set_keymap("n", "<Leader>na", ":lua require('neogen').generate()<CR>", opts)
+    end,
+  },
 }

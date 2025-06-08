@@ -27,11 +27,28 @@ return {
         }):find()
       end
 
+      -- load all marks into buffers
+      local function open_all()
+        local list = harpoon:list()
+        for i = 1, list:length() do
+          local item = list:get(i)
+          vim.cmd("badd " .. vim.fn.fnameescape(item.value))
+        end
+
+        -- open the first file in the list
+        local first_file = list:get(1).value
+        vim.cmd("buffer " .. vim.fn.bufnr(first_file, true))
+      end
+
+      vim.api.nvim_create_user_command("HarpoonOpenAll", open_all, {})
+      vim.keymap.set("n", "<leader>ho", open_all, { desc = "[O]pen all Harpoon Buffers" })
+
       vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "[A]dd Current Buffer to Harpoon" })
-      vim.keymap.set("n", "<leader>ht", function() toggle_telescope(harpoon:list()) end, { desc = "Open Harpoon in [T]elescope" })
-      vim.keymap.set("n", "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Toggle [H]arpoon Menu" })
+      vim.keymap.set("n", "<leader>hh", function() toggle_telescope(harpoon:list()) end, { desc = "Open [H]arpoon in Telescope" })
+      vim.keymap.set("n", "<leader>he", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Open Harpoon [E]dit Menu" })
       vim.keymap.set("n", "<leader>hp", function() harpoon:list():prev() end, { desc = "Select [P]revious Harpoon Buffer" })
       vim.keymap.set("n", "<leader>hn", function() harpoon:list():next() end, { desc = "Select [N]ext Harpoon Buffer" })
+
       vim.keymap.set("n", "<leader>j", function() harpoon:list():select(1) end, { desc = "Select Harpoon Buffer 1" })
       vim.keymap.set("n", "<leader>k", function() harpoon:list():select(2) end, { desc = "Select Harpoon Buffer 2" })
       vim.keymap.set("n", "<leader>l", function() harpoon:list():select(3) end, { desc = "Select Harpoon Buffer 3" })
