@@ -118,6 +118,27 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move Focus to the Right Win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move Focus to the Lower Window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move Focus to the Upper Window" })
 
+-- <leader>x in visual mode will run whatever you’ve selected as Lua
+vim.keymap.set("v", "<leader>x", function()
+  -- yank visual selection to register z
+  vim.cmd('normal! "zy')
+  local lines = tostring(vim.fn.getreg('z'))
+
+  -- compile
+  local fn, err = loadstring(lines)
+  if not fn then
+    return vim.notify("Lua compile error: " .. err, vim.log.levels.ERROR)
+  end
+
+  -- run
+  local ok, result = pcall(fn)
+  if not ok then
+    vim.notify("Lua runtime error: " .. result, vim.log.levels.ERROR)
+  else
+    vim.notify("Output: " .. tostring(result),  vim.log.levels.INFO)
+  end
+end, { desc = "Execute visual selection as Lua" })
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
