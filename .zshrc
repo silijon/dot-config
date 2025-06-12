@@ -50,6 +50,7 @@ alias ll='ls -hal --color |less'
 alias fd='fdfind --hidden --no-ignore' # show hidden and don't respect .gitignore (who comes up with these defaults?)
 alias gd='git diff --name-only --relative --diff-filter=d |xargs bat --diff'
 alias ranger='source ranger' # drops you into currently selected dir when exiting ranger
+alias ipython='ipython --no-autoindent' # autoindent messes with cut/paste and nvim send-to-term
 
 
 ###############################################################################

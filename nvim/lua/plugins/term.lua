@@ -60,18 +60,20 @@ return {
       -- Toggle a persistent terminal from visual mode
       -- Here the visual selection is sent to the terminal
       vim.keymap.set("v", "<leader>t", function()
-        local bufnr = vim.fn["floaterm#terminal#get_bufnr"](term_name)
 
         -- yank visual selection to register z and clean it up
         vim.cmd('normal! "zy')
         local raw = tostring(vim.fn.getreg('z'))
-        local lines = vim.fn.split(raw, "\n")
+        local lines = vim.tbl_filter(function(line)
+            return line:match("%S")  -- keep only lines that contain non-whitespace
+        end, vim.fn.split(raw, "\n"))
         trim_relative(lines)
 
         -- decide show vs new
         if master_term_exists() then
           -- if it already exists we can send the selection and show immediately
           -- order is important since we can't send when the terminal window is active
+          local bufnr = vim.fn["floaterm#terminal#get_bufnr"](term_name)
           vim.fn["floaterm#terminal#send"](bufnr, lines)
           vim.cmd("FloatermShow " .. term_name)
         else
@@ -80,6 +82,7 @@ return {
           vim.cmd("FloatermNew --silent --name=" .. term_name)
           -- wait a sec for it to spin up (avoids echo'ing before prompt)
           vim.defer_fn(function()
+            local bufnr = vim.fn["floaterm#terminal#get_bufnr"](term_name)
             vim.fn["floaterm#terminal#send"](bufnr, lines)
             vim.cmd("FloatermShow " .. term_name)
           end, 1200)
