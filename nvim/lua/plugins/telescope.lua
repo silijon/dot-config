@@ -30,6 +30,9 @@ return {
       -- Zoxide for slick dir changes
       "jvgrootveld/telescope-zoxide",
 
+      -- Nav the undo tree
+      "debugloop/telescope-undo.nvim",
+
       -- Pretty icons -- requires Nerd Font
       { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
     },
@@ -102,6 +105,18 @@ return {
               },
             },
           },
+          undo = {
+            mappings = {
+              i = {
+                ["<cr>"] = require("telescope-undo.actions").restore,
+              },
+              n = {
+                ["<cr>"] = require("telescope-undo.actions").restore,
+                ["y"] = require("telescope-undo.actions").yank_additions,
+                ["Y"] = require("telescope-undo.actions").yank_deletions,
+              },
+            },
+          },
         },
         defaults = {
           layout_strategy = "horizontal",
@@ -121,6 +136,7 @@ return {
       pcall(telescope.load_extension, "ui-select")
       pcall(telescope.load_extension, "file_browser")
       pcall(telescope.load_extension, "zoxide")
+      pcall(telescope.load_extension, "undo")
 
       -- See `:help telescope.builtin`
       local builtin = require "telescope.builtin"
@@ -135,6 +151,7 @@ return {
       vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
       vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "[S]earch Recent Files ('.' for repeat)" })
       vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[S]earch Open [B]uffers" })
+      vim.keymap.set("n", "<leader>u", telescope.extensions.undo.undo, { desc = "Search [U]ndo history" })
       vim.keymap.set("n", "z", telescope.extensions.zoxide.list, { desc = "Change Directory" })
 
       -- Special addtl setting for most common use case
