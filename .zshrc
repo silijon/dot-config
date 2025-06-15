@@ -41,6 +41,8 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#777777'
 ###############################################################################
 # user environment 
 ###############################################################################
+
+# aliases
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR='nvim'
 
@@ -51,6 +53,13 @@ alias fd='fdfind --hidden --no-ignore' # show hidden and don't respect .gitignor
 alias gd='git diff --name-only --relative --diff-filter=d |xargs bat --diff'
 alias ranger='source ranger' # drops you into currently selected dir when exiting ranger
 alias ipython='ipython --no-autoindent' # autoindent messes with cut/paste and nvim send-to-term
+
+# functions
+genpwd() {
+  local length=${1:-20}
+  LC_ALL=C tr -dc 'A-Za-z0-9!@#$%^&*()_+=-' < /dev/urandom | head -c "$length"
+  echo
+}
 
 
 ###############################################################################
