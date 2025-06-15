@@ -68,7 +68,7 @@ return {
         end
 
         -- Key-binding: t
-        vim.keymap.set("n", "t", open_float,
+        vim.keymap.set("n", "<leader>t", open_float,
           { desc = "Open todo.txt", silent = true, noremap = true })
 
         -- Shut off folding

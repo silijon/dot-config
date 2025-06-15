@@ -52,7 +52,7 @@ return {
 
       -- [[ Keybindings ]]
       -- Toggle a persistent terminal from normal mode
-      vim.keymap.set("n", "<leader>t", function()
+      vim.keymap.set("n", "t", function()
         vim.cmd("FloatermToggle " .. term_name)
       end, { desc = "Toggle Floaterm" })
 
