@@ -46,6 +46,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#777777'
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR='nvim'
 
+alias todo="vim $HOME/Dropbox/Documents/todo.txt"
 alias myip='curl http://icanhazip.com'
 alias l='ls -hal --color'
 alias ll='ls -hal --color |less'
