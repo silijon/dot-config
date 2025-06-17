@@ -31,7 +31,7 @@ else
 fi
 
 # 3. Install packages
-REQUIRED_PKGS=(git zsh tmux fd-find ripgrep fzf zoxide ranger)
+REQUIRED_PKGS=(curl git zsh tmux fd-find ripgrep fzf zoxide ranger)
 log "Installing base packages..."
 for pkg in "${REQUIRED_PKGS[@]}"; do
   if ! dpkg -s "$pkg" >/dev/null 2>&1; then
