@@ -41,6 +41,9 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#777777'
 ###############################################################################
 # user environment 
 ###############################################################################
+if [[ -z "$LS_COLORS" ]]; then # ensure ls colors work with non-standard terms
+  eval "$(TERM=xterm-256color dircolors -b)"
+fi
 
 # aliases
 export PATH="$HOME/.local/bin:$PATH"
