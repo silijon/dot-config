@@ -26,7 +26,11 @@ size = 13
 [mouse]
 hide_when_typing = true
 
-[[keyboard.bindings]]
-key  = "F"                     # the physical F key
-mods = "Alt|Shift"             # press Alt + Shift together
-action = "ToggleFullscreen"
+[keyboard]
+bindings = [
+  { key = "F", mods = "Alt|Shift", action = "ToggleFullscreen" },
+  { key = "Equals", mods = "Control", action = "IncreaseFontSize" },
+  { key = "Minus",  mods = "Control", action = "DecreaseFontSize" },
+  { key = "0",   mods = "Control", action = "ResetFontSize"     },
+]
+
