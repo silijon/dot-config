@@ -117,6 +117,7 @@ vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move Focus to the Left Wind
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move Focus to the Right Window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move Focus to the Lower Window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move Focus to the Upper Window" })
+vim.keymap.set("n", "<Tab>", "<C-w><C-w>", { desc = "Move Focus Between Splits" })
 
 -- <leader>x in visual mode will run whatever you’ve selected as Lua
 vim.keymap.set("v", "<leader>x", function()
@@ -204,18 +205,6 @@ require("lazy").setup({
 
     { "numToStr/Comment.nvim",    opts = {} }, -- Quick commenting/uncommenting
 
-    { -- Adds git related signs to the gutter, as well as utilities for managing changes
-      "lewis6991/gitsigns.nvim",
-      opts = {
-        signs = {
-          add = { text = "+" },
-          change = { text = "~" },
-          delete = { text = "_" },
-          topdelete = { text = "‾" },
-          changedelete = { text = "~" },
-        },
-      },
-    },
 
     { -- Useful plugin to show you pending keybinds.
       "folke/which-key.nvim",
@@ -400,6 +389,7 @@ require("lazy").setup({
     { import = "plugins/harpoon" },
     { import = "plugins/noice" },
     { import = "plugins/term" },
+    { import = "plugins/git" },
 
     -- Full Setup
     { import = "plugins/todo", cond = vim.g.full_ide_setup },

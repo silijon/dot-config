@@ -180,6 +180,10 @@ return {
         builtin.find_files { cwd = vim.fn.stdpath "config" }
       end, { desc = "[S]earch [N]eovim Files" })
 
+      -- Git search shortcuts
+      vim.keymap.set("n", "<leader>ss", builtin.git_status, { desc = "[S]earch git [S]tatus" })
+      vim.keymap.set("n", "<leader>sc", builtin.git_files, { desc = "[S]earch git [C]ommits" })
+
       -- Open file browser
       vim.keymap.set("n", "<leader>e", function()
         require("telescope").extensions.file_browser.file_browser()

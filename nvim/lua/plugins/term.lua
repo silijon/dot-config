@@ -59,7 +59,7 @@ return {
 
       -- Toggle a persistent terminal from visual mode
       -- Here the visual selection is sent to the terminal
-      vim.keymap.set("v", "<leader>t", function()
+      vim.keymap.set("v", "t", function()
 
         -- yank visual selection to register z and clean it up
         vim.cmd('normal! "zy')
