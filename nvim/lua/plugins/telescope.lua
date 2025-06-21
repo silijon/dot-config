@@ -182,7 +182,7 @@ return {
 
       -- Git search shortcuts
       vim.keymap.set("n", "<leader>ss", builtin.git_status, { desc = "[S]earch git [S]tatus" })
-      vim.keymap.set("n", "<leader>sc", builtin.git_files, { desc = "[S]earch git [C]ommits" })
+      vim.keymap.set("n", "<leader>sc", builtin.git_commits, { desc = "[S]earch git [C]ommits" })
 
       -- Open file browser
       vim.keymap.set("n", "<leader>e", function()
