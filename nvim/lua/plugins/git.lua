@@ -15,7 +15,24 @@ return {
   { -- Git commands in vim
     "tpope/vim-fugitive",
     config = function()
-      vim.keymap.set("n", "<leader>g", "<cmd>Git<CR>", { desc = "[G]it Status" })
+      local function toggle_git()
+        local git_buffers = vim.tbl_filter(function(buf)
+          return vim.api.nvim_buf_get_option(buf, 'filetype') == 'fugitive'
+        end, vim.api.nvim_list_bufs())
+        
+        if #git_buffers > 0 then
+          for _, buf in ipairs(git_buffers) do
+            local windows = vim.fn.win_findbuf(buf)
+            for _, win in ipairs(windows) do
+              vim.api.nvim_win_close(win, false)
+            end
+          end
+        else
+          vim.cmd('Git')
+        end
+      end
+      
+      vim.keymap.set("n", "<leader>g", toggle_git, { desc = "[G]it Status Toggle" })
     end,
   },
 }
