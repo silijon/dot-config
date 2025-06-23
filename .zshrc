@@ -84,6 +84,11 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export VCPKG_ROOT="$HOME/.local/share/vcpkg/"
 export PATH="$VCPKG_ROOT:$PATH"
 
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
 # nvm
 export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

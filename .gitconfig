@@ -2,7 +2,7 @@
 	name = silijon
 	email = john.w.dennis@gmail.com
 [core]
-	symlinks = false
+	symlinks = true
 	preloadindex = true
 	fscache = true
 	editor = vim
