@@ -9,6 +9,17 @@ return {
       "theHamsta/nvim-dap-virtual-text",
     },
     config = function()
+      local function get_python_path()
+        local venv = os.getenv("VIRTUAL_ENV")
+        if venv then
+          return venv .. "/bin/python"
+        end
+
+        local handle = io.popen("command -v python")
+        local result = handle:read("*a"):gsub("%s+$", "")
+        handle:close()
+        return result
+      end
 
       local dap = require("dap")
       local dap_utils = require("dap.utils")
@@ -28,10 +39,9 @@ return {
             require("mason-nvim-dap").default_setup(config)
           end,
           python = function(config)
-            local venv = os.getenv("VIRTUAL_ENV") or "/usr"
             config.adapters = {
               type = "executable",
-              command = venv .. "/bin/python",
+              command = get_python_path(),
               args = { "-m", "debugpy.adapter" },
             }
             require("mason-nvim-dap").default_setup(config)

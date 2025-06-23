@@ -5,6 +5,19 @@ return {
       ignore_errors = false
     },
     config = function()
+
+      local function get_python_path()
+        local venv = os.getenv("VIRTUAL_ENV")
+        if venv then
+          return venv .. "/bin/python"
+        end
+
+        local handle = io.popen("command -v python")
+        local result = handle:read("*a"):gsub("%s+$", "")
+        handle:close()
+        return result
+      end
+
       local lint = require("lint")
 
       --------------------------------------------------------------------
@@ -80,10 +93,10 @@ return {
       -- Set python linters to work in virtualenv
       -- This has the addtl effect of keeping the linter quiet UNTIL one or the 
       -- other (or both) are available in the current env (global or venv)
-      local venv = os.getenv('VIRTUAL_ENV') or '/usr'
-      lint.linters.pylint.cmd = venv .. "/bin/python"
+      local python_path = get_python_path()
+      lint.linters.pylint.cmd = python_path
       lint.linters.pylint.args = { "-m", "pylint", "-f", "json", "--from-stdin", function() return vim.api.nvim_buf_get_name(0) end, }
-      lint.linters.ruff.cmd = venv .. "/bin/python"
+      lint.linters.ruff.cmd = get_python_path()
       lint.linters.ruff.args = { "-m", "ruff", "check", "--output-format=json", "--stdin-filename", function() return vim.api.nvim_buf_get_name(0) end, }
 
       -- Disable annoying overly pedantic rules
