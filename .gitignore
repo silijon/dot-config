@@ -4,3 +4,4 @@
 *.un~
 .vim/plugged/
 .vim/.netrwhist
+*.zwc
