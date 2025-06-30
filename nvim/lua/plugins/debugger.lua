@@ -58,6 +58,17 @@ return {
         })
       end
 
+      -- Ensure python configurations table exists
+      dap.configurations.python = dap.configurations.python or {}
+      table.insert(dap.configurations.python, {
+        type = "python",
+        request = "attach",
+        name = "Attach: Running Process",
+        processId = dap_utils.pick_process,
+        cwd = "${workspaceFolder}"
+      })
+
+
       dap.adapters["pwa-node"] = {
         type = "server",
         host = "localhost",
@@ -67,14 +78,6 @@ return {
           args = { "${port}", },
         },
       }
-
-      table.insert(dap.configurations.python, {
-        type = "python",
-        request = "attach",
-        name = "Attach: Running Process",
-        processId = dap_utils.pick_process,
-        cwd = "${workspaceFolder}"
-      })
 
       -- Useful links for js/ts
       -- https://github.com/gonstoll/dotfiles/blob/master/.config/nvim/lua/plugins/dap.lua

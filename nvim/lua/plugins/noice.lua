@@ -12,7 +12,7 @@ return {
     },
     config = function()
       require("notify").setup({
-        background_colour = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg") or "#1e1e1e",
+        background_colour = "#000000"
       })
 
       require("noice").setup({
