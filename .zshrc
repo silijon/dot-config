@@ -69,6 +69,9 @@ genpwd() {
 # specific packages 
 ###############################################################################
 
+# neovim (if installed via tarball)
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
 # dotnet
 export DOTNET_ROOT="$HOME/.dotnet"
 export PATH="$DOTNET_ROOT:$PATH"
