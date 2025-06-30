@@ -11,6 +11,10 @@ return {
       "rcarriga/nvim-notify",
     },
     config = function()
+      require("notify").setup({
+        background_colour = vim.fn.synIDattr(vim.fn.hlID("Normal"), "bg") or "#1e1e1e",
+      })
+
       require("noice").setup({
         views = {
           cmdline_popup = {
