@@ -62,6 +62,7 @@ return {
               "-i",
               "--hidden",
               "--files",
+              "--no-ignore-vcs",
               "-g",
               "!**/.git/*",
               "-g",
