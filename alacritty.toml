@@ -1,6 +1,9 @@
 [general]
 import = ["~/.config/alacritty/alacritty-theme/themes/carbonfox.toml"]
 
+[env]
+TERM = "xterm-256color"
+
 [window]
 opacity = 0.9
 
