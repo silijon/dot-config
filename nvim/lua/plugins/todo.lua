@@ -39,9 +39,9 @@ return {
 
           -- window geometry -----------------------------------------------
           local ui      = vim.api.nvim_list_uis()[1]
-          local width   = math.floor(ui.width  * 0.7)
-          local height  = math.floor(ui.height * 0.7)
-          local row     = math.floor((ui.height - height) / 2)
+          local width   = math.floor(ui.width  * 0.85)
+          local height  = math.floor(ui.height * 0.85)
+          local row     = math.floor((ui.height - height) / 2) - 1
           local col     = math.floor((ui.width  - width)  / 2)
 
           todo.win = vim.api.nvim_open_win(todo.buf, true, {
