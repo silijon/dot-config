@@ -1,8 +1,8 @@
 return {
   {
-    'github/copilot.vim',
+    "github/copilot.vim",
     config = function()
-        vim.keymap.set('i', '<C-t>', 'copilot#Accept("\\<CR>")', {
+        vim.keymap.set("i", "<C-t>", "copilot#Accept('\\<CR>')", {
           expr = true,
           replace_keycodes = false
         })
@@ -18,9 +18,9 @@ return {
       { "nvim-lua/plenary.nvim" },
     },
     config = function()
-      require('CopilotChat').setup({})
+      require("CopilotChat").setup({})
       local chat = require("CopilotChat")
-      vim.keymap.set("n", "<leader>cc", function() chat.toggle() end, { desc = 'Toggle [C]opilot [C]hat Window' })
+      vim.keymap.set("n", "<leader>cc", function() chat.toggle() end, { desc = "Toggle [C]opilot [C]hat Window" })
     end,
   },
 }

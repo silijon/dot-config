@@ -94,9 +94,18 @@ vim.keymap.set("n", "<leader>n", "<cmd>bnext<CR>", { desc = "Goto Next Buffer" }
 vim.keymap.set("n", "<leader>p", "<cmd>bprev<CR>", { desc = "Goto Previous Buffer" })
 vim.keymap.set("n", "<leader>b", "<C-^>", { desc = "Goto Previous Buffer" })
 
--- Set highlight on search, but clear on pressing <Esc> in normal mode
+-- Set highlight on search
 vim.opt.hlsearch = true
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+
+-- Clear search highlighting on <Esc> but still allow Esc for other things
+vim.keymap.set('n', '<Esc>', function()
+  if vim.v.hlsearch == 1 then
+    vim.cmd('nohlsearch')
+  end
+  -- Fire a custom event that other plugins can listen to
+  ---@diagnostic disable-next-line: param-type-mismatch
+  vim.api.nvim_exec_autocmds("User", { pattern = "EscapePressed" })
+end, { desc = "Clear search highlighting" })
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open Diagnostic [Q]uickfix List" })
@@ -143,6 +152,7 @@ end, { desc = "Execute visual selection as Lua" })
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
+---@diagnostic disable-next-line: param-type-mismatch
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
   group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),

@@ -15,9 +15,12 @@ return {
           return venv .. "/bin/python"
         end
 
+        ---@diagnostic disable: need-check-nil
         local handle = io.popen("command -v python")
         local result = handle:read("*a"):gsub("%s+$", "")
         handle:close()
+        ---@diagnostic enable: need-check-nil
+
         return result
       end
 
@@ -28,6 +31,7 @@ return {
       dap.set_log_level("DEBUG")
 
       -- Adds inline variable values (super comfy)
+      ---@diagnostic disable-next-line: missing-fields
       require("nvim-dap-virtual-text").setup({})
 
       -- Install adapters
@@ -166,6 +170,7 @@ return {
       vim.keymap.set("n", "<leader>dq", dapui.close, { desc = "[Q]uit the Debugger" })
 
       vim.api.nvim_set_hl(0, "DapStoppedLinehl", { bg = "#555530" })
+      ---@diagnostic disable-next-line: missing-fields
       vim.fn.sign_define("DapStopped", { linehl = "DapStoppedLinehl" })
       vim.api.nvim_set_hl(0, "DapBreakpointColor", { fg = "#FF0000" })
       vim.fn.sign_define("DapBreakpoint", { text = "🐞", texthl = "DapBreakpointColor", linehl = "", numhl = "" })

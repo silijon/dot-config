@@ -11,6 +11,7 @@ return {
       "rcarriga/nvim-notify",
     },
     config = function()
+      ---@diagnostic disable-next-line: missing-fields
       require("notify").setup({
         background_colour = "#000000"
       })
@@ -76,7 +77,13 @@ return {
         },
       })
 
-      vim.keymap.set("n", "<Esc>", require("notify").dismiss, { desc = "Dismiss Noice popups" })
+      -- Listen for the custom escape event (do this instead of mapping <Esc> to avoid conflicts)
+      ---@diagnostic disable-next-line: param-type-mismatch
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "EscapePressed",
+        callback = require("notify").dismiss,
+        desc = "Dismiss noice messages on escape",
+      })
 
     end,
   },

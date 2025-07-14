@@ -1,6 +1,7 @@
 return {
   {
     "mfussenegger/nvim-lint",
+    event = "VeryLazy",
     opts = {
       ignore_errors = false
     },
@@ -12,9 +13,12 @@ return {
           return venv .. "/bin/python"
         end
 
+        ---@diagnostic disable: need-check-nil
         local handle = io.popen("command -v python")
         local result = handle:read("*a"):gsub("%s+$", "")
         handle:close()
+        ---@diagnostic enable: need-check-nil
+
         return result
       end
 
@@ -82,6 +86,7 @@ return {
       end
 
       -- Run after save, insert leave, etc.
+      ---@diagnostic disable-next-line: param-type-mismatch
       vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave" }, {
         callback = function()
           if visible then

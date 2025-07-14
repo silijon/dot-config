@@ -17,9 +17,9 @@ return {
     config = function()
       local function toggle_git()
         local git_buffers = vim.tbl_filter(function(buf)
-          return vim.api.nvim_buf_get_option(buf, 'filetype') == 'fugitive'
+          return vim.bo[buf].filetype == "fugitive"
         end, vim.api.nvim_list_bufs())
-        
+
         if #git_buffers > 0 then
           for _, buf in ipairs(git_buffers) do
             local windows = vim.fn.win_findbuf(buf)
@@ -28,10 +28,10 @@ return {
             end
           end
         else
-          vim.cmd('Git')
+          vim.cmd("Git")
         end
       end
-      
+
       vim.keymap.set("n", "<leader>g", toggle_git, { desc = "[G]it Status Toggle" })
     end,
   },

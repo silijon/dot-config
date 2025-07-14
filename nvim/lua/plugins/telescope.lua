@@ -92,7 +92,7 @@ return {
             mappings = {
               default = {
                 -- Fix bug in Harpoon: https://github.com/rmagatti/auto-session/issues/433
-                before_action = function(selection)
+                before_action = function()
                   -- might not be necessary, but save current harpoon data when we're about to restore a session
                   require("harpoon"):sync()
                 end,
