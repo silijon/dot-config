@@ -88,6 +88,9 @@ vim.opt.inccommand = "split"
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Disable folds, they're annoying
+vim.opt.foldenable = false
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 vim.keymap.set("n", "<leader>n", "<cmd>bnext<CR>", { desc = "Goto Next Buffer" })
@@ -362,6 +365,15 @@ require("lazy").setup({
         -- Add extra file associations
         vim.filetype.add({ extension = { templ = "templ" } })
         vim.filetype.add({ extension = { jinja = "jinja", jinja2 = "jinja", j2 = "jinja" } })
+        vim.filetype.add({
+          filename = {
+            ['docker-compose.yml'] = 'yaml.docker-compose',
+            ['docker-compose.yaml'] = 'yaml.docker-compose',
+            ['compose.yml'] = 'yaml.docker-compose',
+            ['compose.yaml'] = 'yaml.docker-compose',
+          }
+        })
+
         vim.treesitter.language.register("html", "jinja")
 
         -- Add cooler rendering for markdown decorations

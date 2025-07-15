@@ -299,6 +299,7 @@ return {
 
         -- devops --
         dockerls = {},
+        docker_compose_language_service = {},
         -- terraformls = {},
 
         -- web extras --
