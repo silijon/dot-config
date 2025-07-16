@@ -1,7 +1,6 @@
 return {
     { -- Handles todo.txt file
       "freitass/todo.txt-vim",
-      event = "VeryLazy",
       config = function()
 
         -- [[ Make todo.txt appear in a float ]]
