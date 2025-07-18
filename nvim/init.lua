@@ -101,7 +101,7 @@ vim.keymap.set("n", "<leader>b", "<C-^>", { desc = "Goto Previous Buffer" })
 vim.opt.hlsearch = true
 
 -- Clear search highlighting on <Esc> but still allow Esc for other things
-vim.keymap.set('n', '<Esc>', function()
+vim.keymap.set("n", "<Esc>", function()
   if vim.v.hlsearch == 1 then
     vim.cmd('nohlsearch')
   end
@@ -326,20 +326,29 @@ require("lazy").setup({
               local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
               local location      = "%2l:%-2v" -- Fix ugly location indicator
 
-              local linter = "󰅙"
+              -- Create a custom highlight group for red recording
+              vim.api.nvim_set_hl(0, "MiniStatuslineRecording", { fg = "#ff0000", bold = true })
+              local recording = ""
+              local reg = vim.fn.reg_recording()
+              if reg ~= "" then
+                recording = "⏺ @" .. reg .. " "  -- Record button icon
+              end
+
+              local linting = "󰅙"
               local lint_hl = "MiniStatuslineDevinfo"
               if vim.b.linting == true then
-                linter = "󰒱"
+                linting = "󰒱"
                 lint_hl = "MiniStatuslineModeInsert"
               end
 
               return MiniStatusline.combine_groups({
                 { hl = mode_hl,                  strings = { mode } },
                 { hl = "MiniStatuslineDevinfo",  strings = { git, diff, diagnostics, lsp } },
-                { hl = lint_hl,  strings = { linter } },
+                { hl = lint_hl,  strings = { linting } },
                 "%<", -- Mark general truncate point
                 { hl = "MiniStatuslineFilename", strings = { filename } },
                 "%=", -- End left alignment
+                { hl = "MiniStatuslineRecording", strings = { recording } },
                 { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
                 { hl = mode_hl,                  strings = { search, location } },
               })
