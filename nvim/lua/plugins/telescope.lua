@@ -69,6 +69,8 @@ return {
               "!**/node_modules/*",
               "-g",
               "!**/.venv/*",
+              "-g",
+              "!**/__pycache__/*",
             },
           },
         },
