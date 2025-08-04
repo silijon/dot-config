@@ -31,11 +31,16 @@ source ~/.config/zsh/znap/znap.zsh  # Start Znap
 # Znap plugins
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
-bindkey '^t' autosuggest-accept
 
 # Fix autosuggestion colors 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#777777'
 
+# Add fzf capability
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
+
+# Bind personal override keys after all the zsh mods
+bindkey '^t' autosuggest-accept
 
 ###############################################################################
 # user environment 
