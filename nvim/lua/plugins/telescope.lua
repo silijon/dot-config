@@ -185,10 +185,18 @@ return {
       vim.keymap.set("n", "<leader>ss", builtin.git_status, { desc = "[S]earch git [S]tatus" })
       vim.keymap.set("n", "<leader>sc", builtin.git_commits, { desc = "[S]earch git [C]ommits" })
 
-      -- Open file browser
+      -- Open file browser in cwd
       vim.keymap.set("n", "<leader>e", function()
         require("telescope").extensions.file_browser.file_browser()
-      end)
+      end, { desc = "Open file [e]xplorer in current working directory" })
+
+      -- Open file browser in current file dir
+      vim.keymap.set("n", "<leader>E", function()
+        require("telescope").extensions.file_browser.file_browser({
+          path = "%:p:h",
+          select_buffer = true,
+        })
+      end, { desc = "Open file [E]xplorer in current file directory" })
 
       -- Add line numbers to the previewer
       vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
