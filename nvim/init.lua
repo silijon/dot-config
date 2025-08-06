@@ -181,6 +181,11 @@ require("lazy").setup({
       priority = 1000,
       config = function()
         require("nightfox").setup({
+          palettes = {
+            carbonfox = {
+              sel0 = "#3e4a5b" -- brighten visual selection
+            },
+          },
           options = {
             transparent = true,
             styles = {
