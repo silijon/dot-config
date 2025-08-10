@@ -91,14 +91,18 @@ vim.opt.scrolloff = 10
 -- Disable folds, they're annoying
 vim.opt.foldenable = false
 
+-- Set highlight on search
+vim.opt.hlsearch = true
+
+-- Turn on spellcheck
+vim.opt.spelllang = "en_us"
+vim.opt.spell = true
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 vim.keymap.set("n", "<leader>n", "<cmd>bnext<CR>", { desc = "Goto Next Buffer" })
 vim.keymap.set("n", "<leader>p", "<cmd>bprev<CR>", { desc = "Goto Previous Buffer" })
 vim.keymap.set("n", "<leader>b", "<C-^>", { desc = "Goto Previous Buffer" })
-
--- Set highlight on search
-vim.opt.hlsearch = true
 
 -- Clear search highlighting on <Esc> but still allow Esc for other things
 vim.keymap.set("n", "<Esc>", function()

@@ -326,7 +326,6 @@ return {
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        "cspell", -- Spellcheck
         "stylua", -- Used to format lua code
         "black", -- Used to format python code
         "isort", -- Used to format python imports

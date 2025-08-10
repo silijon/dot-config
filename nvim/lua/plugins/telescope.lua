@@ -154,8 +154,9 @@ return {
       vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
       vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "[S]earch Recent Files ('.' for repeat)" })
       vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[S]earch Open [B]uffers" })
+      vim.keymap.set('n', "z=", builtin.spell_suggest, { desc = 'Spell Suggest' })
       vim.keymap.set("n", "<leader>u", telescope.extensions.undo.undo, { desc = "Search [U]ndo history" })
-      vim.keymap.set("n", "z", telescope.extensions.zoxide.list, { desc = "Change Directory" })
+      vim.keymap.set("n", "<leader>z", telescope.extensions.zoxide.list, { desc = "Change Directory" })
 
       -- Special addtl setting for most common use case
       vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "[S]earch [F]iles" })

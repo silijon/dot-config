@@ -28,7 +28,6 @@ return {
       -- 1. Configure linters per filetype
       --------------------------------------------------------------------
       lint.linters_by_ft = {
-        text     = { "cspell", },
         markdown = { "markdownlint", },
         python   = { "ruff", "pylint", },
       }
@@ -110,8 +109,6 @@ return {
       lint.linters.markdownlint.args = { "--stdin", "--disable", "MD013", "MD024", "--", }
 
       vim.keymap.set("n", "<leader>fl", toggle_linter_diagnostics, { desc = "[L]int Current Buffer" })
-      vim.keymap.set("n", "<leader>fs", function() toggle_linter_diagnostics("cspell") end, { desc = "[S]pellcheck Current Buffer" })
-
     end
   }
 }
