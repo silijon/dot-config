@@ -59,20 +59,40 @@ return {
           find_files = {
             find_command = {
               "rg",
-              "-i",
+              "--smart-case",
               "--hidden",
               "--files",
               "--no-ignore-vcs",
-              "-g",
+              "--glob",
               "!**/.git/*",
-              "-g",
+              "--glob",
               "!**/node_modules/*",
-              "-g",
+              "--glob",
               "!**/.venv/*",
-              "-g",
+              "--glob",
               "!**/__pycache__/*",
+              "--glob",
+              "!**/.next/*",
             },
           },
+          live_grep = {
+            additional_args = {
+              "--smart-case",
+              "--hidden",
+              "--no-ignore-vcs",
+            },
+            glob_pattern = {
+              "!**/.git/*",
+              "!**/node_modules/*",
+              "!**/.venv/*",
+              "!**/__pycache__/*",
+              "!**/.next/*",
+            },
+          },
+          buffers = {
+            sort_mru = true,
+            sort_lastused = true
+          }
         },
         extensions = {
           ["ui-select"] = {
@@ -147,19 +167,21 @@ return {
       vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
       vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
       vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+      vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+      vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[S]earch Open [B]uffers" })
       vim.keymap.set("n", "<leader>st", builtin.builtin, { desc = "[S]earch Select [T]elescope" })
       vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch Current [W]ord" })
-      vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
       vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
       vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
       vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = "[S]earch Recent Files ('.' for repeat)" })
-      vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[S]earch Open [B]uffers" })
-      vim.keymap.set('n', "z=", builtin.spell_suggest, { desc = 'Spell Suggest' })
-      vim.keymap.set("n", "<leader>u", telescope.extensions.undo.undo, { desc = "Search [U]ndo history" })
-      vim.keymap.set("n", "<leader>z", telescope.extensions.zoxide.list, { desc = "Change Directory" })
+      vim.keymap.set("n", "<leader>su", telescope.extensions.undo.undo, { desc = "Search [U]ndo history" })
+      vim.keymap.set("n", "<leader>sz", telescope.extensions.zoxide.list, { desc = "Search Zoxide to Change Directory" })
 
       -- Special addtl setting for most common use case
       vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "[S]earch [F]iles" })
+
+      -- Override default spell suggestions to use telescope
+      vim.keymap.set('n', "z=", builtin.spell_suggest, { desc = 'Spell Suggest' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set("n", "<leader>/", function()

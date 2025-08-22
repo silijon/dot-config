@@ -129,6 +129,9 @@ if command -v nvm >/dev/null; then
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
+# miniforge (for conda and mamba)
+export PATH="$HOME/miniforge3/bin:$PATH"
+
 # conda
 if command -v conda >/dev/null; then
     export CONDA_CHANGEPS1=false # disable default env name in prompt
