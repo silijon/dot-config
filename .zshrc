@@ -45,9 +45,31 @@ bindkey '^t' autosuggest-accept
 ###############################################################################
 # user environment 
 ###############################################################################
-if [[ -z "$LS_COLORS" ]]; then # ensure ls colors work with non-standard terms
-  eval "$(TERM=xterm-256color dircolors -b)"
-fi
+
+# Change cursor style on vi modes
+function __set_beam_cursor {
+  echo -ne '\e[6 q'
+}
+
+function __set_block_cursor {
+  echo -ne '\e[2 q'
+}
+
+function zle-keymap-select {
+  case $KEYMAP in
+    vicmd) __set_block_cursor;;
+    viins|main) __set_beam_cursor;;
+  esac
+}
+
+precmd_functions+=(__set_beam_cursor)
+
+zle -N zle-keymap-select
+
+# Ensure ls colors work with non-standard terms
+# if [[ -z "$LS_COLORS" ]]; then
+#   eval "$(TERM=xterm-256color dircolors -b)"
+# fi
 
 # aliases
 export PATH="$HOME/.local/bin:$PATH"
@@ -75,8 +97,8 @@ genpwd() {
 # specific packages 
 ###############################################################################
 
-# neovim (if installed via tarball)
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+# ghostty
+export GHOSTTY_SHELL_INTEGRATION_NO_CURSOR=1
 
 # dotnet
 export DOTNET_ROOT="$HOME/.dotnet"
