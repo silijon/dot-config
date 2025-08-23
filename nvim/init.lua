@@ -330,7 +330,7 @@ require("lazy").setup({
         ---@diagnostic disable-next-line: redundant-value
         require("lualine").setup {
           options = {
-            theme = "ayu_mirage",
+            theme = "nightfly",
           },
           sections = {
             lualine_b = {
