@@ -320,52 +320,49 @@ require("lazy").setup({
           },
         })
 
-        -- Simple and easy statusline.
-        require("mini.statusline").setup({
-          use_icons = vim.g.have_nerd_font,
-          content = {
-            active = function()
-              local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
-              local git           = MiniStatusline.section_git({ trunc_width = 40 })
-              local diff          = MiniStatusline.section_diff({ trunc_width = 75 })
-              local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 75 })
-              local lsp           = MiniStatusline.section_lsp({ trunc_width = 75 })
-              local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
-              local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
-              local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
-              local location      = "%2l:%-2v" -- Fix ugly location indicator
-
-              -- Create a custom highlight group for red recording
-              vim.api.nvim_set_hl(0, "MiniStatuslineRecording", { fg = "#ff0000", bold = true })
-              local recording = ""
-              local reg = vim.fn.reg_recording()
-              if reg ~= "" then
-                recording = "⏺ @" .. reg .. " "  -- Record button icon
-              end
-
-              local linting = "󰅙"
-              local lint_hl = "MiniStatuslineDevinfo"
-              if vim.b.linting == true then
-                linting = "󰒱"
-                lint_hl = "MiniStatuslineModeInsert"
-              end
-
-              return MiniStatusline.combine_groups({
-                { hl = mode_hl,                  strings = { mode } },
-                { hl = "MiniStatuslineDevinfo",  strings = { git, diff, diagnostics, lsp } },
-                { hl = lint_hl,  strings = { linting } },
-                "%<", -- Mark general truncate point
-                { hl = "MiniStatuslineFilename", strings = { filename } },
-                "%=", -- End left alignment
-                { hl = "MiniStatuslineRecording", strings = { recording } },
-                { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
-                { hl = mode_hl,                  strings = { search, location } },
-              })
-            end
-          }
-        })
-
       end,
+    },
+
+    {
+      "nvim-lualine/lualine.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+      config = function()
+        ---@diagnostic disable-next-line: redundant-value
+        require("lualine").setup {
+          options = {
+            theme = "ayu_mirage",
+          },
+          sections = {
+            lualine_b = {
+              "branch",
+              "diff",
+              {
+                "linter",
+                padding = { left = 1, right = 2 },
+                fmt = function() return vim.b.linting and "󰒱" or "󰅙" end,
+              },
+              "diagnostics",
+              {
+                "macro",
+                icon = "󰑋",
+                color = { fg = "#ff0000", gui = "bold" },
+                cond = function()
+                  return vim.fn.reg_recording() ~= ""
+                end,
+                padding = { left = 1, right = 1 },
+                fmt = function()
+                  local key = vim.fn.reg_recording()
+                  if key == "" then
+                    return ""
+                  else
+                    return "@" .. key
+                  end
+                end,
+              },
+            }
+          }
+        }
+      end
     },
 
     { -- Highlight, edit, and navigate code
