@@ -342,6 +342,8 @@ require("lazy").setup({
                 fmt = function() return vim.b.linting and "󰒱" or "󰅙" end,
               },
               "diagnostics",
+            },
+            lualine_x = {
               {
                 "macro",
                 icon = "󰑋",
@@ -359,7 +361,13 @@ require("lazy").setup({
                   end
                 end,
               },
-            }
+              "encoding",
+              {
+                "fileformat",
+                padding = { left = 1, right = 2 },
+              },
+              "filetype",
+            },
           }
         }
       end
