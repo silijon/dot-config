@@ -338,7 +338,7 @@ require("lazy").setup({
               "diff",
               {
                 "linter",
-                padding = { left = 1, right = 2 },
+                padding = { left = 1, right = 1 },
                 fmt = function() return vim.b.linting and "󰒱" or "󰅙" end,
               },
               "diagnostics",
@@ -364,7 +364,7 @@ require("lazy").setup({
               "encoding",
               {
                 "fileformat",
-                padding = { left = 1, right = 2 },
+                padding = { left = 1, right = 1 },
               },
               "filetype",
             },
