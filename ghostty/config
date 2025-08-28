@@ -50,7 +50,7 @@
 
 #font-family = Hack Nerd Font Mono
 font-size = 13
-theme = nightfox
+theme = carbonfox
 gtk-tabs-location = hidden
 gtk-titlebar-hide-when-maximized = true
 cursor-style-blink = false
