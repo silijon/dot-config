@@ -36,8 +36,9 @@ znap source zsh-users/zsh-syntax-highlighting
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#777777'
 
 # Add fzf capability
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
+source /usr/share/fzf/shell/key-bindings.zsh
+#source /usr/share/doc/fzf/examples/key-bindings.zsh
+#source /usr/share/doc/fzf/examples/completion.zsh
 
 # Bind personal override keys after all the zsh mods
 bindkey '^t' autosuggest-accept
@@ -75,7 +76,8 @@ zle -N zle-keymap-select
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR='nvim'
 
-alias todo="vim $HOME/Dropbox/Documents/todo.txt"
+alias vim='nvim'
+alias todo="nvim $HOME/Dropbox/Documents/todo.txt"
 alias myip='curl http://icanhazip.com'
 alias l='ls -hal --color'
 alias ll='ls -hal --color |less'
