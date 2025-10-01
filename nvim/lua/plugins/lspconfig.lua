@@ -270,6 +270,8 @@ return {
           },
         },
 
+        -- python
+        -- ty = {},
         pyright = {
           settings = {
             python = {

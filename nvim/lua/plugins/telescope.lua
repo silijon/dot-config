@@ -73,6 +73,8 @@ return {
               "!**/__pycache__/*",
               "--glob",
               "!**/.next/*",
+              "--glob",
+              "!**/.ruff_cache/*",
             },
           },
           live_grep = {
@@ -87,6 +89,7 @@ return {
               "!**/.venv/*",
               "!**/__pycache__/*",
               "!**/.next/*",
+              "!**/.ruff_cache/*",
             },
           },
           buffers = {

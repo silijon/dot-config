@@ -9,6 +9,8 @@ plugins=(
     sudo
     systemd
     git
+    docker
+    docker-compose
     dotnet
     node
     npm
@@ -17,6 +19,7 @@ plugins=(
     python
     pip
     zoxide
+    #voice-inject
 )
 
 # Source OMZ
@@ -76,12 +79,13 @@ zle -N zle-keymap-select
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR='nvim'
 
+alias open='xdg-open'
 alias vim='nvim'
 alias todo="nvim $HOME/Dropbox/Documents/todo.txt"
 alias myip='curl http://icanhazip.com'
 alias l='ls -hal --color'
 alias ll='ls -hal --color |less'
-alias fd='fdfind --hidden --no-ignore' # show hidden and don't respect .gitignore (who comes up with these defaults?)
+alias fd='fd --hidden --no-ignore' # show hidden and don't respect .gitignore (who comes up with these defaults?)
 alias fzf='fzf --ansi'
 alias lg='lazygit'
 alias gd='git diff --name-only --relative --diff-filter=d |xargs bat --diff'
