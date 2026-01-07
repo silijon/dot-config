@@ -39,9 +39,9 @@ znap source zsh-users/zsh-syntax-highlighting
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#777777'
 
 # Add fzf capability
-source /usr/share/fzf/shell/key-bindings.zsh
-#source /usr/share/doc/fzf/examples/key-bindings.zsh
-#source /usr/share/doc/fzf/examples/completion.zsh
+#source /usr/share/fzf/shell/key-bindings.zsh
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
 
 # Bind personal override keys after all the zsh mods
 bindkey '^t' autosuggest-accept
