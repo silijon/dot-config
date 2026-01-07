@@ -289,7 +289,7 @@ return {
             offsetEncoding = { "utf-16" }, -- make it play nice with copilot
           },
         },
-        cmake = {},
+        -- cmake = {},
 
         -- web --
         html = { filetypes = { "html", "templ", "jinja" } },
