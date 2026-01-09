@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: debian-test-environment
+  name: dev-setup-script-env
 spec:
   containers:
   - name: debian
