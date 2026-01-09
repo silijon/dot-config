@@ -119,6 +119,7 @@ if [ ! -d "$NVIM_DIST_DIR" ]; then
     
     $SUDO_CMD tar -C $NVIM_INSTALL_DIR -xzf "$TEMP_DIR/$(basename "$NVIM_URL")"
     $SUDO_CMD ln -sf "$NVIM_DIST_DIR/bin/nvim" /usr/local/bin/nvim
+
     rm -rf "$TEMP_DIR"
 
     mkdir -p "$USER_HOME/.config"
