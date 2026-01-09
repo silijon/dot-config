@@ -291,6 +291,9 @@ return {
         },
         -- cmake = {},
 
+        -- java --
+        jdtls = {},
+
         -- web --
         html = { filetypes = { "html", "templ", "jinja" } },
         jsonls = {},
