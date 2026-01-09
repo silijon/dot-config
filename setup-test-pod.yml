@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debian-test-environment
+spec:
+  containers:
+  - name: debian
+    image: debian:latest
+    # Keep the container running so we can exec into it
+    command: ["/bin/bash", "-c", "sleep infinity"]
+    volumeMounts:
+    - name: script-vol
+      mountPath: /tmp/setup.sh
+      subPath: setup.sh
+  volumes:
+  - name: script-vol
+    configMap:
+      name: dev-setup-script
+      defaultMode: 0755 # Makes the script executable
