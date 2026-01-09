@@ -2,130 +2,137 @@
 
 set -euo pipefail
 
-USERNAME="${SUDO_USER:-$(logname 2>/dev/null || whoami)}"  # Get the invoking user, fallback to whoami
-USER_HOME="/home/$USERNAME"
-DOTCONFIG_REPO="https://github.com/silijon/dot-config.git"
-NEOVIM_REPO="https://github.com/neovim/neovim"
-NEOVIM_SRC_DIR="/usr/local/src/neovim"
-
 log() {
   echo -e "\033[1;32m==> $1\033[0m"
 }
 
-# 1. Update apt
-log "Running apt update..."
-apt update
 
-# 2. Install sudo and add user to sudo group
-if ! command -v sudo >/dev/null; then
-  log "Installing sudo..."
-  apt install -y sudo
-else
-  log "sudo already installed. Skipping."
-fi
-if ! groups $USERNAME | grep -q sudo; then
-  log "Adding $USERNAME to sudo group..."
-  usermod -aG sudo "$USERNAME"
-else
-  log "$USERNAME already in sudo group. Skipping."
+# --- Architecture Check (Early Exit) ---
+ARCH=$(uname -m)
+case "$ARCH" in
+    x86_64)
+        THIS_ARCH="x86_64"
+        ;;
+    aarch64|arm64)
+        THIS_ARCH="arm64"
+        ;;
+    *)
+        log "Unsupported architecture: $ARCH"
+        exit 1
+        ;;
+esac
+
+  
+# --- Configuration ---
+USERNAME=$(whoami)
+USER_HOME="$HOME"
+DOTFILES="https://github.com/silijon/dot-config.git"
+NVIM_DIST_DIR="/opt/nvim-linux-$THIS_ARCH"
+NVIM_URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-$THIS_ARCH.tar.gz"
+log "Running as $USERNAME on $ARCH. Home: $USER_HOME"
+
+# Setup Sudo prefix if not root
+SUDO_CMD=""
+if [ "$(id -u)" -ne 0 ]; then
+    SUDO_CMD="sudo"
 fi
 
-# 3. Install packages
-REQUIRED_PKGS=(curl git zsh tmux fd-find ripgrep fzf zoxide ranger)
-log "Installing base packages..."
+
+# --- System Dependencies ---
+log "Updating apt and installing base dependencies..."
+$SUDO_CMD apt update
+# We need 'ca-certificates' early to talk to GitHub securely
+$SUDO_CMD apt install -y ca-certificates git curl sudo locales
+$SUDO_CMD sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen
+$SUDO_CMD locale-gen
+
+
+# --- User Packages ---
+REQUIRED_PKGS=(
+  zsh
+  tmux
+  fd-find
+  ripgrep
+  fzf
+  zoxide
+  ranger
+)
+
 for pkg in "${REQUIRED_PKGS[@]}"; do
-  if ! dpkg -s "$pkg" >/dev/null 2>&1; then
-    log "Installing $pkg..."
-    apt install -y "$pkg"
-  else
-    log "$pkg already installed. Skipping."
-  fi
+    if ! dpkg -s "$pkg" >/dev/null 2>&1; then
+        log "Installing $pkg..."
+        $SUDO_CMD apt install -y "$pkg"
+    fi
 done
 
-# 4. Clone dot-config
-if [ ! -d "$USER_HOME/dot-config" ]; then
-  log "Cloning dot-config..."
-  sudo -u "$USERNAME" git clone "$DOTCONFIG_REPO" "$USER_HOME/dot-config"
-else
-  log "dot-config already cloned. Skipping."
+
+# -- Symlinks for User Packages
+ln -sfT "$USER_HOME/dotfiles/.zshrc" "$USER_HOME/.zshrc"
+ln -sfT "$USER_HOME/dotfiles/.gitconfig" "$USER_HOME/.gitconfig"
+ln -sfT "$USER_HOME/dotfiles/.tmux.conf" "$USER_HOME/.tmux.conf"
+
+
+# --- Clone dotfiles ---
+if [ ! -d "$USER_HOME/dotfiles" ]; then
+    log "Cloning dotfiles..."
+    git clone "$DOTFILES" "$USER_HOME/dotfiles"
 fi
 
-# 5. Clone TPM
+
+# --- Install Oh My Zsh (Unattended) ---
+if [ ! -d "$USER_HOME/.oh-my-zsh" ]; then
+    log "Installing Oh My Zsh..."
+    export ZSH="$USER_HOME/.oh-my-zsh"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+    # mkdir -p "$USER_HOME/.oh-my-zsh/themes"
+    ln -sfT "$USER_HOME/dotfiles/kali.zsh-theme" "$USER_HOME/.oh-my-zsh/themes/kali.zsh-theme"
+fi
+
+
+# --- Tmux Packages ---
 if [ ! -d "$USER_HOME/.tmux/plugins/tpm" ]; then
   log "Installing tmux plugin manager (TPM)..."
-  sudo -u "$USERNAME" git clone https://github.com/tmux-plugins/tpm "$USER_HOME/.tmux/plugins/tpm"
+  git clone https://github.com/tmux-plugins/tpm "$USER_HOME/.tmux/plugins/tpm"
+
+  log "Installing tmux plugins..."
+  if tmux has-session 2>/dev/null || $SUDO_CMD tmux start-server 2>/dev/null; then
+      tmux new-session -d -s temp_session && \
+      tmux send-keys -t temp_session 'run-shell ~/.tmux/plugins/tpm/scripts/install_plugins.sh' C-m && \
+      sleep 2 && tmux kill-session -t temp_session
+  else
+    log "Unable to initialize tmux server. Skipping tmux plugin install."
+  fi
 else
   log "TPM already installed. Skipping."
 fi
 
-# 6. Install oh-my-zsh
-if [ ! -d "$USER_HOME/.oh-my-zsh" ]; then
-  log "Installing oh-my-zsh..."
-  sudo -u "$USERNAME" sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
+
+# Install Neovim Binary (Native Arch) ---
+if [ ! -d "$NVIM_DIST_DIR" ]; then
+    log "Installing Neovim ($THIS_ARCH) to /opt..."
+
+    TEMP_DIR=$(mktemp -d)
+    curl -LO --output-dir "$TEMP_DIR" "$NVIM_URL"
+    
+    tar -C /opt -xzf "$TEMP_DIR/$(basename "$NVIM_URL")"
+    ln -sf "$NVIM_DIST_DIR/bin/nvim" /usr/local/bin/nvim
+    rm -rf "$TEMP_DIR"
+
+    mkdir -p "$USER_HOME/.config"
+    ln -sfT "$USER_HOME/dotfiles/nvim" "$USER_HOME/.config/nvim"
+
+    if command -v update-alternatives >/dev/null; then
+        $SUDO_CMD update-alternatives --install /usr/bin/vim vim /usr/local/bin/nvim 60
+        $SUDO_CMD update-alternatives --set vim /usr/local/bin/nvim
+    fi
 else
-  log "oh-my-zsh already installed. Skipping."
+    log "Neovim already exists at $NVIM_DIST_DIR."
 fi
 
-# 7. Remove default .zshrc
-if [ -f "$USER_HOME/.zshrc" ]; then
-  log "Removing default .zshrc..."
-  rm -f "$USER_HOME/.zshrc"
-else
-  log "No default .zshrc found. Skipping."
-fi
 
-# 8–10. Symlinks
-log "Creating symlinks..."
-sudo -u "$USERNAME" ln -sfT "$USER_HOME/dot-config/.zshrc" "$USER_HOME/.zshrc"
-sudo -u "$USERNAME" ln -sfT "$USER_HOME/dot-config/.tmux.conf" "$USER_HOME/.tmux.conf"
-sudo -u "$USERNAME" ln -sfT "$USER_HOME/dot-config/.gitconfig" "$USER_HOME/.gitconfig"
-sudo -u "$USERNAME" ln -sfT "$USER_HOME/dot-config/kali.zsh-theme" "$USER_HOME/.oh-my-zsh/themes/kali.zsh-theme"
-
-# 11. Install tmux plugins
-log "Installing tmux plugins..."
-if sudo -u "$USERNAME" tmux has-session 2>/dev/null || sudo -u "$USERNAME" tmux start-server 2>/dev/null; then
-  sudo -u "$USERNAME" tmux new-session -d -s temp_session && \
-    sudo -u "$USERNAME" tmux send-keys -t temp_session 'run-shell ~/.tmux/plugins/tpm/scripts/install_plugins.sh' C-m && \
-    sleep 2 && sudo -u "$USERNAME" tmux kill-session -t temp_session
-else
-  log "Unable to initialize tmux server. Skipping tmux plugin install."
-fi
-
-# 12–16. Install Neovim from source
-if ! command -v nvim >/dev/null; then
-  log "Installing Neovim from source..."
-  apt install -y ninja-build gettext cmake curl build-essential
-  if [ ! -d "$NEOVIM_SRC_DIR" ]; then
-    git clone "$NEOVIM_REPO" "$NEOVIM_SRC_DIR"
-  else
-    log "Neovim source already cloned. Skipping clone."
-  fi
-  cd "$NEOVIM_SRC_DIR"
-  make CMAKE_BUILD_TYPE=RelWithDebInfo
-  make install
-else
-  log "Neovim already built and installed. Skipping."
-fi
-
-# Always configure update-alternatives for Neovim if it's available
-if command -v nvim >/dev/null; then
-  log "Setting up update-alternatives for Neovim..."
-  NVIM_PATH="$(command -v nvim)"
-  update-alternatives --install /usr/bin/vim vim "$NVIM_PATH" 60
-  update-alternatives --set vim "$NVIM_PATH"
-  update-alternatives --install /usr/bin/edit edit "$NVIM_PATH" 60
-  update-alternatives --install /usr/bin/view view "$NVIM_PATH" 60
-  update-alternatives --install /usr/bin/vimdiff vimdiff "$NVIM_PATH" 60
-fi
-
-# 17. Symlink Neovim config
-log "Linking Neovim config..."
-sudo -u "$USERNAME" mkdir -p "$USER_HOME/.config"
-sudo -u "$USERNAME" ln -sfT "$USER_HOME/dot-config/nvim" "$USER_HOME/.config/nvim"
-
-# 18. Final message
+# --- Final message ---
 log "Setup complete. Switching to home directory and sourcing shell..."
 cd "$USER_HOME"
-sudo -u "$USERNAME" chsh -s $(which zsh) "$USERNAME"
+$SUDO_CMD chsh -s $(which zsh) "$USERNAME"
 
 log "You may need to log out and back in for shell changes to take effect."
