@@ -27,7 +27,9 @@ esac
 USERNAME=$(whoami)
 USER_HOME="$HOME"
 DOTFILES="https://github.com/silijon/dot-config.git"
-NVIM_DIST_DIR="/opt/nvim-linux-$THIS_ARCH"
+# NVIM_INSTALL_DIR="$HOME/.local/bin/nvim"
+NVIM_INSTALL_DIR="/opt"
+NVIM_DIST_DIR="$NVIM_INSTALL_DIR/nvim-linux-$THIS_ARCH"
 NVIM_URL="https://github.com/neovim/neovim/releases/latest/download/nvim-linux-$THIS_ARCH.tar.gz"
 log "Running as $USERNAME on $ARCH. Home: $USER_HOME"
 
@@ -109,12 +111,13 @@ fi
 
 # Install Neovim Binary (Native Arch) ---
 if [ ! -d "$NVIM_DIST_DIR" ]; then
-    log "Installing Neovim ($THIS_ARCH) to /opt..."
+    log "Installing Neovim ($THIS_ARCH) to $NVIM_INSTALL_DIR..."
+    $SUDO_CMD mkdir -p "$NVIM_INSTALL_DIR"
 
     TEMP_DIR=$(mktemp -d)
     curl -LO --output-dir "$TEMP_DIR" "$NVIM_URL"
     
-    tar -C /opt -xzf "$TEMP_DIR/$(basename "$NVIM_URL")"
+    $SUDO_CMD tar -C $NVIM_INSTALL_DIR -xzf "$TEMP_DIR/$(basename "$NVIM_URL")"
     ln -sf "$NVIM_DIST_DIR/bin/nvim" /usr/local/bin/nvim
     rm -rf "$TEMP_DIR"
 
