@@ -98,6 +98,25 @@ vim.opt.hlsearch = true
 vim.opt.spelllang = "en_us"
 vim.opt.spell = true
 
+-- Handle non-four-space tabstops per-file
+local ft_settings = {
+  lua = { ts = 2, sw = 2, et = true },
+  bash = { ts = 2, sw = 2, et = true },
+  zsh = { ts = 2, sw = 2, et = true },
+  markdown = { ts = 2, sw = 2, et = true },
+}
+
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    local s = ft_settings[args.match]
+    if not s then return end
+
+    vim.opt_local.tabstop = s.ts
+    vim.opt_local.shiftwidth = s.sw
+    vim.opt_local.expandtab = s.et
+  end,
+})
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 vim.keymap.set("n", "<leader>n", "<cmd>bnext<CR>", { desc = "Goto Next Buffer" })
