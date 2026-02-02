@@ -405,6 +405,7 @@ require("lazy").setup({
           indent = { enable = false }, -- this breaks indentation sometimes and fixes it other times :(
         }
         -- Add extra file associations
+        vim.filetype.add({ extension = { jams = "json" } })
         vim.filetype.add({ extension = { templ = "templ" } })
         vim.filetype.add({ extension = { jinja = "jinja", jinja2 = "jinja", j2 = "jinja" } })
         vim.filetype.add({
