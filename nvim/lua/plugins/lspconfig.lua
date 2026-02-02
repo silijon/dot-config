@@ -308,7 +308,7 @@ return {
         -- terraformls = {},
 
         -- web extras --
-        -- htmx = { filetypes = { 'html', 'templ', 'jinja' }, },
+        htmx = {},
         -- templ = {},
         -- jinja_lsp = {},
         -- angularls = {},
