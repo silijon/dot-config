@@ -198,7 +198,32 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-    { -- Colorscheme
+    { -- mason
+      "mason-org/mason.nvim",
+      opts = {
+        log_level = vim.log.levels.INFO
+      }
+    },
+    { -- mason auto installer
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      dependencies = { "mason-org/mason.nvim" },
+      -- don’t force it to run on servers unless you want it
+      enabled = true,
+      config = function()
+        local tools = require("config.mason_ensure")
+        tools.add({ -- add any globally required tools here
+          "tree-sitter-cli", -- for nvim-treesitter rewrite
+        })
+
+        require("mason-tool-installer").setup({
+          ensure_installed = tools.list(),
+          auto_update = false,
+          run_on_start = true,
+        })
+      end,
+    },
+
+    { -- colorscheme
       "EdenEast/nightfox.nvim",
       lazy = false,
       priority = 1000,
@@ -392,43 +417,49 @@ require("lazy").setup({
       end
     },
 
-    { -- Highlight, edit, and navigate code
+    {
       "nvim-treesitter/nvim-treesitter",
+      lazy = false,
       build = ":TSUpdate",
       config = function()
-        ---@diagnostic disable-next-line: missing-fields
-        require("nvim-treesitter.config").setup {
-          ensure_installed = { "bash", "c", "python", "html", "lua", "markdown", "markdown_inline", "vim", "vimdoc" },
-          -- Autoinstall languages that are not installed
-          auto_install = true,
-          highlight = { enable = true },
-          indent = { enable = false }, -- this breaks indentation sometimes and fixes it other times :(
+        local filetypes = {
+          "bash", "zsh", "diff", "query", "regex", "csv",
+          "vim", "lua", "c", "python", "java",
+          "html", "css", "javascript", "jsx", "typescript", "tsx",
+          "vimdoc", "luadoc", "json", "yaml", "toml",
+          "markdown", "markdown_inline",
         }
-        -- Add extra file associations
+
+        -- Optional: keep this if you like auto-install; it's async.
+        -- It will race on fresh installs, so treesitter.start() MUST be pcall'd.
+        require("nvim-treesitter").install(filetypes)
+
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = filetypes,
+          callback = function(args)
+            pcall(vim.treesitter.start, args.buf)
+          end,
+        })
+
+        -- Filetype associations
         vim.filetype.add({ extension = { jams = "json" } })
-        vim.filetype.add({ extension = { templ = "templ" } })
-        vim.filetype.add({ extension = { jinja = "jinja", jinja2 = "jinja", j2 = "jinja" } })
         vim.filetype.add({
           filename = {
-            ['docker-compose.yml'] = 'yaml.docker-compose',
-            ['docker-compose.yaml'] = 'yaml.docker-compose',
-            ['compose.yml'] = 'yaml.docker-compose',
-            ['compose.yaml'] = 'yaml.docker-compose',
-          }
+            ["docker-compose.yml"] = "yaml.docker-compose",
+            ["docker-compose.yaml"] = "yaml.docker-compose",
+            ["compose.yml"] = "yaml.docker-compose",
+            ["compose.yaml"] = "yaml.docker-compose",
+          },
         })
 
-        vim.treesitter.language.register("html", "jinja")
+        -- Make docker-compose TS use yaml parser/queries (optional but nice)
+        vim.treesitter.language.register("yaml", { "yaml.docker-compose" })
 
-        -- Add cooler rendering for markdown decorations
+        -- Highlight tweaks
         vim.api.nvim_set_hl(0, "@markup.strikethrough", { strikethrough = true, fg = "#888888" })
-        vim.api.nvim_set_hl(0, "@markup.strong", { bold = true, })
-        vim.api.nvim_set_hl(0, "@markup.emphasis", { italic = true, })
-
-        -- (Optional) Code blocks
-        vim.api.nvim_set_hl(0, "@markup.raw.inline", {
-          fg = "#ffa500", -- orange-ish for inline code
-          bg = "#2b2b2b", -- subtle dark background
-        })
+        vim.api.nvim_set_hl(0, "@markup.strong", { bold = true })
+        vim.api.nvim_set_hl(0, "@markup.emphasis", { italic = true })
+        vim.api.nvim_set_hl(0, "@markup.raw.inline", { fg = "#ffa500", bg = "#2b2b2b" })
       end,
     },
 

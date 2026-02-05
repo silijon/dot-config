@@ -1,6 +1,10 @@
 return {
   {
     "stevearc/conform.nvim",
+    dependencies = {
+      "mason-org/mason.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
     event = { "BufWritePre" },
     cmd = { "ConformInfo" },
     keys = {
@@ -30,5 +34,17 @@ return {
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
+    config = function()
+      require("config.mason_ensure").add({
+        "stylua", -- Used to format lua code
+        "black", -- Used to format python code
+        "isort", -- Used to format python imports
+        "jq", -- Json formatting
+        "markdownlint", -- Markdown linting
+        "mdformat", -- Markdown formatting
+        "prettier", -- JS/TS formatting
+        "ruff", -- Python formatting
+      })
+    end,
   },
 }

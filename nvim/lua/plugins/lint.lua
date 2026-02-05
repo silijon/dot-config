@@ -1,11 +1,19 @@
 return {
   {
     "mfussenegger/nvim-lint",
+    dependencies = {
+      "mason-org/mason.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
     event = "VeryLazy",
     opts = {
       ignore_errors = false
     },
     config = function()
+      require("config.mason_ensure").add({
+        "markdownlint", -- Markdown linting
+        "ruff", -- Python linting
+      })
 
       local function get_python_path()
         local venv = os.getenv("VIRTUAL_ENV")

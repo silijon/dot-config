@@ -91,7 +91,7 @@ alias todo="nvim $HOME/Dropbox/Documents/todo.txt"
 alias myip='curl http://icanhazip.com'
 alias l='ls -hal --color'
 alias ll='ls -hal --color |less'
-alias fd='fd --hidden --no-ignore' # show hidden and don't respect .gitignore (who comes up with these defaults?)
+alias fd='fdfind --hidden --no-ignore' # show hidden and don't respect .gitignore (who comes up with these defaults?)
 alias fzf='fzf --ansi'
 alias lg='lazygit'
 alias gd='git diff --name-only --relative --diff-filter=d |xargs bat --diff'
