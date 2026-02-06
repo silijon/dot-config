@@ -44,7 +44,7 @@ fi
 log "Updating apt and installing base dependencies..."
 $SUDO_CMD apt update
 # We need 'ca-certificates' early to talk to GitHub securely
-$SUDO_CMD apt install -y ca-certificates git curl sudo locales
+$SUDO_CMD apt install -y ca-certificates git curl sudo locales build-essential
 $SUDO_CMD sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen
 $SUDO_CMD locale-gen
 
@@ -58,6 +58,7 @@ REQUIRED_PKGS=(
   fzf
   zoxide
   ranger
+  direnv
 )
 
 for pkg in "${REQUIRED_PKGS[@]}"; do
@@ -123,7 +124,6 @@ if [ ! -d "$NVIM_DIST_DIR" ]; then
     rm -rf "$TEMP_DIR"
 
     mkdir -p "$USER_HOME/.config"
-    ln -sfT "$USER_HOME/dotfiles/nvim" "$USER_HOME/.config/nvim"
 
     if command -v update-alternatives >/dev/null; then
         $SUDO_CMD update-alternatives --install /usr/bin/vim vim /usr/local/bin/nvim 60
@@ -133,6 +133,7 @@ else
     log "Neovim already exists at $NVIM_DIST_DIR."
 fi
 
+ln -sfT "$USER_HOME/dotfiles/nvim" "$USER_HOME/.config/nvim"
 
 # --- Final message ---
 log "Setup complete. Switching to home directory and sourcing shell..."
